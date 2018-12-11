@@ -1,0 +1,358 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFA521BF67E700EDF694 /* AppDelegate.swift */; };
+		BF92BFA821BF67E700EDF694 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFA721BF67E700EDF694 /* ViewController.swift */; };
+		BF92BFAB21BF67E700EDF694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFA921BF67E700EDF694 /* Main.storyboard */; };
+		BF92BFAE21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFAC21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld */; };
+		BF92BFB021BF67EA00EDF694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */; };
+		BF92BFB321BF67EA00EDF694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF92BFA221BF67E700EDF694 /* RecipleaseV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipleaseV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF92BFA521BF67E700EDF694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BF92BFA721BF67E700EDF694 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BF92BFAA21BF67E700EDF694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BF92BFAD21BF67E700EDF694 /* RecipleaseV1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipleaseV1.xcdatamodel; sourceTree = "<group>"; };
+		BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BF92BFB221BF67EA00EDF694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BF92BFB421BF67EA00EDF694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF92BF9F21BF67E700EDF694 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF92BF9921BF67E700EDF694 = {
+			isa = PBXGroup;
+			children = (
+				BF92BFA421BF67E700EDF694 /* RecipleaseV1 */,
+				BF92BFA321BF67E700EDF694 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF92BFA321BF67E700EDF694 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF92BFA221BF67E700EDF694 /* RecipleaseV1.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF92BFA421BF67E700EDF694 /* RecipleaseV1 */ = {
+			isa = PBXGroup;
+			children = (
+				BF92BFA521BF67E700EDF694 /* AppDelegate.swift */,
+				BF92BFA721BF67E700EDF694 /* ViewController.swift */,
+				BF92BFA921BF67E700EDF694 /* Main.storyboard */,
+				BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */,
+				BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */,
+				BF92BFB421BF67EA00EDF694 /* Info.plist */,
+				BF92BFAC21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld */,
+			);
+			path = RecipleaseV1;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF92BFA121BF67E700EDF694 /* RecipleaseV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF92BFB721BF67EA00EDF694 /* Build configuration list for PBXNativeTarget "RecipleaseV1" */;
+			buildPhases = (
+				BF92BF9E21BF67E700EDF694 /* Sources */,
+				BF92BF9F21BF67E700EDF694 /* Frameworks */,
+				BF92BFA021BF67E700EDF694 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RecipleaseV1;
+			productName = RecipleaseV1;
+			productReference = BF92BFA221BF67E700EDF694 /* RecipleaseV1.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF92BF9A21BF67E700EDF694 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = VBoulanger;
+				TargetAttributes = {
+					BF92BFA121BF67E700EDF694 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = BF92BF9D21BF67E700EDF694 /* Build configuration list for PBXProject "RecipleaseV1" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BF92BF9921BF67E700EDF694;
+			productRefGroup = BF92BFA321BF67E700EDF694 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF92BFA121BF67E700EDF694 /* RecipleaseV1 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF92BFA021BF67E700EDF694 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF92BFB321BF67EA00EDF694 /* LaunchScreen.storyboard in Resources */,
+				BF92BFB021BF67EA00EDF694 /* Assets.xcassets in Resources */,
+				BF92BFAB21BF67E700EDF694 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF92BF9E21BF67E700EDF694 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF92BFA821BF67E700EDF694 /* ViewController.swift in Sources */,
+				BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */,
+				BF92BFAE21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BF92BFA921BF67E700EDF694 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF92BFAA21BF67E700EDF694 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF92BFB221BF67EA00EDF694 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BF92BFB521BF67EA00EDF694 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BF92BFB621BF67EA00EDF694 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BF92BFB821BF67EA00EDF694 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KQ6387NFD;
+				INFOPLIST_FILE = RecipleaseV1/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "vBoulanger-Organization.RecipleaseV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BF92BFB921BF67EA00EDF694 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KQ6387NFD;
+				INFOPLIST_FILE = RecipleaseV1/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "vBoulanger-Organization.RecipleaseV1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF92BF9D21BF67E700EDF694 /* Build configuration list for PBXProject "RecipleaseV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF92BFB521BF67EA00EDF694 /* Debug */,
+				BF92BFB621BF67EA00EDF694 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF92BFB721BF67EA00EDF694 /* Build configuration list for PBXNativeTarget "RecipleaseV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF92BFB821BF67EA00EDF694 /* Debug */,
+				BF92BFB921BF67EA00EDF694 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BF92BFAC21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF92BFAD21BF67E700EDF694 /* RecipleaseV1.xcdatamodel */,
+			);
+			currentVersion = BF92BFAD21BF67E700EDF694 /* RecipleaseV1.xcdatamodel */;
+			path = RecipleaseV1.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = BF92BF9A21BF67E700EDF694 /* Project object */;
+}
