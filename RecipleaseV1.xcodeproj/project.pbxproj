@@ -13,6 +13,9 @@
 		BF92BFAE21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFAC21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld */; };
 		BF92BFB021BF67EA00EDF694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */; };
 		BF92BFB321BF67EA00EDF694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */; };
+		BF92BFC021C0171D00EDF694 /* whatever it takes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFBF21C0171D00EDF694 /* whatever it takes.ttf */; };
+		BF92BFC221C0177000EDF694 /* whatever it takes bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFC121C0177000EDF694 /* whatever it takes bold.ttf */; };
+		BF92BFC421C0352400EDF694 /* SearchForRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFC321C0352400EDF694 /* SearchForRecipesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF92BFB221BF67EA00EDF694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF92BFB421BF67EA00EDF694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF92BFBF21C0171D00EDF694 /* whatever it takes.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "whatever it takes.ttf"; sourceTree = "<group>"; };
+		BF92BFC121C0177000EDF694 /* whatever it takes bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "whatever it takes bold.ttf"; sourceTree = "<group>"; };
+		BF92BFC321C0352400EDF694 /* SearchForRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForRecipesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				BF92BFA421BF67E700EDF694 /* RecipleaseV1 */,
+				BF92BFBE21C0170200EDF694 /* Fonts */,
 				BF92BFA321BF67E700EDF694 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,15 +63,57 @@
 		BF92BFA421BF67E700EDF694 /* RecipleaseV1 */ = {
 			isa = PBXGroup;
 			children = (
+				BF92BFBA21BF681200EDF694 /* Model */,
 				BF92BFA521BF67E700EDF694 /* AppDelegate.swift */,
-				BF92BFA721BF67E700EDF694 /* ViewController.swift */,
-				BF92BFA921BF67E700EDF694 /* Main.storyboard */,
+				BF92BFBB21BF681400EDF694 /* View */,
+				BF92BFBC21BF681600EDF694 /* Controller */,
 				BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */,
-				BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */,
 				BF92BFB421BF67EA00EDF694 /* Info.plist */,
 				BF92BFAC21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld */,
 			);
 			path = RecipleaseV1;
+			sourceTree = "<group>";
+		};
+		BF92BFBA21BF681200EDF694 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BF92BFBB21BF681400EDF694 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF92BFA921BF67E700EDF694 /* Main.storyboard */,
+				BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BF92BFBC21BF681600EDF694 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BF92BFC321C0352400EDF694 /* SearchForRecipesViewController.swift */,
+				BF92BFA721BF67E700EDF694 /* ViewController.swift */,
+				BF92BFBD21BF682000EDF694 /* Extension */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BF92BFBD21BF682000EDF694 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		BF92BFBE21C0170200EDF694 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BF92BFBF21C0171D00EDF694 /* whatever it takes.ttf */,
+				BF92BFC121C0177000EDF694 /* whatever it takes bold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +174,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF92BFC021C0171D00EDF694 /* whatever it takes.ttf in Resources */,
+				BF92BFC221C0177000EDF694 /* whatever it takes bold.ttf in Resources */,
 				BF92BFB321BF67EA00EDF694 /* LaunchScreen.storyboard in Resources */,
 				BF92BFB021BF67EA00EDF694 /* Assets.xcassets in Resources */,
 				BF92BFAB21BF67E700EDF694 /* Main.storyboard in Resources */,
@@ -140,6 +191,7 @@
 			files = (
 				BF92BFA821BF67E700EDF694 /* ViewController.swift in Sources */,
 				BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */,
+				BF92BFC421C0352400EDF694 /* SearchForRecipesViewController.swift in Sources */,
 				BF92BFAE21BF67E700EDF694 /* RecipleaseV1.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
