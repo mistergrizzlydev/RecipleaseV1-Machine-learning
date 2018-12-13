@@ -16,6 +16,7 @@
 		BF92BFC021C0171D00EDF694 /* whatever it takes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFBF21C0171D00EDF694 /* whatever it takes.ttf */; };
 		BF92BFC221C0177000EDF694 /* whatever it takes bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFC121C0177000EDF694 /* whatever it takes bold.ttf */; };
 		BF92BFC421C0352400EDF694 /* SearchForRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFC321C0352400EDF694 /* SearchForRecipesViewController.swift */; };
+		BF92BFC621C094FF00EDF694 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFC521C094FF00EDF694 /* Podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BF92BFBF21C0171D00EDF694 /* whatever it takes.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "whatever it takes.ttf"; sourceTree = "<group>"; };
 		BF92BFC121C0177000EDF694 /* whatever it takes bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "whatever it takes bold.ttf"; sourceTree = "<group>"; };
 		BF92BFC321C0352400EDF694 /* SearchForRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForRecipesViewController.swift; sourceTree = "<group>"; };
+		BF92BFC521C094FF00EDF694 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = RecipleaseV1/Podfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 				BF92BFA421BF67E700EDF694 /* RecipleaseV1 */,
 				BF92BFBE21C0170200EDF694 /* Fonts */,
 				BF92BFA321BF67E700EDF694 /* Products */,
+				BF92BFC521C094FF00EDF694 /* Podfile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF92BFC621C094FF00EDF694 /* Podfile in Resources */,
 				BF92BFC021C0171D00EDF694 /* whatever it takes.ttf in Resources */,
 				BF92BFC221C0177000EDF694 /* whatever it takes bold.ttf in Resources */,
 				BF92BFB321BF67EA00EDF694 /* LaunchScreen.storyboard in Resources */,

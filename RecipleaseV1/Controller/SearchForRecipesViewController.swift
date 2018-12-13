@@ -18,12 +18,16 @@ class SearchForRecipesViewController: UIViewController {
 	@IBOutlet weak var ingredientsTableViewOutlet: UITableView!
 	@IBOutlet weak var searchForRecipesUIActivityIndicatorOutlet: UIActivityIndicatorView!
 	@IBOutlet weak var searchForRecipesOutlet: UIButton!
+	var ingredientTab = ["Apple", "Tomatoes", "Curry", "Chicken"]
 	//===================================
 	// -MARK : IBACTION
 	//===================================
 	@IBAction func addButtonIBAction(_ sender: UIButton) {
+		var test = searchIngredientsTextFieldOutlet.text
+		ingredientTab.append(test!)
 	}
 	@IBAction func clearButtonIBAction(_ sender: UIButton) {
+		ingredientTab.removeAll()
 	}
 	
 	
@@ -42,15 +46,48 @@ class SearchForRecipesViewController: UIViewController {
 	// MARK : - ViewDidLoad
 	//================================
 	override func viewDidLoad() {
-		
+		ingredientsTableViewOutlet.dataSource = self
 	}
 	
 }
 
 
-extension SearchForRecipesViewController {
+extension SearchForRecipesViewController: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return ingredientTab.count
+	}
 	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
+		
+		if let titleLabel = cell.textLabel {
+			titleLabel.text = ingredientTab[indexPath.row]
+		}
+		return cell
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 extension SearchForRecipesViewController : UITextFieldDelegate {
 	func hideKeyboard() {
