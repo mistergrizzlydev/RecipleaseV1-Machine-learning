@@ -20,47 +20,49 @@ class SearchForRecipesViewController: UIViewController {
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	
 	var ingredientAPIService = IngredientAPIService()
-	var ingredients = IngredientCD.all
-	var ingredientEnum:IngredientsSearch?
 	
 	@IBOutlet weak var searchForRecipesUIActivityIndicatorOutlet: UIActivityIndicatorView!
 	@IBOutlet weak var searchForRecipesOutlet: UIButton!
 	
-	//var ingredientTab = ["Apple", "Tomatoes", "Curry", "Chicken"]
-	//var ingredientTab2:Ingredients = [Ingredients.ingredient1.rawValue, Ingredients.ingredient2.rawValue]
-	//private var currentIngredient: [(Ingredients.RawValue, Ingredients.RawValue)] = [("", "")]
-	//private var currrentIngredient: [(String, String)] = []
 	
-	var currentIngredient = [String]()
-	
-	func addIngredient() {
+	@objc func addIngredient() {
 		if searchIngredientsTextField.text == "" {
 			print("Vous devez entrer un ingrédient")
 			alertEmptyTextField()
 		} else {
 			print("Vous avez ajouté un ingrédient")
-			
-			guard let search = searchIngredientsTextField.text else {return}
-			print("test2: \(currentIngredient)")
-			currentIngredient.append(search)
-	
-			print(ingredientAPIService.getUrlRequest(ingredients: [.ingredient1]))
-			print("search :\(search)")
-			let ingredientUser = currentIngredient.map({$0}).joined(separator: "+")
+		
+			guard let ingredientsUser = searchIngredientsTextField.text else {return}
+			ingredientAPIService.currentIngredient.append(ingredientsUser)
+			let ingredientUser = ingredientAPIService.currentIngredient.map({$0}).joined(separator: "+")
 			ingredientAPIService.ingredientsUser = ingredientUser
-			print(currentIngredient.map({$0}).joined(separator: "+") )
-			print(ingredientAPIService.getUrlRequest(ingredients: [.ingredient1]))
+
+			print("url: \(ingredientAPIService.getUrlRequest())")
+			//ingredientsTableView.reloadData()
+			print("currentIngredient.count : \(ingredientAPIService.currentIngredient.count)")
+			print("currentIngredient.text : \(ingredientAPIService.currentIngredient)")
 			ingredientsTableView.reloadData()
-			print(currentIngredient.count)
 			hideKeyboard()
 		}
 	}
 	//===================================
 	// -MARK : IBACTION
 	//===================================
-	@IBAction func requestSearchForRecipesAction(_ sender: UITextField) {
+	@IBAction func searchForRecipesTextField(_ sender: UITextField) {
 		//addIngredient()
 		
+	}
+	
+	
+	@IBAction func addButtonIBAction(_ sender: UIButton) {
+		print("add ingredient button")
+		addIngredient()
+		searchIngredientsTextField.text = ""
+	}
+	@IBAction func clearButtonIBAction(_ sender: UIButton) {
+		print("clear ingredient button")
+		ingredientAPIService.currentIngredient.removeAll()
+		searchIngredientsTextField.text = ""
 	}
 	
 	@IBAction func searchForRecipeIBActionButton(_ sender: UIButton) {
@@ -69,25 +71,11 @@ class SearchForRecipesViewController: UIViewController {
 		addIngredient()
 		requestSearchForRecipes()
 	}
-	@IBAction func addButtonIBAction(_ sender: UIButton) {
-		print("add ingredient button")
-		addIngredient()
-		searchIngredientsTextField.text = ""
-	}
-	@IBAction func clearButtonIBAction(_ sender: UIButton) {
-		print("clear ingredient button")
-		currentIngredient.removeAll()
-		searchIngredientsTextField.text = ""
-	}
-	
-	
 	func requestSearchForRecipes() {
-		ingredientAPIService.requestRecipes(ingredients: [.ingredient1, .ingredient2]) { (success, recipeList) in
+		ingredientAPIService.requestRecipes() { (success, recipeList) in
 			if success {
 				print("request recipes succes")
-//				self.currentIngredient.0 = "test current ingredient 1"
-//				self.currentIngredient.1 = "test current ingredient 2"
-				guard let recipeList = recipeList else {return}
+				self.searchIngredientsTextField.text = recipeList!
 			}
 		}
 	}
@@ -119,35 +107,93 @@ class SearchForRecipesViewController: UIViewController {
 	override func viewDidLoad() {
 		toggleActivityIndicator(shown: true)
 		createToolbar()
-		ingredientsTableView.dataSource = self
+		//let ingredientsRequestData: NSFetchRequest<IngredientCD> = IngredientCD.fetchRequest() //creation de la requete ingredient dans CoreData
+		//guard let ingredients = try? AppDelegate.viewContext.fetch(ingredientsRequestData) else {return} // recupération des infos ingredienst en bdd Core Data
+		
+	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		//ingredientsCD = IngredientCD.all // rechargement visuel de la liste
+		ingredientsTableView.reloadData()
+	}
+}
+extension SearchForRecipesViewController: UITableViewDataSource {
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
 	}
 	
-}
-
-
-extension SearchForRecipesViewController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return currentIngredient.count
+		return ingredientAPIService.currentIngredient.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
 		
-		if let titleLabel = cell.textLabel {
-			titleLabel.text = currentIngredient[indexPath.row]
-		}
-		//let currentIngredient = ingredientTab[indexPath.row]
-		cell.textLabel?.text = currentIngredient[indexPath.row]
-		ingredientsTableView.reloadData()
+		let ingredient = ingredientAPIService.currentIngredient[indexPath.row]
+		cell.textLabel?.text = ingredient
+		//cell.textLabel?.text = ingredient.count
 		return cell
 	}
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		currentIngredient.remove(at: indexPath.row)
-		tableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
-		try? AppDelegate.viewContext.save()
-		ingredientsTableView.reloadData()
-	}
+//		func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//			ingredientAPIService.currentIngredient.remove(at: indexPath.row)
+//			ingredientsTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
+//			try? AppDelegate.viewContext.save()
+//			ingredientsTableView.reloadData()
+//		}
 }
+
+//extension SearchForRecipesViewController: UITableViewDataSource, UITableViewDelegate {
+//	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//		return 1
+//	}
+//	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//		return ingredientsCD.count
+//	}
+//
+//	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//		let cell:UITableViewCell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
+//
+//
+//		try? AppDelegate.viewContext.save()
+//		ingredientsTableView.reloadData()
+//		return cell
+//	}
+//	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//		currentIngredient.remove(at: indexPath.row)
+//		ingredientsTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
+//		try? AppDelegate.viewContext.save()
+//		ingredientsTableView.reloadData()
+//	}
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 extension SearchForRecipesViewController : UITextFieldDelegate {
@@ -160,8 +206,8 @@ extension SearchForRecipesViewController : UITextFieldDelegate {
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		print("Return Pressed")
+		addIngredient()
 		hideKeyboard()
-		//recherche()
 		return true
 	}
 }
