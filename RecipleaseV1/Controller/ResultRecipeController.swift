@@ -12,4 +12,30 @@ import UIKit
 
 class ResultRecipeController: ViewController {
 	
+	
+	
+	//================================
+	// MARK : - ViewDidLoad
+	//================================
+	override func viewDidLoad() {
+		super.viewDidLoad()
+	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+	}
+	
+	
+	
+	
 }
+//extension ResultRecipeController : UITableViewDataSource {
+//	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//		return 
+//	}
+//	
+//	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//		<#code#>
+//	}
+//	
+//	
+//}
