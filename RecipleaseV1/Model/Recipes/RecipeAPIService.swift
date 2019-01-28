@@ -25,7 +25,7 @@ class RecipeAPIService{
 	//var requestRecipe = [String]()
 	
 	func requestRecipes( completionHandler: @escaping(Bool, RecipeAPIResult?) -> Void) {
-		let url = URL(string: recipesSession.urlStringApi)!
+		guard let url = URL(string: recipesSession.urlStringApi) else {return}
 		recipesSession.request(url: url) { response in
 			guard response.response?.statusCode == 200 else {
 				completionHandler(false, nil)

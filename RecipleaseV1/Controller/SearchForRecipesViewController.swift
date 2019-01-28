@@ -19,12 +19,12 @@ class SearchForRecipesViewController: UIViewController {
 	@IBOutlet weak var clearButtonOutlet: UIButton!
 	@IBOutlet weak var ingredientsTableView: UITableView!
 
-	let recipeAPIService = RecipeAPIService()
+	
 	var recipes = Recipes()
 	@IBOutlet weak var searchForRecipesUIActivityIndicatorOutlet: UIActivityIndicatorView!
 	@IBOutlet weak var searchForRecipesOutlet: UIButton!
 	
-
+	let test = RecipesSession()
 	func addIngredient() {
 		if searchIngredientsTextField.text == "" {
 			print("Vous devez entrer un ingrédient")
@@ -33,11 +33,8 @@ class SearchForRecipesViewController: UIViewController {
 			print("Vous avez ajouté un ingrédient")
 		
 			guard let userIngredients = searchIngredientsTextField.text else {return}
-
-			
-		
 			recipes.currentIngredient.append(userIngredients)
-			// mapper pour accpeter plusieurs ingredients à la fois
+			// mapper pour accepter plusieurs ingrédients à la fois
 			
 			UserDefaults.standard.set(userIngredients, forKey: "ingredientsSaved")
 			
@@ -47,9 +44,10 @@ class SearchForRecipesViewController: UIViewController {
 			print("recipes.ingredientsUserToUrl: \(recipes.ingredientsUserToUrl)")
 			print("recipes.currentIngredient: \(recipes.currentIngredient)")
 			print("recipeUser: \(recipeUser)")
-			
+			print()
 			print("userIngredients : \(userIngredients)")
-
+			print("\(recipes.currentIngredient)")
+			print("\(test.urlStringApi)")
 			print("=====================")
 			ingredientsTableView.reloadData()
 			hideKeyboard()
@@ -80,16 +78,8 @@ class SearchForRecipesViewController: UIViewController {
 		print("searchForRecipeIBActionButton")
 		//toggleActivityIndicator(shown: false)
 		addIngredient()
-		requestSearchForRecipes()
 	}
-	func requestSearchForRecipes() {
-		recipeAPIService.requestRecipes { (success, dataYum) in
-			if success {
-				guard let dataYum = dataYum?.matches[0].recipeName else {return}
-				print("\(dataYum)")
-			}
-		}
-	}
+	
 	
 	//================================
 	// MARK : - Animation

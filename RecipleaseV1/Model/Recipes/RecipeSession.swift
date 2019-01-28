@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 
 class RecipesSession: RecipeProtocol {
+	var urlStringApi: String = ""
+	
 	var recipes: Recipes
 	init(recipes: Recipes = Recipes()) {
 		self.recipes = recipes

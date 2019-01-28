@@ -10,10 +10,8 @@ import Foundation
 
 struct Recipes {
 	static var shared = Recipes()
-	init(){}
-
-	var ingredientsUserToUrl:String = ""
 	var currentIngredient = [String]()
+	var ingredientsUserToUrl:String = ""
 }
 
 

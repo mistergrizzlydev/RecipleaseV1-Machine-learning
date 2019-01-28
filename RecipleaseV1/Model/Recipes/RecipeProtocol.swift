@@ -15,16 +15,20 @@ protocol RecipeProtocol {
 	func request(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void)// la fonction request va prendre en compte mon url et qui va me renvoyer un completion handler du même type que celui que te renvoie Alamofire (cf data response)
 }
 extension RecipeProtocol {
-	
-	
-	var urlStringApi: String { // Je réécris la variable au dessus et lui attribue une valeur l'url en dessous
-		let urlString = "https://api.yummly.com/v1/api/recipes?_app_id=654bf699&_app_key=7c4b6ee18b43f40b31fbd410264f2376&q="
+
+	var urlStringApi: String { // Je réécris la variable au dessus et lui attribue une valeur l'url en dessous		
 		//let requiredPhoto:String = "&requirePictures=true"
 		let recipeUser = String(recipes.ingredientsUserToUrl)
-		print("recipeUser \(recipeUser)")
-		let requestRecipe:String = urlString + recipeUser //+ requiredPhoto
-		print("request Recipe :  \(requestRecipe)")
+recipeUser.components(separatedBy: ",")
 		
-		return requestRecipe
+		var urlStringConstruct = ["https://api.yummly.com/v1/api/recipes?_app_id=654bf699&_app_key=7c4b6ee18b43f40b31fbd410264f2376&q="]
+		urlStringConstruct.append(recipeUser)
+			for i in recipes.currentIngredient {
+				let ingredient = "&allowedIngredient[]=\(i)"
+				urlStringConstruct.append(ingredient)
+			}
+		let urlString = urlStringConstruct.map({$0}).joined(separator: "")
+		print(urlString)
+		return urlString
 	}
 }
