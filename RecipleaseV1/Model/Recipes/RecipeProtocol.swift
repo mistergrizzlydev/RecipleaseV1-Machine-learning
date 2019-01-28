@@ -19,10 +19,12 @@ extension RecipeProtocol {
 	var urlStringApi: String { // Je réécris la variable au dessus et lui attribue une valeur l'url en dessous		
 		//let requiredPhoto:String = "&requirePictures=true"
 		let recipeUser = String(recipes.ingredientsUserToUrl)
-recipeUser.components(separatedBy: ",")
+
 		
 		var urlStringConstruct = ["https://api.yummly.com/v1/api/recipes?_app_id=654bf699&_app_key=7c4b6ee18b43f40b31fbd410264f2376&q="]
+		
 		urlStringConstruct.append(recipeUser)
+		
 			for i in recipes.currentIngredient {
 				let ingredient = "&allowedIngredient[]=\(i)"
 				urlStringConstruct.append(ingredient)

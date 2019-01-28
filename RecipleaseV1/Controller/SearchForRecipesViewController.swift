@@ -33,13 +33,30 @@ class SearchForRecipesViewController: UIViewController {
 			print("Vous avez ajouté un ingrédient")
 		
 			guard let userIngredients = searchIngredientsTextField.text else {return}
-			recipes.currentIngredient.append(userIngredients)
-			// mapper pour accepter plusieurs ingrédients à la fois
+			
+			//recipes.currentIngredient.append(userIngredients)
 			
 			UserDefaults.standard.set(userIngredients, forKey: "ingredientsSaved")
-			
+			//var tuples = ()
 			let recipeUser = recipes.currentIngredient.map({$0}).joined(separator: "+")
 			recipes.ingredientsUserToUrl = recipeUser
+			let separators = CharacterSet(charactersIn: ", ;.")
+			let multiIngredient = userIngredients.components(separatedBy: separators)
+			
+			//let test = recipeUser.split(separator: "+")
+			for i  in multiIngredient {
+				let ingredient = i
+				print(ingredient)
+				recipes.currentIngredient.append(String(ingredient))
+			}
+			let test2 = userIngredients.split(separator: ",")
+			
+		
+				//recipes.currentIngredient.append(test.description)
+			print("=====================")
+				//print(ingredient.description)
+			print("=====================")
+			
 			print("=====================")
 			print("recipes.ingredientsUserToUrl: \(recipes.ingredientsUserToUrl)")
 			print("recipes.currentIngredient: \(recipes.currentIngredient)")
@@ -47,7 +64,7 @@ class SearchForRecipesViewController: UIViewController {
 			print()
 			print("userIngredients : \(userIngredients)")
 			print("\(recipes.currentIngredient)")
-			print("\(test.urlStringApi)")
+			//print("\(test.urlStringApi)")
 			print("=====================")
 			ingredientsTableView.reloadData()
 			hideKeyboard()
