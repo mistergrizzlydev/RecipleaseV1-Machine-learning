@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import CoreData
 
 class SearchForRecipesViewController: UIViewController {
 	//===================================
@@ -18,92 +16,97 @@ class SearchForRecipesViewController: UIViewController {
 	@IBOutlet weak var addButtonOutlet: UIButton!
 	@IBOutlet weak var clearButtonOutlet: UIButton!
 	@IBOutlet weak var ingredientsTableView: UITableView!
-
-	
-	var recipes = Recipes()
 	@IBOutlet weak var searchForRecipesUIActivityIndicatorOutlet: UIActivityIndicatorView!
-	@IBOutlet weak var searchForRecipesOutlet: UIButton!
+	@IBOutlet weak var searchForRecipesButton: UIButton!
 	
-	let test = RecipesSession()
-	func addIngredient() {
+	let recipeApIResult: RecipeAPIResult? = nil
+	let recipeAPIService = RecipeAPIService()
+	var userListIngredient = [String]()
+	
+	
+	
+	
+	
+	
+	func addIngredientToDisplay() {
 		if searchIngredientsTextField.text == "" {
 			print("Vous devez entrer un ingrédient")
 			alertEmptyTextField()
+			return
 		} else {
-			print("Vous avez ajouté un ingrédient")
-		
-			guard let userIngredients = searchIngredientsTextField.text else {return}
-			
-			//recipes.currentIngredient.append(userIngredients)
-			
-			UserDefaults.standard.set(userIngredients, forKey: "ingredientsSaved")
-			//var tuples = ()
-			let recipeUser = recipes.currentIngredient.map({$0}).joined(separator: "+")
-			recipes.ingredientsUserToUrl = recipeUser
-			let separators = CharacterSet(charactersIn: ", ;.")
-			let multiIngredient = userIngredients.components(separatedBy: separators)
-			
-			//let test = recipeUser.split(separator: "+")
-			for i  in multiIngredient {
-				let ingredient = i
-				print(ingredient)
-				recipes.currentIngredient.append(String(ingredient))
+			print("=====================")
+			print("Good  ! Vous avez ajouté un ingrédient")
+			guard let userIngredients = searchIngredientsTextField.text?.changeToArray else {return}
+			for i in userIngredients {
+				userListIngredient.append(i.firstUppercased)
 			}
-			let test2 = userIngredients.split(separator: ",")
-			
-		
-				//recipes.currentIngredient.append(test.description)
-			print("=====================")
-				//print(ingredient.description)
-			print("=====================")
-			
-			print("=====================")
-			print("recipes.ingredientsUserToUrl: \(recipes.ingredientsUserToUrl)")
-			print("recipes.currentIngredient: \(recipes.currentIngredient)")
-			print("recipeUser: \(recipeUser)")
-			print()
-			print("userIngredients : \(userIngredients)")
-			print("\(recipes.currentIngredient)")
-			//print("\(test.urlStringApi)")
 			print("=====================")
 			ingredientsTableView.reloadData()
 			hideKeyboard()
 		}
 	}
+	func requestSearchForRecipes() {
+//		recipeAPIService.requestRecipes(recipeList: userListIngredient) { (success, dataYum) in
+//			if success {
+//				print("test success")
+//
+//				guard let dataYum = dataYum?.matches else {return}
+//				print(dataYum[0].recipeName)
+////				list.recipeName = dataYum[0].recipeName
+////				print(list.recipeName)
+////				self.resultRecipeTableView.reloadData()
+////				for i in dataYum {
+////
+////					recipeName = String(i.recipeName)
+////					rates = String(i.rating)
+////					totalTime = String(i.totalTimeInSeconds)
+////
+////					cell.nameRecipeOutlet.text = recipeName
+////					cell.ratesLabel.text = rates
+////					cell.timeLabel.text = totalTime
+////
+////					list.recipeName = recipeName
+////					list.rating.append(rates)
+////					list.totalTimeInSeconds.append(totalTime)
+////
+////					print(recipeName)
+////
+////				}
+//			}
+//			self.resultRecipeTableView.reloadData()
+//		}
+	}
 	//===================================
 	// -MARK : IBACTION
 	//===================================
-	@IBAction func searchForRecipesTextField(_ sender: UITextField) {
-		//addIngredient()
-		
-	}
-	
 	
 	@IBAction func addButtonIBAction(_ sender: UIButton) {
 		print("add ingredient button")
-		addIngredient()
+		addIngredientToDisplay()
 		searchIngredientsTextField.text = ""
 	}
 	@IBAction func clearButtonIBAction(_ sender: UIButton) {
 		print("clear ingredient button")
-		recipes.currentIngredient.removeAll()
+		userListIngredient.removeAll()
 		searchIngredientsTextField.text = ""
 		ingredientsTableView.reloadData()
 	}
 	
 	@IBAction func searchForRecipeIBActionButton(_ sender: UIButton) {
 		print("searchForRecipeIBActionButton")
-		//toggleActivityIndicator(shown: false)
-		addIngredient()
+		//toggleActivityIndicator(shown: true)
+		//searchIngredientsTextField.text = ""
+		//addIngredient()
+		requestSearchForRecipes()
+		
 	}
-	
 	
 	//================================
 	// MARK : - Animation
 	//================================
 	func toggleActivityIndicator(shown: Bool) {
-		searchForRecipesOutlet.isHidden = !shown
-		searchForRecipesUIActivityIndicatorOutlet.isHidden = shown
+		searchForRecipesButton.isHidden = shown
+		searchForRecipesUIActivityIndicatorOutlet.isHidden = !shown
 	}
 	//================================
 	// MARK : - ToolBar
@@ -117,7 +120,6 @@ class SearchForRecipesViewController: UIViewController {
 		toolBar.setItems ([searchRecipeButton], animated: false)
 		toolBar.isUserInteractionEnabled = true
 		searchIngredientsTextField.inputAccessoryView = toolBar
-		
 	}
 	//================================
 	// MARK : - ViewDidLoad
@@ -125,7 +127,7 @@ class SearchForRecipesViewController: UIViewController {
 
 		override func viewDidLoad() {
 			super.viewDidLoad()
-			toggleActivityIndicator(shown: true)
+			//toggleActivityIndicator(shown: true)
 			createToolbar()
 			// call userfault
 			//let ingredient1 = UserDefaults.standard.object(forKey: "ingredient1") as? String
@@ -147,20 +149,20 @@ extension SearchForRecipesViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		//guard let test = recipes.recipes else {return}
-		return recipes.currentIngredient.count
+		return userListIngredient.count
 		//return Recipes.shared.recipes.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
 		
-		let recipe = recipes.currentIngredient[indexPath.row]
+		let recipe = userListIngredient[indexPath.row]
 		//let ingredientsSaved = UserDefaults.standard.string(forKey: "ingredientsSaved") ?? "€"
 		cell.textLabel?.text = "\(recipe)"
 		return cell
 	}
 		func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-			recipes.currentIngredient.remove(at: indexPath.row)
+			userListIngredient.remove(at: indexPath.row)
 			ingredientsTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
 			ingredientsTableView.reloadData()
 		}
@@ -177,7 +179,7 @@ extension SearchForRecipesViewController : UITextFieldDelegate {
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		print("Return Pressed")
-		addIngredient()
+		addIngredientToDisplay()
 		hideKeyboard()
 	
 		return true

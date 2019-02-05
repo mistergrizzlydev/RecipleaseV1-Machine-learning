@@ -14,7 +14,7 @@ import UIKit
 //============================================================
 extension UIViewController {
 	func presentAlert() { // currency 's alert
-		let alertVC = UIAlertController(title: "Erreur", message: "The currency's download failed", preferredStyle: .alert)
+		let alertVC = UIAlertController(title: "Erreur", message: "The request failed", preferredStyle: .alert)
 		alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
 		present(alertVC, animated: true, completion: nil)
 	}

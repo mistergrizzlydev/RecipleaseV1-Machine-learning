@@ -8,12 +8,14 @@
 
 import Foundation
 import Alamofire
-import CoreData
+//import CoreData
 
 
 //		let addIngredient = "&allowedIngredient[]="
 //		let addAllergy = "&allowedAllergy[]="
 //onion+soup&requirePictures = true
+
+
 class RecipeAPIService{
 	
 	private var recipesSession:RecipesSession
@@ -21,12 +23,19 @@ class RecipeAPIService{
 	init(recipeSession: RecipesSession = RecipesSession()) {
 		self.recipesSession = recipeSession
 	}
+	func urlConstructRecipeList(recipeList: [String]) -> String {
+		var ingredient = ""
+		for i in recipeList {
+			ingredient += "&allowedIngredient[]=\(i)"
+		}
+		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key\(recipesSession.appKey)\(ingredient)"
+	}
+
+	func requestRecipes(recipeList: [String], completionHandler: @escaping(Bool, RecipeAPIResult?) -> Void) {
+		let url = urlConstructRecipeList(recipeList: recipeList)
+		guard let urlString = URL(string: url) else {return} // changer avec la methode de creation
 	
-	//var requestRecipe = [String]()
-	
-	func requestRecipes( completionHandler: @escaping(Bool, RecipeAPIResult?) -> Void) {
-		guard let url = URL(string: recipesSession.urlStringApi) else {return}
-		recipesSession.request(url: url) { response in
+		recipesSession.request(url: urlString) { response in
 			guard response.response?.statusCode == 200 else {
 				completionHandler(false, nil)
 				return
