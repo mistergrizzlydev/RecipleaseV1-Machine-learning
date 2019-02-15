@@ -15,6 +15,7 @@ protocol UrlYummlyConstructProtocol {
 	var urlStringApiDetail:String {get}
 	var appId:String {get}
 	var appKey: String {get}
+	
 	func request(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void)// la fonction request va prendre en compte mon url et qui va me renvoyer un completion handler du même type que celui que te renvoie Alamofire (cf data response)
 }
 extension UrlYummlyConstructProtocol {
@@ -35,8 +36,9 @@ extension UrlYummlyConstructProtocol {
 	var appKey:String {
 		return "7c4b6ee18b43f40b31fbd410264f2376"
 	}
+	
 // &allowedAllergy[]=
-		
+
 //		var urlStringConstruct = ["https://api.yummly.com/v1/api/recipes?_app_id=654bf699&_app_key=7c4b6ee18b43f40b31fbd410264f2376&q="]
 //
 //		urlStringConstruct.append(recipeUser)

@@ -23,18 +23,18 @@ class RecipeAPIService{
 	init(recipeSession: RecipesSession = RecipesSession()) {
 		self.recipesSession = recipeSession
 	}
+	
 	func urlConstructRecipeList(recipeList: [String]) -> String {
 		var ingredient = ""
 		for i in recipeList {
-			ingredient += "&allowedIngredient[]=\(i)"
+			ingredient += "&allowedIngredient[]=\(i.firstLowerCased)"
 		}
-		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key\(recipesSession.appKey)\(ingredient)"
+		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)"
 	}
-
-	func requestRecipes(recipeList: [String], completionHandler: @escaping(Bool, RecipeAPIResult?) -> Void) {
-		let url = urlConstructRecipeList(recipeList: recipeList)
-		guard let urlString = URL(string: url) else {return} // changer avec la methode de creation
 	
+	func requestRecipes(recipeList: [String], completionHandler: @escaping(Bool, RecipeAPIResult?) -> Void) {
+		 let url = urlConstructRecipeList(recipeList: recipeList)
+		guard let urlString = URL(string: url) else {return} // changer avec la methode de creation
 		recipesSession.request(url: urlString) { response in
 			guard response.response?.statusCode == 200 else {
 				completionHandler(false, nil)

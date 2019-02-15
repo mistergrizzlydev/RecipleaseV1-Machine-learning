@@ -10,14 +10,19 @@
 		450E28DA47CC7B2EFC6A0316 /* Pods_RecipleaseV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8ADA9782E4BDCC46233358 /* Pods_RecipleaseV1.framework */; };
 		BF1A3E0E21F9054200E915D7 /* Allergies.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A3E0D21F9054200E915D7 /* Allergies.swift */; };
 		BF1A3E1821F9634400E915D7 /* AllergiesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A3E1721F9634400E915D7 /* AllergiesTableView.swift */; };
-		BF22AD9A21F7579200EC914A /* ResultRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF22AD9921F7579200EC914A /* ResultRecipeController.swift */; };
-		BF22ADA921F7DBBA00EC914A /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF22ADA821F7DBBA00EC914A /* ProfilViewController.swift */; };
+		BF254380220A134B0094171B /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25437F220A134B0094171B /* SegueExtension.swift */; };
+		BF254382220A65740094171B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF254381220A65740094171B /* NavigationController.swift */; };
 		BF25534121F4DF2A00350118 /* RecipeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25534021F4DF2A00350118 /* RecipeAPIService.swift */; };
 		BF25534521F4E22100350118 /* RecipeAPIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25534421F4E22100350118 /* RecipeAPIResult.swift */; };
 		BF25534F21F5549600350118 /* AlertsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25534E21F5549600350118 /* AlertsExtension.swift */; };
 		BF26F5022208859D0044A7F6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF26F5012208859D0044A7F6 /* String.swift */; };
+		BF2D240A220DF61F00A7F427 /* AllergyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D2409220DF61F00A7F427 /* AllergyViewController.swift */; };
+		BF2D240C220E435000A7F427 /* ResultListRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D240B220E435000A7F427 /* ResultListRecipeViewController.swift */; };
+		BF2D241822124ED700A7F427 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D241722124ED700A7F427 /* RecipeTableViewCell.swift */; };
+		BF8D34C9220B370D009C6629 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = BF8D34C8220B370D009C6629 /* recipes.json */; };
+		BF8D34F6220C95DB009C6629 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8D34F5220C95DB009C6629 /* RecipeViewController.swift */; };
+		BF8D34F8220C992A009C6629 /* ProfilViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8D34F7220C992A009C6629 /* ProfilViewController2.swift */; };
 		BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFA521BF67E700EDF694 /* AppDelegate.swift */; };
-		BF92BFA821BF67E700EDF694 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFA721BF67E700EDF694 /* ViewController.swift */; };
 		BF92BFAB21BF67E700EDF694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFA921BF67E700EDF694 /* Main.storyboard */; };
 		BF92BFB021BF67EA00EDF694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */; };
 		BF92BFB321BF67EA00EDF694 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */; };
@@ -27,7 +32,7 @@
 		BF92BFC621C094FF00EDF694 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFC521C094FF00EDF694 /* Podfile */; };
 		BFC62BAA21FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BA921FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift */; };
 		BFC62BAC21FA69160097E0B0 /* RecipeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BAB21FA69160097E0B0 /* RecipeSession.swift */; };
-		BFC62BB221FBD16C0097E0B0 /* ResultRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BB121FBD16C0097E0B0 /* ResultRecipeTableViewCell.swift */; };
+		BFC62BB221FBD16C0097E0B0 /* ListRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BB121FBD16C0097E0B0 /* ListRecipeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,15 +41,20 @@
 		994BF08252B1BE72AB090088 /* Pods-RecipleaseV1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseV1.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipleaseV1/Pods-RecipleaseV1.release.xcconfig"; sourceTree = "<group>"; };
 		BF1A3E0D21F9054200E915D7 /* Allergies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergies.swift; sourceTree = "<group>"; };
 		BF1A3E1721F9634400E915D7 /* AllergiesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergiesTableView.swift; sourceTree = "<group>"; };
-		BF22AD9921F7579200EC914A /* ResultRecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRecipeController.swift; sourceTree = "<group>"; };
-		BF22ADA821F7DBBA00EC914A /* ProfilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfilViewController.swift; path = RecipleaseV1/Controller/ProfilViewController.swift; sourceTree = SOURCE_ROOT; };
+		BF25437F220A134B0094171B /* SegueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueExtension.swift; sourceTree = "<group>"; };
+		BF254381220A65740094171B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BF25534021F4DF2A00350118 /* RecipeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPIService.swift; sourceTree = "<group>"; };
 		BF25534421F4E22100350118 /* RecipeAPIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPIResult.swift; sourceTree = "<group>"; };
 		BF25534E21F5549600350118 /* AlertsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertsExtension.swift; sourceTree = "<group>"; };
 		BF26F5012208859D0044A7F6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BF2D2409220DF61F00A7F427 /* AllergyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergyViewController.swift; sourceTree = "<group>"; };
+		BF2D240B220E435000A7F427 /* ResultListRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultListRecipeViewController.swift; sourceTree = "<group>"; };
+		BF2D241722124ED700A7F427 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		BF8D34C8220B370D009C6629 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
+		BF8D34F5220C95DB009C6629 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		BF8D34F7220C992A009C6629 /* ProfilViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController2.swift; sourceTree = "<group>"; };
 		BF92BFA221BF67E700EDF694 /* RecipleaseV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipleaseV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF92BFA521BF67E700EDF694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BF92BFA721BF67E700EDF694 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BF92BFAA21BF67E700EDF694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF92BFB221BF67EA00EDF694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,7 +65,7 @@
 		BF92BFC521C094FF00EDF694 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = RecipleaseV1/Podfile; sourceTree = "<group>"; };
 		BFC62BA921FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlYummlyConstructProtocol.swift; sourceTree = "<group>"; };
 		BFC62BAB21FA69160097E0B0 /* RecipeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSession.swift; sourceTree = "<group>"; };
-		BFC62BB121FBD16C0097E0B0 /* ResultRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultRecipeTableViewCell.swift; path = RecipleaseV1/View/ResultRecipeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		BFC62BB121FBD16C0097E0B0 /* ListRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListRecipeTableViewCell.swift; path = RecipleaseV1/View/ListRecipeTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +127,7 @@
 				BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */,
 				BF92BFA521BF67E700EDF694 /* AppDelegate.swift */,
 				BF92BFB421BF67EA00EDF694 /* Info.plist */,
+				BF8D34C8220B370D009C6629 /* recipes.json */,
 			);
 			path = RecipleaseV1;
 			sourceTree = "<group>";
@@ -133,10 +144,12 @@
 		BF92BFBB21BF681400EDF694 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BFC62BB121FBD16C0097E0B0 /* ResultRecipeTableViewCell.swift */,
+				BFC62BB121FBD16C0097E0B0 /* ListRecipeTableViewCell.swift */,
+				BF2D241722124ED700A7F427 /* RecipeTableViewCell.swift */,
 				BF1A3E1721F9634400E915D7 /* AllergiesTableView.swift */,
 				BF92BFA921BF67E700EDF694 /* Main.storyboard */,
 				BF92BFB121BF67EA00EDF694 /* LaunchScreen.storyboard */,
+				BF254381220A65740094171B /* NavigationController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -145,9 +158,10 @@
 			isa = PBXGroup;
 			children = (
 				BF92BFC321C0352400EDF694 /* SearchForRecipesViewController.swift */,
-				BF22AD9921F7579200EC914A /* ResultRecipeController.swift */,
-				BF22ADA821F7DBBA00EC914A /* ProfilViewController.swift */,
-				BF92BFA721BF67E700EDF694 /* ViewController.swift */,
+				BF2D240B220E435000A7F427 /* ResultListRecipeViewController.swift */,
+				BF8D34F5220C95DB009C6629 /* RecipeViewController.swift */,
+				BF8D34F7220C992A009C6629 /* ProfilViewController2.swift */,
+				BF2D2409220DF61F00A7F427 /* AllergyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -157,6 +171,7 @@
 			children = (
 				BF25534E21F5549600350118 /* AlertsExtension.swift */,
 				BF26F5012208859D0044A7F6 /* String.swift */,
+				BF25437F220A134B0094171B /* SegueExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -254,6 +269,7 @@
 				BF92BFC221C0177000EDF694 /* whatever it takes bold.ttf in Resources */,
 				BF92BFB321BF67EA00EDF694 /* LaunchScreen.storyboard in Resources */,
 				BF92BFB021BF67EA00EDF694 /* Assets.xcassets in Resources */,
+				BF8D34C9220B370D009C6629 /* recipes.json in Resources */,
 				BF92BFAB21BF67E700EDF694 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,19 +328,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF22AD9A21F7579200EC914A /* ResultRecipeController.swift in Sources */,
-				BF22ADA921F7DBBA00EC914A /* ProfilViewController.swift in Sources */,
+				BF8D34F8220C992A009C6629 /* ProfilViewController2.swift in Sources */,
 				BF1A3E0E21F9054200E915D7 /* Allergies.swift in Sources */,
 				BF25534521F4E22100350118 /* RecipeAPIResult.swift in Sources */,
+				BF2D241822124ED700A7F427 /* RecipeTableViewCell.swift in Sources */,
 				BF26F5022208859D0044A7F6 /* String.swift in Sources */,
+				BF254380220A134B0094171B /* SegueExtension.swift in Sources */,
 				BFC62BAA21FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift in Sources */,
-				BF92BFA821BF67E700EDF694 /* ViewController.swift in Sources */,
 				BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */,
+				BF254382220A65740094171B /* NavigationController.swift in Sources */,
 				BF1A3E1821F9634400E915D7 /* AllergiesTableView.swift in Sources */,
+				BF2D240A220DF61F00A7F427 /* AllergyViewController.swift in Sources */,
 				BF25534121F4DF2A00350118 /* RecipeAPIService.swift in Sources */,
-				BFC62BB221FBD16C0097E0B0 /* ResultRecipeTableViewCell.swift in Sources */,
+				BFC62BB221FBD16C0097E0B0 /* ListRecipeTableViewCell.swift in Sources */,
+				BF8D34F6220C95DB009C6629 /* RecipeViewController.swift in Sources */,
 				BFC62BAC21FA69160097E0B0 /* RecipeSession.swift in Sources */,
 				BF92BFC421C0352400EDF694 /* SearchForRecipesViewController.swift in Sources */,
+				BF2D240C220E435000A7F427 /* ResultListRecipeViewController.swift in Sources */,
 				BF25534F21F5549600350118 /* AlertsExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

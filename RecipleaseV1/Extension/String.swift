@@ -14,11 +14,15 @@ extension String {
 			return self.components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter {!$0.isEmpty }
 		}
 	}
-	var firstUppercased:String { // replace the first letter of a string with capital letter
+	var firstUppercased:String { // replace the first letter of a string with capital letter to display
 		guard let first = first else {return ""}
 		return String (first).uppercased() + dropFirst()
 	}
-	var upadteSizeUrlImageString: String { // chnage url size : 90 px to 360px
+	var firstLowerCased:String { // replace the first letter of a string with lower letter to url
+		guard let first = first else {return ""}
+		return String (first).lowercased() + dropFirst()
+	}
+	var updateSizeUrlImageString: String { // chnage url size : 90 px to 360px
 		return self.dropLast(2) + "360"
 	}
 }
