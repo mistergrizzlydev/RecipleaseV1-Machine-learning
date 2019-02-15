@@ -256,7 +256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqI-0H-ryN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="-31"/>
+            <point key="canvasLocation" x="714" y="-31"/>
         </scene>
         <!--Search For Recipes View Controller-->
         <scene sceneID="B6l-lv-WhB">
@@ -432,7 +432,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-841" y="-31"/>
+            <point key="canvasLocation" x="-802" y="-31"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="c6z-bc-8qm">
@@ -562,7 +562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iAA-AI-fKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-135" y="-31"/>
+            <point key="canvasLocation" x="-47" y="-31"/>
         </scene>
         <!--Profil View Controller-->
         <scene sceneID="VO1-Py-bii">
