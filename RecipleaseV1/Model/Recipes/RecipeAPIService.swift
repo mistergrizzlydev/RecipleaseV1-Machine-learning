@@ -29,6 +29,11 @@ class RecipeAPIService{
 		for i in recipeList {
 			ingredient += "&allowedIngredient[]=\(i.firstLowerCased)"
 		}
+		// ne pas oublier , allergiesList: [String]
+//		var allergies = ""
+//		for i in allergiesList {
+//			allergies += "&allowedAllergy[]=\(i.firstLowerCased)"
+//		}
 		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)"
 	}
 	

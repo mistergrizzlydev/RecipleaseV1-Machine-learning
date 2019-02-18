@@ -8,17 +8,15 @@
 
 import UIKit
 
-class AllergiesTableView: UITableViewCell {
-
-	@IBOutlet weak var allergyOutletCell: UILabel!
-	
+class AllergiesTableViewCell: UITableViewCell {
+	@IBOutlet weak var nameAllergy: UILabel!
 	@IBOutlet weak var allergySwitch: UISwitch!
 	
-	func configure(titleAllergy: String, AllergyOK: Bool) {
-		
-		allergyOutletCell.text = titleAllergy
-		allergySwitch.isOn = AllergyOK
-	}
+//	func configure(titleAllergy: String, AllergyOK: Bool) {
+//		
+//		nameAllergy.text = titleAllergy
+//		allergySwitch.isOn = AllergyOK
+//	}
 	
     override func awakeFromNib() {
         super.awakeFromNib()

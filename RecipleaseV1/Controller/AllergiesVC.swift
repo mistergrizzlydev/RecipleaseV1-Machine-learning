@@ -1,37 +1,38 @@
-////
-////  ProfilViewController.swift
-////  RecipleaseV1
-////
-////  Created by VINCENT BOULANGER on 23/01/2019.
-////  Copyright © 2019 VBoulanger. All rights reserved.
-////
 //
-//import Foundation
-//import UIKit
+//  AllergiesViewController.swift
+//  RecipleaseV1
 //
-//class ProfilViewController2: Vieu {
+//  Created by VINCENT BOULANGER on 17/02/2019.
+//  Copyright © 2019 VBoulanger. All rights reserved.
+//
 
-//	override func viewDidLoad() {
-//		super.viewDidLoad()
-//		
-//		// Do any additional setup after loading the view.
-//	}
-//	
-//	@IBOutlet weak var allergiesTableView: UITableView!
-//	
-//	
-//}
-//
-//extension RecipeViewController : UITableViewDataSource {
-//	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//		return Allergies.list.count
-//	}
-//	
-//	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//		guard let cell = tableView.dequeueReusableCell(withIdentifier: "AllergiesCell", for : indexPath) as? AllergiesTableView else {
-//			return UITableViewCell()
-//		}
-//		
+import UIKit
+
+class AllergiesVC: UIViewController {
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		//allergiesTableView.delegate = self as! UITableViewDelegate
+		allergiesTableView.dataSource = self
+		// Do any additional setup after loading the view.
+	}
+	
+	@IBOutlet weak var allergiesTableView: UITableView!
+	
+	let tab = ["soja","bière","orange"]
+}
+
+extension AllergiesVC : UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return tab.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "AllergiesCell", for : indexPath) as? AllergiesTableViewCell else {
+			return UITableViewCell()
+		}
+		//cell.nameAllergy
 //		let allergies = Allergies.list[indexPath.row].allergy
 //		//cell.allergyOutletCell?.text = allergies.description
 //		
@@ -39,17 +40,17 @@
 //			cell.allergyOutletCell?.text = "\(key)"
 //			if cell.allergySwitch.isOn  {
 //				print("vrai")
-//				Allergies.list[0].allergy
+//				//Allergies.list[0].allergy
 //			} else {
 //				print("faux")
 //			}
 //		}
-//		return cell
-//	}
-//	
-//	
-//	
-//}
+		return cell
+	}
+	
+	
+	
+}
 //
 //
 ///*

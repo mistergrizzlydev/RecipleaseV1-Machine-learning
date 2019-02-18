@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchForRecipesViewController: UIViewController {
+class SearchForRecipesVC: UIViewController {
 	
 	//===================================
 	// -MARK : OUTLETS
@@ -41,7 +41,7 @@ class SearchForRecipesViewController: UIViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "segueRecipesToDisplay" {
 			if let matches = matches {
-				let successVC = segue.destination as! ResultListRecipeViewController
+				let successVC = segue.destination as! ResultListRecipeVC
 				successVC.matches = matches
 			}
 		}
@@ -81,6 +81,7 @@ class SearchForRecipesViewController: UIViewController {
 	@IBAction func searchForRecipeIBActionButton(_ sender: UIButton) {
 		print("searchForRecipeIBActionButton")
 	//	toggleActivityIndicator(shown: true)
+		//addIngredientToDisplay()
 		requestSearchForRecipes()
 	}
 	
@@ -99,7 +100,7 @@ class SearchForRecipesViewController: UIViewController {
 		toolBar.sizeToFit()
 		toolBar.barTintColor = .black
 		toolBar.tintColor = .white
-		let searchRecipeButton = UIBarButtonItem(title: "Recherche une recette", style: .plain, target: self, action: #selector(SearchForRecipesViewController.searchForRecipeIBActionButton))
+		let searchRecipeButton = UIBarButtonItem(title: "Recherche une recette", style: .plain, target: self, action: #selector(SearchForRecipesVC.searchForRecipeIBActionButton))
 		toolBar.setItems ([searchRecipeButton], animated: false)
 		toolBar.isUserInteractionEnabled = true
 		searchIngredientsTextField.inputAccessoryView = toolBar
@@ -107,22 +108,26 @@ class SearchForRecipesViewController: UIViewController {
 	//================================
 	// MARK : - ViewDidLoad
 	//================================
-
-		override func viewDidLoad() {
-			super.viewDidLoad()
-			ingredientsTableView.dataSource = self
-			
-//			toggleActivityIndicator(shown: false)
-			createToolbar()
-			addButtonOutlet.layer.cornerRadius = 5
-			clearButtonOutlet.layer.cornerRadius = 5
-			searchForRecipesButton.layer.cornerRadius = 5
-			// call userfault
-			//let ingredient1 = UserDefaults.standard.object(forKey: "ingredient1") as? String
-			
-			//let ingredientsRequestData: NSFetchRequest<IngredientCD> = IngredientCD.fetchRequest() //creation de la requete ingredient dans CoreData
-			//guard let ingredients = try? AppDelegate.viewContext.fetch(ingredientsRequestData) else {return} // recupération des infos ingredienst en bdd Core Data
-		}
+	func designItemBarNavigation() {
+		self.navigationItem.title = "Reciplease"
+		//			let test = UINavigationBar.appearance()
+		//			test.layer = UIColor.white
+	}
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		//toggleActivityIndicator(shown: false)
+		designItemBarNavigation()
+		ingredientsTableView.dataSource = self
+		createToolbar()
+		addButtonOutlet.layer.cornerRadius = 5
+		clearButtonOutlet.layer.cornerRadius = 5
+		searchForRecipesButton.layer.cornerRadius = 5
+		// call userfault
+		//let ingredient1 = UserDefaults.standard.object(forKey: "ingredient1") as? String
+		
+		//let ingredientsRequestData: NSFetchRequest<IngredientCD> = IngredientCD.fetchRequest() //creation de la requete ingredient dans CoreData
+		//guard let ingredients = try? AppDelegate.viewContext.fetch(ingredientsRequestData) else {return} // recupération des infos ingredienst en bdd Core Data
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		toggleActivityIndicator(shown: false)
@@ -130,9 +135,7 @@ class SearchForRecipesViewController: UIViewController {
 	//	ingredientsTableView.reloadData()
 	}
 }
-extension SearchForRecipesViewController: UITableViewDataSource {
-
-	
+extension SearchForRecipesVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return userListIngredient.count
 	}
@@ -152,7 +155,7 @@ extension SearchForRecipesViewController: UITableViewDataSource {
 }
 
 
-extension SearchForRecipesViewController : UITextFieldDelegate {
+extension SearchForRecipesVC : UITextFieldDelegate {
 	func hideKeyboard() {
 		searchIngredientsTextField.resignFirstResponder()
 	}

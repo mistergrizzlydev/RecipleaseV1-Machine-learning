@@ -8,23 +8,28 @@
 
 import UIKit
 
-class RecipeViewController: UIViewController {
+class RecipeVC: UIViewController {
 	@IBOutlet weak var backViewRateAndTime: UIView!
+	@IBOutlet weak var imageRecipe: UIImageView!
 	@IBOutlet weak var rateLabel: UILabel!
 	@IBOutlet weak var timeLabel: UILabel!
 	@IBOutlet weak var recipeName: UILabel!
 	@IBOutlet weak var ingredientsTableView: UITableView!
-	var matches: [Match]!
-	@IBOutlet weak var imageRecipe: UIImageView!
 	@IBOutlet weak var getDirections: UIButton!
+	var matches: [Match]!
+	var listIngredientsDetail = [String]()
+	
 	
 	override func viewDidLoad() {
 			super.viewDidLoad()
+		for i in matches {
+			print(i.ingredients)
+		}
+		self.navigationItem.title = "Reciplease"
 		designButton()
 		print("RecipeViewController")
-		//ingredientsTableView.dataSource = self
+		ingredientsTableView.dataSource = self
 		displayRecipe()
-		
 		ingredientsTableView.reloadData()
 		}
 	override func viewWillAppear(_ animated: Bool) {
@@ -33,48 +38,48 @@ class RecipeViewController: UIViewController {
 	}
 	func designButton() {
 		backViewRateAndTime.layer.cornerRadius = 5
-		backViewRateAndTime.layer.cornerRadius = 5
 		getDirections.layer.cornerRadius = 5
 	}
 	func displayRecipe() {
-		guard let resultMatches = matches else {return}
-		if matches!.count > 0 {
-			recipeName.text = String(resultMatches[0].recipeName)
-			timeLabel.text = String("\((resultMatches[0].totalTimeInSeconds)/60) mn")
-			rateLabel.text = String("\(resultMatches[0].rating) / 5")
-			let images = resultMatches[0].smallImageUrls![0].updateSizeUrlImageString
-			if let url = NSURL(string: images) {
-				if let data = NSData(contentsOf: url as URL) {
-					imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
-					imageRecipe.image = UIImage(data: data as Data)
-				}
-			}
-		} else {
-			// ajouter une alerte
-			print("error recipe List")
-		}
+		//guard let resultMatches = matches else {return}
+		
 	}
 }
 
-
-extension RecipeViewController: UITableViewDataSource {
+extension RecipeVC: UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
-
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let matches = matches else {return 0}
-		return matches[0].ingredients.count
+		//guard let matches = matches else {return 0}
+		return matches.count
 	}
-
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? RecipeTableViewCell else {
 			return UITableViewCell()
 		}
 		let resultMatches = matches![indexPath.row].ingredients
 		print("resultMatches")
+		print(resultMatches.description)
+		if matches!.count > 0 {
+			recipeName.text =  resultMatches[indexPath.row].description
+//			timeLabel.text = String("\((resultMatches[0].totalTimeInSeconds)/60) mn")
+//			rateLabel.text = String("\(resultMatches[0].rating) / 5")
+//			let images = resultMatches[0].smallImageUrls![0].updateSizeUrlImageString
+//			if let url = NSURL(string: images) {
+//				if let data = NSData(contentsOf: url as URL) {
+//					imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
+//					imageRecipe.image = UIImage(data: data as Data)
+//				}
+			}
+//		} else {
+//			// ajouter une alerte
+//			print("error recipe List")
+//		}
 		for i in resultMatches {
-			cell.textLabel?.text = i
+			print("i: \(i)")
+			cell.textLabel?.text = i.description
+			recipeName.text = i.description
 		}
 		return cell
 	}
