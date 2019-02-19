@@ -13,7 +13,9 @@ class ResultListRecipeVC: UIViewController {
 	var recipeAPIService = RecipeAPIService()
 	@IBOutlet weak var recipesTableView: UITableView!
 	var matches: [Match]?
-	
+	//========================================
+	// MARK : - viewDidLoad() & viewWillAppear
+	//========================================
     override func viewDidLoad() {
         super.viewDidLoad()
 		let nib = UINib(nibName: "CellTableViewXib", bundle: nil)
@@ -28,6 +30,10 @@ class ResultListRecipeVC: UIViewController {
 		
 		recipesTableView.reloadData()
 	}
+	
+	//================================
+	// MARK : - prepare fo segue
+	//================================
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "SegueRecipeToSuccess" {
 			if let matches = matches {
@@ -37,6 +43,9 @@ class ResultListRecipeVC: UIViewController {
 		}
 	}
 }
+//================================================
+// MARK : - ResultListRecipeVC: UITableViewDelegate
+//=================================================
 extension ResultListRecipeVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		print("didSelect : \(matches![indexPath.row].id)")
@@ -51,6 +60,9 @@ extension ResultListRecipeVC: UITableViewDelegate {
 		}
 	}
 }
+//===================================================
+// MARK : - ResultListRecipeVC: UITableViewDataSource
+//===================================================
 extension ResultListRecipeVC: UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1

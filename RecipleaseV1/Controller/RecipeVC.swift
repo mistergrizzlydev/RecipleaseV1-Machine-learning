@@ -19,6 +19,12 @@ class RecipeVC: UIViewController {
 	var matches: [Match]!
 	var listIngredientsDetail = [String]()
 	
+	// launch URL
+	@IBAction func getRecipeDirection(_ sender: UIButton) {
+		guard let url = URL(string: "https://stackoverflow.com") else { return }
+		UIApplication.shared.open(url)
+	}
+	
 	
 	override func viewDidLoad() {
 			super.viewDidLoad()
@@ -29,7 +35,7 @@ class RecipeVC: UIViewController {
 		designButton()
 		print("RecipeViewController")
 		ingredientsTableView.dataSource = self
-		displayRecipe()
+		//displayRecipe()
 		ingredientsTableView.reloadData()
 		}
 	override func viewWillAppear(_ animated: Bool) {
@@ -40,10 +46,10 @@ class RecipeVC: UIViewController {
 		backViewRateAndTime.layer.cornerRadius = 5
 		getDirections.layer.cornerRadius = 5
 	}
-	func displayRecipe() {
-		//guard let resultMatches = matches else {return}
-		
-	}
+//	func displayRecipe() {
+//		//guard let resultMatches = matches else {return}
+//
+//	}
 }
 
 extension RecipeVC: UITableViewDataSource {
@@ -62,7 +68,7 @@ extension RecipeVC: UITableViewDataSource {
 		print("resultMatches")
 		print(resultMatches.description)
 		if matches!.count > 0 {
-			recipeName.text =  resultMatches[indexPath.row].description
+			recipeName.text =  String(resultMatches[indexPath.row].description)
 //			timeLabel.text = String("\((resultMatches[0].totalTimeInSeconds)/60) mn")
 //			rateLabel.text = String("\(resultMatches[0].rating) / 5")
 //			let images = resultMatches[0].smallImageUrls![0].updateSizeUrlImageString

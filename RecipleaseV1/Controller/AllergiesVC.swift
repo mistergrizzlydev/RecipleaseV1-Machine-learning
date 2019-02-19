@@ -12,7 +12,7 @@ class AllergiesVC: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		self.navigationItem.title = "Reciplease"
 		//allergiesTableView.delegate = self as! UITableViewDelegate
 		allergiesTableView.dataSource = self
 		// Do any additional setup after loading the view.

@@ -50,6 +50,9 @@
                                 <color key="backgroundColor" red="1" green="0.54901960780000003" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Get directions"/>
+                                <connections>
+                                    <action selector="getRecipeDirection:" destination="wnu-rf-JKu" eventType="touchUpInside" id="LLE-53-GGO"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0um-6L-q2b">
                                 <rect key="frame" x="15" y="266" width="345" height="17"/>
@@ -179,7 +182,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backViewRateAndTime" destination="0yK-c7-NGI" id="yNW-TV-Peh"/>
-                        <outlet property="getDirections" destination="R1b-9U-0PN" id="uqZ-uh-O6c"/>
+                        <outlet property="getDirections" destination="R1b-9U-0PN" id="CR1-un-8PV"/>
                         <outlet property="imageRecipe" destination="aIc-U3-rlx" id="Pfm-Re-0Ov"/>
                         <outlet property="ingredientsTableView" destination="dgX-JG-Un9" id="oCx-dO-dC6"/>
                         <outlet property="rateLabel" destination="Yj2-n6-c9D" id="dak-Kc-2LW"/>
@@ -506,9 +509,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XuA-Eg-whW">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XuA-Eg-whW">
                                                     <rect key="frame" x="291" y="30" width="51" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YlB-eS-O5S">
                                                     <rect key="frame" x="15" y="36" width="38" height="18"/>
@@ -518,6 +520,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XuA-Eg-whW" firstAttribute="top" secondItem="IsQ-Cs-UaB" secondAttribute="topMargin" constant="-1" id="bhx-FQ-hqA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="XuA-Eg-whW" secondAttribute="trailing" constant="19" id="pQq-PD-2yR"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="allergySwitch" destination="XuA-Eg-whW" id="5mF-An-l94"/>
