@@ -22,7 +22,6 @@ class SearchForRecipesVC: UIViewController {
 	
 	let recipeAPIService = RecipeAPIService()
 	var userListIngredient = [String]()
-	var ingredientList = [RecipeAPIResult]()
 	var matches: [Match]!
 	
 	func addIngredientToDisplay() {
@@ -31,7 +30,8 @@ class SearchForRecipesVC: UIViewController {
 			return
 		} else {
 			guard let userIngredients = searchIngredientsTextField.text?.changeToArray else {return}
-			for i in userIngredients {				userListIngredient.append(i.firstUppercased)
+			for i in userIngredients {
+				userListIngredient.append(i.firstUppercased)
 			}
 			ingredientsTableView.reloadData()
 			hideKeyboard()
@@ -50,13 +50,10 @@ class SearchForRecipesVC: UIViewController {
 	func requestSearchForRecipes() {
 		//toggleActivityIndicator(shown: true)
 		print("requestSearchForRecipes")
-		recipeAPIService.requestRecipes(recipeList: userListIngredient) { (success, dataYum) in
+		recipeAPIService.requestListRecipes(recipeList: userListIngredient) { (success, dataYum) in
 			if success {
-				print("test success")
 				guard let dataYum = dataYum else {return}
 				self.matches = dataYum.matches
-				print(dataYum.matches)
-				print(dataYum.totalMatchCount)
 				self.performSegue(withIdentifier: "segueRecipesToDisplay", sender: nil)
 			}
 		}
@@ -80,8 +77,8 @@ class SearchForRecipesVC: UIViewController {
 	
 	@IBAction func searchForRecipeIBActionButton(_ sender: UIButton) {
 		print("searchForRecipeIBActionButton")
-	//	toggleActivityIndicator(shown: true)
 		//addIngredientToDisplay()
+		toggleActivityIndicator(shown: true)
 		requestSearchForRecipes()
 	}
 	
@@ -100,7 +97,7 @@ class SearchForRecipesVC: UIViewController {
 		toolBar.sizeToFit()
 		toolBar.barTintColor = .black
 		toolBar.tintColor = .white
-		let searchRecipeButton = UIBarButtonItem(title: "Recherche une recette", style: .plain, target: self, action: #selector(SearchForRecipesVC.searchForRecipeIBActionButton))
+		let searchRecipeButton = UIBarButtonItem(title: "Go Search", style: .plain, target: self, action: #selector(SearchForRecipesVC.searchForRecipeIBActionButton))
 		toolBar.setItems ([searchRecipeButton], animated: false)
 		toolBar.isUserInteractionEnabled = true
 		searchIngredientsTextField.inputAccessoryView = toolBar
@@ -136,6 +133,7 @@ class SearchForRecipesVC: UIViewController {
 	}
 }
 extension SearchForRecipesVC: UITableViewDataSource {
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return userListIngredient.count
 	}
@@ -143,7 +141,6 @@ extension SearchForRecipesVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
 		let recipe = userListIngredient[indexPath.row]
-		//let ingredientsSaved = UserDefaults.standard.string(forKey: "ingredientsSaved") ?? "€"
 		cell.textLabel?.text = "\(recipe)"
 		return cell
 	}

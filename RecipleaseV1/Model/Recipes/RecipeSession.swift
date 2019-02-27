@@ -13,7 +13,7 @@ class RecipesSession: UrlYummlyConstructProtocol {
 	
 	// c'est ce qui remplace URL session
 	func request(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void) {
-		Alamofire.request(url).responseJSON { responseData in // alamofire request avec "url" que je passe en paramètre. je vais renvoyer ce que me renvoie alamfire dans mons completionHandler
+		Alamofire.request(url).responseJSON { responseData in // alamofire request avec "url" que je passe en paramètre. je vais renvoyer ce que me renvoie alamofire dans mons completionHandler
 			completionHandler(responseData)
 		}
 	}// en gros quand j'appelle request j'ai dans mon callback la reponse d'alamofire

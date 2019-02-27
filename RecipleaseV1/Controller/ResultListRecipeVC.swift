@@ -5,14 +5,15 @@
 //  Created by VINCENT BOULANGER on 09/02/2019.
 //  Copyright © 2019 VBoulanger. All rights reserved.
 //
-
 import UIKit
 
 class ResultListRecipeVC: UIViewController {
-	var userListIngredient = [String]()
 	var recipeAPIService = RecipeAPIService()
 	@IBOutlet weak var recipesTableView: UITableView!
 	var matches: [Match]?
+	var recipeDetailAPIResult: [RecipeDetailAPIResult]!
+	
+	
 	//========================================
 	// MARK : - viewDidLoad() & viewWillAppear
 	//========================================
@@ -27,39 +28,42 @@ class ResultListRecipeVC: UIViewController {
     }
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
+		//print(matches)
 		recipesTableView.reloadData()
 	}
 	
-	//================================
-	// MARK : - prepare fo segue
-	//================================
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "SegueRecipeToSuccess" {
-			if let matches = matches {
-				let successVC = segue.destination as! RecipeVC
-				successVC.matches = matches
-			}
-		}
-	}
 }
 //================================================
 // MARK : - ResultListRecipeVC: UITableViewDelegate
 //=================================================
 extension ResultListRecipeVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		print("didSelect : \(matches![indexPath.row].id)")
-		let idRecipe = matches![indexPath.row].id
-		recipeAPIService.requestRecipes(recipeList: [idRecipe]) { (success, dataRecipeId) in
+		guard let idRecipe = matches?[indexPath.row].id else {return}
+		recipeAPIService.requestRecipeDetail(recipeID: idRecipe) { (success, dataRecipeID) in
+			print("idRecipeTest : \(self.recipeAPIService.urlConstructRecipeDetail(recipeID: idRecipe))")
 			if success {
 				print("test success")
-				guard let dataRecipeId = dataRecipeId else {return}
-				self.matches = dataRecipeId.matches
-				self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: nil)
+				guard let dataRecipeID = dataRecipeID else {return}
+				self.recipeDetailAPIResult = [dataRecipeID]
+				self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: self.recipeDetailAPIResult[indexPath.row])
+			} else {
+				print("request error")
+			}
+		}
+	}
+	//================================
+	// MARK : - prepare fo segue
+	//================================
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "SegueRecipeToSuccess" {
+			if let recipeDetailAPIResult = recipeDetailAPIResult {
+				let successVC = segue.destination as! RecipeVC
+				successVC.recipeDetailAPIResult = recipeDetailAPIResult
 			}
 		}
 	}
 }
+
 //===================================================
 // MARK : - ResultListRecipeVC: UITableViewDataSource
 //===================================================
@@ -71,6 +75,7 @@ extension ResultListRecipeVC: UITableViewDataSource {
 		guard let matches = matches else {return 0}
 		return matches.count
 	}
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else {
 			return UITableViewCell()

@@ -10,34 +10,53 @@ import Foundation
 import Alamofire
 //import CoreData
 
-
-//		let addIngredient = "&allowedIngredient[]="
-//		let addAllergy = "&allowedAllergy[]="
-//onion+soup&requirePictures = true
-
-
 class RecipeAPIService{
 	
 	private var recipesSession:RecipesSession
-	
 	init(recipeSession: RecipesSession = RecipesSession()) {
 		self.recipesSession = recipeSession
 	}
+	//========================================
+	// MARK : - construct URL one recipe
+	//========================================
+	func urlConstructRecipeDetail(recipeID: String) -> String {
+		return "\(recipesSession.urlStringApiDetail)\(recipeID)?_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)"
+	}
 	
+	func requestRecipeDetail(recipeID: String, completionHandler: @escaping(Bool, RecipeDetailAPIResult?) -> Void) {
+		let url = urlConstructRecipeDetail(recipeID: recipeID)
+		print(url)
+		guard let urlString = URL(string: url) else {return} // changer avec la methode de creation
+		recipesSession.request(url: urlString) { response in
+			guard response.response?.statusCode == 200 else {
+				completionHandler(false, nil)
+				return
+			}
+			guard let data = response.data, response.error == nil else {
+				completionHandler(false, nil)
+				return
+			}
+			guard let recipes = try? JSONDecoder().decode(RecipeDetailAPIResult.self, from: data) else {
+				completionHandler(false, nil)
+				return
+			}
+			print("recipes.name: \(recipes)")
+			completionHandler(true, recipes)
+		}
+	}
+	//========================================
+	// MARK : - construct URL list of recipes
+	//========================================
 	func urlConstructRecipeList(recipeList: [String]) -> String {
 		var ingredient = ""
 		for i in recipeList {
 			ingredient += "&allowedIngredient[]=\(i.firstLowerCased)"
 		}
-		// ne pas oublier , allergiesList: [String]
-//		var allergies = ""
-//		for i in allergiesList {
-//			allergies += "&allowedAllergy[]=\(i.firstLowerCased)"
-//		}
 		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)"
 	}
 	
-	func requestRecipes(recipeList: [String], completionHandler: @escaping(Bool, RecipeAPIResult?) -> Void) {
+	// requete id 
+	func requestListRecipes(recipeList: [String], completionHandler: @escaping(Bool, RecipeListAPIResult?) -> Void) {
 		 let url = urlConstructRecipeList(recipeList: recipeList)
 		guard let urlString = URL(string: url) else {return} // changer avec la methode de creation
 		recipesSession.request(url: urlString) { response in
@@ -49,7 +68,7 @@ class RecipeAPIService{
 				completionHandler(false, nil)
 				return
 			}
-			guard let recipes = try? JSONDecoder().decode(RecipeAPIResult.self, from: data) else {
+			guard let recipes = try? JSONDecoder().decode(RecipeListAPIResult.self, from: data) else {
 				completionHandler(false, nil)
 				return
 			}

@@ -16,79 +16,70 @@ class RecipeVC: UIViewController {
 	@IBOutlet weak var recipeName: UILabel!
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
-	var matches: [Match]!
-	var listIngredientsDetail = [String]()
 	
+	@IBOutlet weak var favoriteButtonAction: UIBarButtonItem!
+	@IBOutlet weak var favoriteButton: UIBarButtonItem!
+	
+	
+	var matches: [Match]!
+	var recipeDetailAPIResult: [RecipeDetailAPIResult]!
 	// launch URL
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
-		guard let url = URL(string: "https://stackoverflow.com") else { return }
+		
+		guard let url = URL(string: "https://openclassrooms.com/fr") else { return }
 		UIApplication.shared.open(url)
 	}
 	
-	
 	override func viewDidLoad() {
-			super.viewDidLoad()
-		for i in matches {
-			print(i.ingredients)
-		}
+		super.viewDidLoad()
+		print("viewDidLoad Reciple detail ")
+
+	//	print("data recipe : \(recipeDetailAPIResult[0].id)")
 		self.navigationItem.title = "Reciplease"
 		designButton()
-		print("RecipeViewController")
 		ingredientsTableView.dataSource = self
-		//displayRecipe()
 		ingredientsTableView.reloadData()
 		}
 	override func viewWillAppear(_ animated: Bool) {
-		//displayRecipe()
 		ingredientsTableView.reloadData()
 	}
 	func designButton() {
 		backViewRateAndTime.layer.cornerRadius = 5
 		getDirections.layer.cornerRadius = 5
 	}
-//	func displayRecipe() {
-//		//guard let resultMatches = matches else {return}
-//
-//	}
 }
 
 extension RecipeVC: UITableViewDataSource {
-	func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
-	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		//guard let matches = matches else {return 0}
-		return matches.count
+		guard let recipeDetailAPIResult = recipeDetailAPIResult else {return 0}
+		
+		return recipeDetailAPIResult.count
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? RecipeTableViewCell else {
-			return UITableViewCell()
-		}
-		let resultMatches = matches![indexPath.row].ingredients
-		print("resultMatches")
-		print(resultMatches.description)
-		if matches!.count > 0 {
-			recipeName.text =  String(resultMatches[indexPath.row].description)
-//			timeLabel.text = String("\((resultMatches[0].totalTimeInSeconds)/60) mn")
-//			rateLabel.text = String("\(resultMatches[0].rating) / 5")
-//			let images = resultMatches[0].smallImageUrls![0].updateSizeUrlImageString
-//			if let url = NSURL(string: images) {
-//				if let data = NSData(contentsOf: url as URL) {
-//					imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
-//					imageRecipe.image = UIImage(data: data as Data)
-//				}
-			}
-//		} else {
-//			// ajouter une alerte
-//			print("error recipe List")
-//		}
-		for i in resultMatches {
-			print("i: \(i)")
-			cell.textLabel?.text = i.description
-			recipeName.text = i.description
+		let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientDetailCell", for: indexPath)
+		recipeName.text =  String(recipeDetailAPIResult[indexPath.row].name)
+		if recipeDetailAPIResult!.count > 0 {
+			print("good recipe list")
+		} else {
+			// ajouter une alerte
+			print("error recipe List")
 		}
 		return cell
 	}
 }
 
 
+
+
+
+//recipeName.text =  String(resultTest.recipeName)
+//timeLabel.text = String("\((resultTest.totalTimeInSeconds)/60) mn")
+//timeLabel.text = String("\((resultMatches[0].totalTimeInSeconds)/60) mn")
+//rateLabel.text = String("\(resultMatches[0].rating) / 5")
+//			let images = resultMatches[0].smallImageUrls![0].updateSizeUrlImageString
+//			if let url = NSURL(string: images) {
+//				if let data = NSData(contentsOf: url as URL) {
+//					imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
+//					imageRecipe.image = UIImage(data: data as Data)
+//				}
+//			}
