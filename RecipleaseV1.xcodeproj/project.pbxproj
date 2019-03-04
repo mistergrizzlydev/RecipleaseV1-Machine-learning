@@ -10,7 +10,6 @@
 		450E28DA47CC7B2EFC6A0316 /* Pods_RecipleaseV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8ADA9782E4BDCC46233358 /* Pods_RecipleaseV1.framework */; };
 		BF054D802217428F00C82CBB /* CellTableViewXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF054D7F2217428F00C82CBB /* CellTableViewXib.xib */; };
 		BF054D85221766B100C82CBB /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF054D83221766B100C82CBB /* CustomTableViewCell.swift */; };
-		BF14618A22272F4900CE60AE /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF14618922272F4900CE60AE /* Inceptionv3.mlmodel */; };
 		BF1A3E0E21F9054200E915D7 /* Allergies.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A3E0D21F9054200E915D7 /* Allergies.swift */; };
 		BF1A3E1821F9634400E915D7 /* AllergiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A3E1721F9634400E915D7 /* AllergiesTableViewCell.swift */; };
 		BF254380220A134B0094171B /* SegueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25437F220A134B0094171B /* SegueExtension.swift */; };
@@ -19,10 +18,12 @@
 		BF25534521F4E22100350118 /* RecipeListAPIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25534421F4E22100350118 /* RecipeListAPIResult.swift */; };
 		BF25534F21F5549600350118 /* AlertsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25534E21F5549600350118 /* AlertsExtension.swift */; };
 		BF26F5022208859D0044A7F6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF26F5012208859D0044A7F6 /* String.swift */; };
+		BF2A712D222ABF9800B67563 /* FruitAndVegetables.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF2A712C222ABF9800B67563 /* FruitAndVegetables.mlmodel */; };
 		BF2BB7B82219AC0E0082EC59 /* AllergiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2BB7B72219AC0E0082EC59 /* AllergiesVC.swift */; };
 		BF2D240C220E435000A7F427 /* ResultListRecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2D240B220E435000A7F427 /* ResultListRecipeVC.swift */; };
 		BF8D34C9220B370D009C6629 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = BF8D34C8220B370D009C6629 /* recipes.json */; };
 		BF8D34F6220C95DB009C6629 /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8D34F5220C95DB009C6629 /* RecipeVC.swift */; };
+		BF8DCECE222DA6B700A381DF /* Favorite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF8DCECC222DA6B700A381DF /* Favorite.xcdatamodeld */; };
 		BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFA521BF67E700EDF694 /* AppDelegate.swift */; };
 		BF92BFAB21BF67E700EDF694 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFA921BF67E700EDF694 /* Main.storyboard */; };
 		BF92BFB021BF67EA00EDF694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF92BFAF21BF67EA00EDF694 /* Assets.xcassets */; };
@@ -36,6 +37,10 @@
 		BFC62BAA21FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BA921FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift */; };
 		BFC62BAC21FA69160097E0B0 /* RecipeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BAB21FA69160097E0B0 /* RecipeSession.swift */; };
 		BFD12B142226EA190005686F /* RecognizerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD12B132226EA190005686F /* RecognizerVC.swift */; };
+		BFD3075322295B4C0054C80E /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFD3075222295B4C0054C80E /* Inceptionv3.mlmodel */; };
+		BFF48F20222D340600C312BE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F1F222D340600C312BE /* Colors.swift */; };
+		BFF48F22222D735B00C312BE /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F21222D735B00C312BE /* FavoritesVC.swift */; };
+		BFF48F2B222D866200C312BE /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F2A222D866200C312BE /* Favorites.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +49,6 @@
 		994BF08252B1BE72AB090088 /* Pods-RecipleaseV1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseV1.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipleaseV1/Pods-RecipleaseV1.release.xcconfig"; sourceTree = "<group>"; };
 		BF054D7F2217428F00C82CBB /* CellTableViewXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellTableViewXib.xib; sourceTree = "<group>"; };
 		BF054D83221766B100C82CBB /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		BF14618922272F4900CE60AE /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		BF1A3E0D21F9054200E915D7 /* Allergies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergies.swift; sourceTree = "<group>"; };
 		BF1A3E1721F9634400E915D7 /* AllergiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergiesTableViewCell.swift; sourceTree = "<group>"; };
 		BF25437F220A134B0094171B /* SegueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueExtension.swift; sourceTree = "<group>"; };
@@ -53,10 +57,12 @@
 		BF25534421F4E22100350118 /* RecipeListAPIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListAPIResult.swift; sourceTree = "<group>"; };
 		BF25534E21F5549600350118 /* AlertsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertsExtension.swift; sourceTree = "<group>"; };
 		BF26F5012208859D0044A7F6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BF2A712C222ABF9800B67563 /* FruitAndVegetables.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FruitAndVegetables.mlmodel; sourceTree = "<group>"; };
 		BF2BB7B72219AC0E0082EC59 /* AllergiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergiesVC.swift; sourceTree = "<group>"; };
 		BF2D240B220E435000A7F427 /* ResultListRecipeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultListRecipeVC.swift; sourceTree = "<group>"; };
 		BF8D34C8220B370D009C6629 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		BF8D34F5220C95DB009C6629 /* RecipeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
+		BF8DCECD222DA6B700A381DF /* Favorite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favorite.xcdatamodel; sourceTree = "<group>"; };
 		BF92BFA221BF67E700EDF694 /* RecipleaseV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipleaseV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF92BFA521BF67E700EDF694 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF92BFAA21BF67E700EDF694 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,6 +78,10 @@
 		BFC62BA921FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlYummlyConstructProtocol.swift; sourceTree = "<group>"; };
 		BFC62BAB21FA69160097E0B0 /* RecipeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSession.swift; sourceTree = "<group>"; };
 		BFD12B132226EA190005686F /* RecognizerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizerVC.swift; sourceTree = "<group>"; };
+		BFD3075222295B4C0054C80E /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		BFF48F1F222D340600C312BE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		BFF48F21222D735B00C312BE /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		BFF48F2A222D866200C312BE /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +136,6 @@
 		BF92BFA421BF67E700EDF694 /* RecipleaseV1 */ = {
 			isa = PBXGroup;
 			children = (
-				BF14618922272F4900CE60AE /* Inceptionv3.mlmodel */,
 				BF92BFBA21BF681200EDF694 /* Model */,
 				BF92BFBC21BF681600EDF694 /* Controller */,
 				BF92BFBB21BF681400EDF694 /* View */,
@@ -143,6 +152,8 @@
 		BF92BFBA21BF681200EDF694 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BFF48F2C222D86A700C312BE /* Favorite */,
+				BFD3075422295B6A0054C80E /* Model CoreML */,
 				BFC62BB021FBCEA80097E0B0 /* Allergies */,
 				BFC62BAF21FBCE7E0097E0B0 /* Recipes */,
 			);
@@ -170,6 +181,7 @@
 				BF8D34F5220C95DB009C6629 /* RecipeVC.swift */,
 				BFD12B132226EA190005686F /* RecognizerVC.swift */,
 				BF2BB7B72219AC0E0082EC59 /* AllergiesVC.swift */,
+				BFF48F21222D735B00C312BE /* FavoritesVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -177,6 +189,7 @@
 		BF92BFBD21BF682000EDF694 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BFF48F1F222D340600C312BE /* Colors.swift */,
 				BF25534E21F5549600350118 /* AlertsExtension.swift */,
 				BF26F5012208859D0044A7F6 /* String.swift */,
 				BF25437F220A134B0094171B /* SegueExtension.swift */,
@@ -211,6 +224,24 @@
 				BF1A3E0D21F9054200E915D7 /* Allergies.swift */,
 			);
 			path = Allergies;
+			sourceTree = "<group>";
+		};
+		BFD3075422295B6A0054C80E /* Model CoreML */ = {
+			isa = PBXGroup;
+			children = (
+				BFD3075222295B4C0054C80E /* Inceptionv3.mlmodel */,
+				BF2A712C222ABF9800B67563 /* FruitAndVegetables.mlmodel */,
+			);
+			path = "Model CoreML";
+			sourceTree = "<group>";
+		};
+		BFF48F2C222D86A700C312BE /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				BFF48F2A222D866200C312BE /* Favorites.swift */,
+				BF8DCECC222DA6B700A381DF /* Favorite.xcdatamodeld */,
+			);
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,21 +372,26 @@
 			files = (
 				BF1A3E0E21F9054200E915D7 /* Allergies.swift in Sources */,
 				BF25534521F4E22100350118 /* RecipeListAPIResult.swift in Sources */,
+				BFF48F22222D735B00C312BE /* FavoritesVC.swift in Sources */,
 				BF26F5022208859D0044A7F6 /* String.swift in Sources */,
 				BF254380220A134B0094171B /* SegueExtension.swift in Sources */,
-				BF14618A22272F4900CE60AE /* Inceptionv3.mlmodel in Sources */,
 				BF054D85221766B100C82CBB /* CustomTableViewCell.swift in Sources */,
 				BFC62BAA21FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift in Sources */,
 				BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */,
 				BF2BB7B82219AC0E0082EC59 /* AllergiesVC.swift in Sources */,
+				BFD3075322295B4C0054C80E /* Inceptionv3.mlmodel in Sources */,
 				BFD12B142226EA190005686F /* RecognizerVC.swift in Sources */,
 				BF254382220A65740094171B /* NavigationController.swift in Sources */,
 				BF1A3E1821F9634400E915D7 /* AllergiesTableViewCell.swift in Sources */,
+				BF8DCECE222DA6B700A381DF /* Favorite.xcdatamodeld in Sources */,
 				BF25534121F4DF2A00350118 /* RecipeAPIService.swift in Sources */,
+				BF2A712D222ABF9800B67563 /* FruitAndVegetables.mlmodel in Sources */,
 				BF8D34F6220C95DB009C6629 /* RecipeVC.swift in Sources */,
 				BFC62BAC21FA69160097E0B0 /* RecipeSession.swift in Sources */,
+				BFF48F20222D340600C312BE /* Colors.swift in Sources */,
 				BF92BFC421C0352400EDF694 /* SearchForRecipesVC.swift in Sources */,
 				BFAB1B102220967C00B8F55E /* RecipeDetailAPIResult.swift in Sources */,
+				BFF48F2B222D866200C312BE /* Favorites.swift in Sources */,
 				BF2D240C220E435000A7F427 /* ResultListRecipeVC.swift in Sources */,
 				BF25534F21F5549600350118 /* AlertsExtension.swift in Sources */,
 			);
@@ -559,6 +595,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BF8DCECC222DA6B700A381DF /* Favorite.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF8DCECD222DA6B700A381DF /* Favorite.xcdatamodel */,
+			);
+			currentVersion = BF8DCECD222DA6B700A381DF /* Favorite.xcdatamodel */;
+			name = Favorite.xcdatamodeld;
+			path = RecipleaseV1/Model/Favorite.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BF92BF9A21BF67E700EDF694 /* Project object */;
 }

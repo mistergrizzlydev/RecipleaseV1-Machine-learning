@@ -14,15 +14,15 @@ import Vision
 class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 	
 	@IBOutlet weak var ui_Label: UILabel!
-	
 	@IBOutlet weak var ui_proba: UILabel!
 	
 	let captureSession = AVCaptureSession()
-	lazy var imageRecognizerRequest: VNRequest = { // propriété calculé de type lazy, chargée uniquement lorsuqe la variable est appelée et réutilisée par la suite sans être de nouveau chargée
-		let model = try! VNCoreMLModel(for: Inceptionv3().model) // on charge le fichier datamodel squeezie
+	lazy var imageRecognizerRequest: VNRequest = { // propriété calculé de type lazy, chargée uniquement lorsque la variable est appelée et réutilisée par la suite sans être de nouveau chargée
+		let model = try! VNCoreMLModel(for: FruitAndVegetables().model) // on charge le fichier datamodel squeezie
 		let request = VNCoreMLRequest(model: model, completionHandler: self.imageRecognizerHandler) // il charge le model et lance le completion handler de la fonction ci dessous
 		return request
 	}()
+	
 	func imageRecognizerHandler(request:VNRequest, error: Error?) {
 		// si je n'ai pas les bonnes observations au bon format et si il n'y a pas un élément à l'intérieur(best  guesss.first)
 		guard let observations = request.results as? [VNClassificationObservation], let bestGuess = observations.first else {return}

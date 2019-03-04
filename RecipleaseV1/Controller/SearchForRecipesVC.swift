@@ -115,6 +115,7 @@ class SearchForRecipesVC: UIViewController {
 		//toggleActivityIndicator(shown: false)
 		designItemBarNavigation()
 		ingredientsTableView.dataSource = self
+		
 		createToolbar()
 		addButtonOutlet.layer.cornerRadius = 5
 		clearButtonOutlet.layer.cornerRadius = 5

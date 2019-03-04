@@ -16,20 +16,43 @@ class RecipeVC: UIViewController {
 	@IBOutlet weak var recipeName: UILabel!
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
-	
-	@IBOutlet weak var favoriteButtonAction: UIBarButtonItem!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
-	
-	
+	//var favorite:Favorite?
 	var matches: [Match]!
-	var recipeDetailAPIResult: [RecipeDetailAPIResult]!
-	// launch URL
-	@IBAction func getRecipeDirection(_ sender: UIButton) {
+	var recipeDetailAPIResult: RecipeDetailAPIResult?
+	
+	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
+		print("add favorite button")
+		// ajouter une alert : Vous avez bien ajouté
+		guard let recipeName = recipeName.text, let idRecipe = recipeDetailAPIResult?.id else {return}
+		let favorite = Favorites(context: AppDelegate.viewContext)
+		favorite.
+		// sauvegarder dans le 
 		
-		guard let url = URL(string: "https://openclassrooms.com/fr") else { return }
-		UIApplication.shared.open(url)
 	}
 	
+	
+	
+	
+	// launch URL
+	@IBAction func getRecipeDirection(_ sender: UIButton) {
+		print("getRecipeDirection")
+		guard let test = recipeDetailAPIResult else {return}
+		guard let source = test.source.sourceRecipeURL else {return}
+		print("source : \(test.name)")
+		guard let url = URL(string: source) else {return}
+		UIApplication.shared.open(url)
+	}
+	//guard let source = recipeDetailAPIResult?.source else {return ""}
+	//print("test 23 : \(source)")
+	
+	//		@IBAction func getDirection() {
+	//			guard let url = URL(string: recipe!.attribution.url) else {
+	//				displayAlert(title: "Error", message: "Nop !")
+	//				return
+	//			}
+	//			UIApplication.shared.open(url, options: [:], completionHandler: nil)
+	//		}
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		print("viewDidLoad Reciple detail ")
@@ -52,34 +75,46 @@ class RecipeVC: UIViewController {
 extension RecipeVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		guard let recipeDetailAPIResult = recipeDetailAPIResult else {return 0}
-		
-		return recipeDetailAPIResult.count
+		return recipeDetailAPIResult.ingredientLines.count
 	}
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientDetailCell", for: indexPath)
-		recipeName.text =  String(recipeDetailAPIResult[indexPath.row].name)
-		if recipeDetailAPIResult!.count > 0 {
-			print("good recipe list")
-		} else {
-			// ajouter une alerte
-			print("error recipe List")
+		recipeName.text =  recipeDetailAPIResult?.name
+		rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
+		timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
+		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
+			cell.textLabel!.text = "\(String(describing: ingredientLines))"
 		}
-		return cell
-	}
-}
-
-
-
-
-
-//recipeName.text =  String(resultTest.recipeName)
-//timeLabel.text = String("\((resultTest.totalTimeInSeconds)/60) mn")
-//timeLabel.text = String("\((resultMatches[0].totalTimeInSeconds)/60) mn")
-//rateLabel.text = String("\(resultMatches[0].rating) / 5")
-//			let images = resultMatches[0].smallImageUrls![0].updateSizeUrlImageString
-//			if let url = NSURL(string: images) {
+		//let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
+		//let source = recipeDetailAPIResult!.source
+		guard let images = recipeDetailAPIResult?.images[0].hostedLargeURL else {return cell}
+		if let url = NSURL(string: images) {
+			if let data = NSData(contentsOf: url as URL) {
+				print(data)
+				imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
+				imageRecipe.image = UIImage(data: data as Data)
+			} else {
+				imageRecipe.backgroundColor = Colors.grey
+				imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
+			}
+		}
+//		if result?.hostedLargeURL != nil {
+//			print(result?.hostedLargeURL)
+//			imageRecipe.image = UIImage(named:(result!.hostedLargeURL!)) //UIImage(named:(recipeDetailAPIResult?.images[0].hostedLargeURL)!)
+//		} else {
+//			imageRecipe.backgroundColor = Colors.grey
+//			imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
+//		}
+		//if let images = recipeDetailAPIResult!.images[indexPath.row] {
+//			print("images : \(String(describing: image))")
+//			if let url = NSURL(string: image) {
 //				if let data = NSData(contentsOf: url as URL) {
 //					imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
 //					imageRecipe.image = UIImage(data: data as Data)
 //				}
 //			}
+		//}
+		return cell
+	}
+}

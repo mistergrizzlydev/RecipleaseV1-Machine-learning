@@ -11,7 +11,7 @@ class ResultListRecipeVC: UIViewController {
 	var recipeAPIService = RecipeAPIService()
 	@IBOutlet weak var recipesTableView: UITableView!
 	var matches: [Match]?
-	var recipeDetailAPIResult: [RecipeDetailAPIResult]!
+	//var recipeDetailAPIResult: RecipeDetailAPIResult?
 	
 	
 	//========================================
@@ -39,13 +39,13 @@ class ResultListRecipeVC: UIViewController {
 extension ResultListRecipeVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		guard let idRecipe = matches?[indexPath.row].id else {return}
-		recipeAPIService.requestRecipeDetail(recipeID: idRecipe) { (success, dataRecipeID) in
+		recipeAPIService.requestRecipeDetail(recipeID: idRecipe) { (success, recipe) in
 			print("idRecipeTest : \(self.recipeAPIService.urlConstructRecipeDetail(recipeID: idRecipe))")
 			if success {
 				print("test success")
-				guard let dataRecipeID = dataRecipeID else {return}
-				self.recipeDetailAPIResult = [dataRecipeID]
-				self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: self.recipeDetailAPIResult[indexPath.row])
+				guard let recipe = recipe else {return}
+				//self.recipeDetailAPIResult = dataRecipeID
+				self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
 			} else {
 				print("request error")
 			}
@@ -56,10 +56,8 @@ extension ResultListRecipeVC: UITableViewDelegate {
 	//================================
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "SegueRecipeToSuccess" {
-			if let recipeDetailAPIResult = recipeDetailAPIResult {
 				let successVC = segue.destination as! RecipeVC
-				successVC.recipeDetailAPIResult = recipeDetailAPIResult
-			}
+			successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
 		}
 	}
 }

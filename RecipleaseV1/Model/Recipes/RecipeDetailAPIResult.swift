@@ -9,20 +9,20 @@
 import Foundation
 
 struct RecipeDetailAPIResult: Decodable {
-	let yield: String
+	//let yield: String
 	//let nutritionEstimates: [NutritionEstimate]
-	let prepTimeInSeconds: Int
-	let totalTime: String
+	//let prepTimeInSeconds: Int
+	//let totalTime: String
 	let images: [Image]
 	let name: String
 	let source: Source
-	let prepTime, id: String
+	let id: String
 	let ingredientLines: [String]
-	let cookTime: String
-	let attribution: Attribution
-	let numberOfServings, totalTimeInSeconds: Int
-	let attributes: Attributes
-	let cookTimeInSeconds: Int
+	//let cookTime: String
+	//let attribution: Attribution
+	let totalTimeInSeconds: Int
+	//let attributes: Attributes
+	//let cookTimeInSeconds: Int
 	//let flavors: Flavors
 	let rating: Int
 }
@@ -42,8 +42,8 @@ struct Attribution: Decodable {
 //}
 
 struct Image: Decodable {
-	let hostedSmallURL, hostedMediumURL, hostedLargeURL: String
-	let imageUrlsBySize: [String: String]
+	var hostedLargeURL: String?
+	//let imageUrlsBySize: [String: String]
 }
 
 //struct NutritionEstimate: Decodable {
@@ -53,14 +53,14 @@ struct Image: Decodable {
 //	let unit: Unit
 //}
 
-struct Unit: Decodable {
-	let id: String
-	//let name: Name
-	//let abbreviation: Abbreviation
-	//let plural: Plural
-	//let pluralAbbreviation: Abbreviation
-	let decimal: Bool
-}
+//struct Unit: Decodable {
+//	let id: String
+//	//let name: Name
+//	//let abbreviation: Abbreviation
+//	//let plural: Plural
+//	//let pluralAbbreviation: Abbreviation
+//	let decimal: Bool
+//}
 
 //enum Abbreviation: Decodable {
 //	case g
@@ -88,7 +88,7 @@ struct Unit: Decodable {
 //}
 
 struct Source: Decodable {
-	let sourceDisplayName: String
-	let sourceSiteURL: String
-	let sourceRecipeURL: String
+//	let sourceDisplayName: String
+//	let sourceSiteURL: String
+	var sourceRecipeURL: String?
 }
