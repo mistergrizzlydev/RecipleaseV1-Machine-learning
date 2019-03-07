@@ -19,4 +19,9 @@ extension UIViewController {
 		alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
 		present(alertVC, animated: true, completion: nil)
 	}
+//	func alertEmptyTextField() { // translation's alert
+//		let alertVC = UIAlertController(title: "Favorites", message: "The recipe has been added to your favorites", preferredStyle: .alert )
+//		alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+//		present(alertVC, animated: true, completion : nil)
+//	}
 }

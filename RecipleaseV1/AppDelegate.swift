@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// MARK: - Core Data stack
 
 	lazy var persistentContainer: NSPersistentContainer = {
-	    let container = NSPersistentContainer(name: "Favorite")
+	    let container = NSPersistentContainer(name: "Reciplease") //  pour que notre NSPersistentContainer fasse son travail, à savoir créer les différents fichiers, initialiser le NSManagedObjectModel et le NSPersistentStoreCoordinator, il nous faut lui donner le nom de notre fichier
 	    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
 	        if let error = error as NSError? {
 	            fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -69,9 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	        }
 	    }
 	}
-	static var persistentContainer: NSPersistentContainer { // refactorisation
+	static var persistentContainer: NSPersistentContainer { // refactorisation accéder à notre propriété persistentContainer,
 		return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
 	}
+	/*
+	La dernière étape, c'est de récupérer le contexte puisque, comme on l'a vu au chapitre précédent, c'est dans le contexte que nous allons manipuler les données.
+	
+	Pour cela, nous allons tout simplement utiliser la propriété viewContext de type NSManagedObjectContext de la classe NSPersistentContainer. Cette propriété retourne un contexte à utiliser dans le Main Thread, celui dans lequel les vues sont gérées. D'où son nom.
+	*/
 	static var viewContext: NSManagedObjectContext { // recuperation du contexte
 		return persistentContainer.viewContext
 	}

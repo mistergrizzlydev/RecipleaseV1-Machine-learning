@@ -5,20 +5,22 @@
 //  Created by VINCENT BOULANGER on 04/03/2019.
 //  Copyright © 2019 VBoulanger. All rights reserved.
 // https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
-
+import CoreData
 import UIKit
 
 class FavoritesVC: UIViewController {
-	var test = ["test1", "test3", "test3"]
 	
 	var matches: [Match]!
-	
-	var favoriteList =  Favorites.fetchAll() // var qui va contenir tous les objets favoris
-	
+	//var favoriteList =  Favorite.all // var qui va contenir tous les objets favoris
+	var favoriteList = Favorite.fetchAll()
 	@IBOutlet weak var favoriteTableView: UITableView!
 	
-	func setupNavigationsItems() {
-		//navigationItem.leftBarButtonItem = UIBarButtonItem(title: NavigationBar, style: <#T##UIBarButtonItem.Style#>, target: <#T##Any?#>, action: <#T##Selector?#>)
+	
+	@IBAction func deleteFavorites(_ sender: UIBarButtonItem) {
+		Favorite.deleteAll()
+		favoriteList.removeAll()
+		favoriteTableView.reloadData()
+		try? AppDelegate.viewContext.save()
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,51 +31,44 @@ class FavoritesVC: UIViewController {
 		favoriteTableView.delegate = self
 		favoriteTableView.dataSource = self
 		favoriteTableView.tableFooterView = UIView()
+	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		favoriteList = Favorite.fetchAll()
 		favoriteTableView.reloadData()
 	}
-	
+
 }
 
-extension FavoritesVC : UITableViewDelegate {
-	
+//================================================
+// MARK : - ResultListRecipeVC: UITableViewDelegate
+//=================================================
+extension FavoritesVC: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		self.performSegue(withIdentifier: "segueFavoritesToDisplay", sender: nil)
+	}
 }
 extension FavoritesVC: UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return test.count
-		//return favoriteList.count
+		return favoriteList.count
 	}
-	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else {
-			return UITableViewCell()
-		}
-		//let resultMatches = matches![indexPath.row]
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else {return UITableViewCell()}
+			cell.recipeLabel.text = favoriteList[indexPath.row].nameRecipe
+			cell.timeLabel.text = favoriteList[indexPath.row].totalTimeRecipe
+			cell.ratesLabel.text = favoriteList[indexPath.row].rateRecipe
 		
-//		if matches!.count > 0 {
-			cell.recipeLabel.text = String(test.description)
-//			//cell.recipeLabel.text = String(resultMatches.recipeName)
-//			cell.timeLabel.text = String("\((resultMatches.totalTimeInSeconds)/60) mn")
-//			cell.ratesLabel.text = String("\(resultMatches.rating) / 5")
-//			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
-//			if let url = NSURL(string: images) {
-//				if let data = NSData(contentsOf: url as URL) {
-//					cell.recipeImage.contentMode = UIView.ContentMode.scaleAspectFit
-//					cell.recipeImage.image = UIImage(data: data as Data)
-//				}
-//			}
-//		} else {
-//			// ajouter une alerte
-//			print("error recipe List")
-//		}
 		return cell
 	}
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		test.remove(at: indexPath.row)
+		favoriteList.remove(at: indexPath.row)
 		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
 		favoriteTableView.reloadData()
+		favoriteList = Favorite.fetchAll()
+		try? AppDelegate.viewContext.save()
 	}
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		let label = UILabel()
@@ -84,10 +79,7 @@ extension FavoritesVC: UITableViewDataSource {
 		return label
 	}
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return test.isEmpty ? 200: 0
+		return favoriteList.isEmpty ? 200: 0
 	}
-
-	
-	
 }
 

@@ -37,8 +37,7 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 		}
 	}
 	@IBOutlet weak var recognizerView: UIView!
-	
-	@IBAction func startSession(_ sender: UIButton) {
+	func recognizeSession() {
 		if captureSession.isRunning {
 			captureSession.stopRunning()
 		} else {
@@ -49,10 +48,13 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 			captureSession.startRunning()
 		}
 	}
+	@IBAction func startSession(_ sender: UIButton) {
+		
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		recognizeSession()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		

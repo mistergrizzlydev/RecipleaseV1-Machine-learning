@@ -11,8 +11,6 @@ class ResultListRecipeVC: UIViewController {
 	var recipeAPIService = RecipeAPIService()
 	@IBOutlet weak var recipesTableView: UITableView!
 	var matches: [Match]?
-	//var recipeDetailAPIResult: RecipeDetailAPIResult?
-	
 	
 	//========================================
 	// MARK : - viewDidLoad() & viewWillAppear
@@ -44,7 +42,6 @@ extension ResultListRecipeVC: UITableViewDelegate {
 			if success {
 				print("test success")
 				guard let recipe = recipe else {return}
-				//self.recipeDetailAPIResult = dataRecipeID
 				self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
 			} else {
 				print("request error")
@@ -84,14 +81,15 @@ extension ResultListRecipeVC: UITableViewDataSource {
 			cell.timeLabel.text = String("\((resultMatches.totalTimeInSeconds)/60) mn")
 			cell.ratesLabel.text = String("\(resultMatches.rating) / 5")
 			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
-			if let url = NSURL(string: images) {
-				if let data = NSData(contentsOf: url as URL) {
+			if let url = URL(string: images) {
+				if let data = try? Data(contentsOf: url as URL) {
 					cell.recipeImage.contentMode = UIView.ContentMode.scaleAspectFit
 					cell.recipeImage.image = UIImage(data: data as Data)
 				}
 			}
 		} else {
 			// ajouter une alerte
+			
 			print("error recipe List")
 		}
 		return cell

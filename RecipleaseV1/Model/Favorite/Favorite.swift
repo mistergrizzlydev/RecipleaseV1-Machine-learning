@@ -21,11 +21,20 @@ import CoreData
 //	var imageData:String = ""
 //}
 
-class Favorites: NSManagedObject {
+class Favorite: NSManagedObject {
 	
+	static var all: [Favorite] {
+		let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()// création de la request Favorite. On précise entre les chevrons le type de résultat que va retourner notre requête. Comme pour un tableau, le type est incomplet si on ne fournit pas cette information.
+		guard let favorites = try? AppDelegate.viewContext.fetch(request) else {return []}
+		return favorites
+	}
 	static func fetchAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext ) -> [Favorite] {
 		let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
-		request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true),NSSortDescriptor(key: "id", ascending: true)]
+		request.sortDescriptors = [NSSortDescriptor(key: "nameRecipe", ascending: true),
+								   NSSortDescriptor(key: "idRecipe", ascending: true),
+								   NSSortDescriptor(key: "totalTimeRecipe", ascending: true),
+								   NSSortDescriptor(key: "rateRecipe", ascending: true),
+								   NSSortDescriptor(key: "imageRecipe", ascending: true)]
 		guard let myFavorites = try? AppDelegate.viewContext.fetch(request) else {return []}
 		return myFavorites
 	}
@@ -34,3 +43,4 @@ class Favorites: NSManagedObject {
 		let _ = try? AppDelegate.viewContext.execute(deleteRequest)
 	}
 }
+

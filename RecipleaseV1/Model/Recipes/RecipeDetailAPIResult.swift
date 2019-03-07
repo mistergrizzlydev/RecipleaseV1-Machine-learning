@@ -42,7 +42,7 @@ struct Attribution: Decodable {
 //}
 
 struct Image: Decodable {
-	var hostedLargeURL: String?
+	var hostedLargeUrl: String?
 	//let imageUrlsBySize: [String: String]
 }
 
@@ -90,5 +90,5 @@ struct Image: Decodable {
 struct Source: Decodable {
 //	let sourceDisplayName: String
 //	let sourceSiteURL: String
-	var sourceRecipeURL: String?
+	var sourceRecipeUrl: String?
 }

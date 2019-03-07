@@ -58,10 +58,10 @@ class SearchForRecipesVC: UIViewController {
 			}
 		}
 	}
+	
 	//===================================
 	// -MARK : IBACTION
 	//===================================
-	
 	@IBAction func addButtonIBAction(_ sender: UIButton) {
 		print("add ingredient button")
 		addIngredientToDisplay()
@@ -74,7 +74,6 @@ class SearchForRecipesVC: UIViewController {
 		searchIngredientsTextField.text = ""
 		ingredientsTableView.reloadData()
 	}
-	
 	@IBAction func searchForRecipeIBActionButton(_ sender: UIButton) {
 		print("searchForRecipeIBActionButton")
 		//addIngredientToDisplay()
