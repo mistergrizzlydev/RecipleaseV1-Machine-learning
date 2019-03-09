@@ -15,16 +15,18 @@ class FavoriteDetailVC: UIViewController {
 	@IBOutlet weak var rateLabel: UILabel!
 	@IBOutlet weak var timeLabel: UILabel!
 	@IBOutlet weak var recipeName: UILabel!
-	@IBOutlet weak var ingredientsTableView: UITableView!
+	@IBOutlet weak var instructionsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
 	var favoriteList = Favorite.fetchAll()
 	//let favorite = Favorite(context: AppDelegate.viewContext)//
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
-		print("getRecipeDirection")
+		print("getRecipeDirection Detail")
+		
+		print(favoriteList[0].sourceRecipe)
 		//guard let source = recipeDetailAPIResult?.source.sourceRecipeUrl else {return}
 //		print("source : \(source)")
-//		guard let url = URL(string: source) else {return}
+	//	guard let url = favorite.sourceRecipe else {return}
 	//	UIApplication.shared.open(url)
 	}
 	func designButton() {
@@ -36,11 +38,14 @@ class FavoriteDetailVC: UIViewController {
 		print("viewDidLoad Favorites")
 		self.navigationItem.title = "Favorites"
 		designButton()
-		//ingredientsTableView.dataSource = self
-		//ingredientsTableView.reloadData()
+		favoriteList = Favorite.fetchAll()
+		instructionsTableView.dataSource = self
+		instructionsTableView.reloadData()
+		
 	}
 	override func viewWillAppear(_ animated: Bool) {
-		ingredientsTableView.reloadData()
+		favoriteList = Favorite.fetchAll()
+		instructionsTableView.reloadData()
 	}
 }
 
@@ -50,17 +55,15 @@ extension FavoriteDetailVC: UITableViewDataSource {
 		//guard let recipeDetailAPIResult = recipeDetailAPIResult else {return 0}
 		// ajouter bdd relationships
 		//return recipeDetailAPIResult.ingredientLines.count
-		return favoriteList.count
+		return 1
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientDetailCell", for: indexPath)
-		//recipeName.text =  recipeDetailAPIResult?.name
-		recipeName.text = favoriteList[0].nameRecipe
-		//rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
-		//rateLabel.text =
-		//timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
-		//timeLabel.text =
+		let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteIngredientDetailCell", for: indexPath)
+		recipeName.text = favoriteList[indexPath.row].nameRecipe
+		rateLabel.text = favoriteList[indexPath.row].rateRecipe
+		timeLabel.text = favoriteList[indexPath.row].totalTimeRecipe
+			//favoriteList[indexPath.row]
 //		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
 //			cell.textLabel!.text = "\(String(describing: ingredientLines))"
 //		}

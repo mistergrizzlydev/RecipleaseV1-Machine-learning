@@ -11,8 +11,7 @@ import UIKit
 class FavoritesVC: UIViewController {
 	
 	var matches: [Match]!
-	//var favoriteList =  Favorite.all // var qui va contenir tous les objets favoris
-	var favoriteList = Favorite.fetchAll()
+	var favoriteList = Favorite.fetchAll() // var qui va contenir tous les objets favoris
 	@IBOutlet weak var favoriteTableView: UITableView!
 	
 	
@@ -31,16 +30,31 @@ class FavoritesVC: UIViewController {
 		favoriteTableView.delegate = self
 		favoriteTableView.dataSource = self
 		favoriteTableView.tableFooterView = UIView()
+		
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		favoriteList = Favorite.fetchAll()
 		favoriteTableView.reloadData()
 	}
-
+//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//		if segue.identifier == SegueIdentifiers.FromFavoriteListOfRecipeViewControllerTo.FavoriteRecipeViewController {
+//			if let destinationVC = segue.destination as? FavoriteRecipeViewController {
+//				destinationVC.recipe = recipeForDetail
+//			}
+//		}
+//	}
+	//=================================================
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "segueFavoritesToDisplay" {
+			let successVC = segue.destination as! FavoriteDetailVC
+//			successVC.favoriteList = sender as? 
+//			successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
+		}
+	}
 }
 
-//================================================
+//=================================================
 // MARK : - ResultListRecipeVC: UITableViewDelegate
 //=================================================
 extension FavoritesVC: UITableViewDelegate {
@@ -60,7 +74,6 @@ extension FavoritesVC: UITableViewDataSource {
 			cell.recipeLabel.text = favoriteList[indexPath.row].nameRecipe
 			cell.timeLabel.text = favoriteList[indexPath.row].totalTimeRecipe
 			cell.ratesLabel.text = favoriteList[indexPath.row].rateRecipe
-		
 		return cell
 	}
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

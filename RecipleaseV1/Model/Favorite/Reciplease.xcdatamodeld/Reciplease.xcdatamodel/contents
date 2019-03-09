@@ -5,9 +5,15 @@
         <attribute name="imageRecipe" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="nameRecipe" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rateRecipe" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceRecipe" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalTimeRecipe" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="instructions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Instruction" inverseName="recipe" inverseEntity="Instruction" syncable="YES"/>
+    </entity>
+    <entity name="Instruction" representedClassName=".Instruction" syncable="YES" codeGenerationType="category">
+        <relationship name="recipe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Favorite" inverseName="instructions" inverseEntity="Favorite" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Favorite" positionX="-45" positionY="0" width="128" height="120"/>
+        <element name="Favorite" positionX="-6567.859375" positionY="-9766.5078125" width="128" height="148"/>
+        <element name="Instruction" positionX="-6320.37109375" positionY="-9676.40625" width="128" height="58"/>
     </elements>
 </model>

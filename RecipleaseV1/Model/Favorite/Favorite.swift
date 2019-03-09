@@ -34,7 +34,10 @@ class Favorite: NSManagedObject {
 								   NSSortDescriptor(key: "idRecipe", ascending: true),
 								   NSSortDescriptor(key: "totalTimeRecipe", ascending: true),
 								   NSSortDescriptor(key: "rateRecipe", ascending: true),
-								   NSSortDescriptor(key: "imageRecipe", ascending: true)]
+								   NSSortDescriptor(key: "sourceRecipe", ascending: true),
+								   NSSortDescriptor(key: "imageRecipe", ascending: true),
+								   //NSSortDescriptor(key: "instructions", ascending: true)
+		]
 		guard let myFavorites = try? AppDelegate.viewContext.fetch(request) else {return []}
 		return myFavorites
 	}

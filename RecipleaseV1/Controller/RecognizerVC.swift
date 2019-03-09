@@ -18,7 +18,7 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	
 	let captureSession = AVCaptureSession()
 	lazy var imageRecognizerRequest: VNRequest = { // propriété calculé de type lazy, chargée uniquement lorsque la variable est appelée et réutilisée par la suite sans être de nouveau chargée
-		let model = try! VNCoreMLModel(for: FruitAndVegetables().model) // on charge le fichier datamodel squeezie
+		let model = try! VNCoreMLModel(for: Inceptionv3().model) // on charge le fichier datamodel squeezie
 		let request = VNCoreMLRequest(model: model, completionHandler: self.imageRecognizerHandler) // il charge le model et lance le completion handler de la fonction ci dessous
 		return request
 	}()

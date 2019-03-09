@@ -28,12 +28,22 @@ class RecipeVC: UIViewController {
 	}
 	func saveFavorite() {
 		let favorite = Favorite(context: AppDelegate.viewContext)// création de l'objet favoris
-		guard let recipeName = recipeName.text, let idRecipe = recipeDetailAPIResult?.id, let rateRecipe = rateLabel.text, let totalTimeRecipe = timeLabel.text, let imageFavorite = imageRecipe.image else {return}
+		guard let recipeName = recipeName.text,
+			let idRecipe = recipeDetailAPIResult?.id,
+			let rateRecipe = rateLabel.text,
+			let totalTimeRecipe = timeLabel.text,
+			let source = recipeDetailAPIResult?.source.sourceRecipeUrl,
+			//let instructions = favorite.instructions,
+			let imageFavorite = imageRecipe.image else {return}
+		
+			
 		favorite.idRecipe = idRecipe
 		favorite.nameRecipe = recipeName
 		favorite.rateRecipe = rateRecipe
 		favorite.totalTimeRecipe = totalTimeRecipe
-		let imageConverted = imageFavorite
+		//favorite.imageRecipe = Data(imageFavorite)
+		favorite.sourceRecipe = source
+		//let imageConverted = imageFavorite
 		//favorite.imageRecipe = Data(imageFavorite)
 		try? AppDelegate.viewContext.save() // sauvegarde du context avec try car cela peut générer une erreur.
 	}
@@ -87,10 +97,10 @@ extension RecipeVC: UITableViewDataSource {
 				print(data)
 				imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
 				imageRecipe.image = UIImage(data: data as Data)
-			} else {
-				imageRecipe.backgroundColor = Colors.grey
-				imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
 			}
+		} else {
+			imageRecipe.backgroundColor = Colors.grey
+			imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
 		}
 		return cell
 	}
