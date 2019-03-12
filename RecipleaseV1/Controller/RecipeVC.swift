@@ -24,6 +24,8 @@ class RecipeVC: UIViewController {
 	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
 		print("add favorite button")
 		// ajouter une alert : you added recipe with success
+		let test:Bool = true
+		
 		saveFavorite()
 	}
 	func saveFavorite() {
@@ -33,7 +35,7 @@ class RecipeVC: UIViewController {
 			let rateRecipe = rateLabel.text,
 			let totalTimeRecipe = timeLabel.text,
 			let source = recipeDetailAPIResult?.source.sourceRecipeUrl,
-			//let instructions = favorite.instructions,
+			let instructions = recipeDetailAPIResult?.ingredientLines[0].firstUppercased,
 			let imageFavorite = imageRecipe.image else {return}
 		
 			
@@ -41,7 +43,9 @@ class RecipeVC: UIViewController {
 		favorite.nameRecipe = recipeName
 		favorite.rateRecipe = rateRecipe
 		favorite.totalTimeRecipe = totalTimeRecipe
-		//favorite.imageRecipe = Data(imageFavorite)
+		favorite.instructions?.nameInstruction = instructions
+		//let test = try? Data(imageFavorite)
+		//favorite.imageRecipe = UIImage(data: test)
 		favorite.sourceRecipe = source
 		//let imageConverted = imageFavorite
 		//favorite.imageRecipe = Data(imageFavorite)

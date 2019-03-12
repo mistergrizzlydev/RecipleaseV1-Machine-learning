@@ -19,15 +19,14 @@ class FavoriteDetailVC: UIViewController {
 	@IBOutlet weak var getDirections: UIButton!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
 	var favoriteList = Favorite.fetchAll()
-	//let favorite = Favorite(context: AppDelegate.viewContext)//
+	
+	
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
 		print("getRecipeDirection Detail")
-		
-		print(favoriteList[0].sourceRecipe)
-		//guard let source = recipeDetailAPIResult?.source.sourceRecipeUrl else {return}
-//		print("source : \(source)")
-	//	guard let url = favorite.sourceRecipe else {return}
-	//	UIApplication.shared.open(url)
+		guard let source = favoriteList[0].sourceRecipe else {return}// erreur d'indexpath
+		guard let url = URL(string:source) else {return}
+		print(url)
+		UIApplication.shared.open(url)
 	}
 	func designButton() {
 		backViewRateAndTime.layer.cornerRadius = 5
@@ -52,9 +51,6 @@ class FavoriteDetailVC: UIViewController {
 
 extension FavoriteDetailVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		//guard let recipeDetailAPIResult = recipeDetailAPIResult else {return 0}
-		// ajouter bdd relationships
-		//return recipeDetailAPIResult.ingredientLines.count
 		return 1
 	}
 	
@@ -63,6 +59,9 @@ extension FavoriteDetailVC: UITableViewDataSource {
 		recipeName.text = favoriteList[indexPath.row].nameRecipe
 		rateLabel.text = favoriteList[indexPath.row].rateRecipe
 		timeLabel.text = favoriteList[indexPath.row].totalTimeRecipe
+		 let test = favoriteList[indexPath.row].instructions?.nameInstruction 
+			print(test)
+		
 			//favoriteList[indexPath.row]
 //		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
 //			cell.textLabel!.text = "\(String(describing: ingredientLines))"
