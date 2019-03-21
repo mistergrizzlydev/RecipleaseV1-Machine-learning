@@ -18,15 +18,20 @@ class FavoriteDetailVC: UIViewController {
 	@IBOutlet weak var instructionsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
-	var favoriteList = Favorite.fetchAll()
+	var recipe = Recipe.fetchAll()
+
 	
-	
+	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
+		print("unlike favorite")
+		favoriteButton.tintColor = .white
+		//Recipe.deleteFavoriteID(id: (recipeDetailAPIResult?.id)!)
+	}
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
 		print("getRecipeDirection Detail")
-		guard let source = favoriteList[0].sourceRecipe else {return}// erreur d'indexpath
-		guard let url = URL(string:source) else {return}
-		print(url)
-		UIApplication.shared.open(url)
+//		guard let source = favoriteList[0].sourceRecipe else {return}// erreur d'indexpath
+//		guard let url = URL(string:source) else {return}
+//		print(url)
+//		UIApplication.shared.open(url)
 	}
 	func designButton() {
 		backViewRateAndTime.layer.cornerRadius = 5
@@ -37,13 +42,13 @@ class FavoriteDetailVC: UIViewController {
 		print("viewDidLoad Favorites")
 		self.navigationItem.title = "Favorites"
 		designButton()
-		favoriteList = Favorite.fetchAll()
+		recipe = Recipe.fetchAll()
 		instructionsTableView.dataSource = self
 		instructionsTableView.reloadData()
-		
+		favoriteButton.tintColor = .red
 	}
 	override func viewWillAppear(_ animated: Bool) {
-		favoriteList = Favorite.fetchAll()
+		recipe = Recipe.fetchAll()
 		instructionsTableView.reloadData()
 	}
 }
@@ -51,16 +56,21 @@ class FavoriteDetailVC: UIViewController {
 
 extension FavoriteDetailVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
+		return recipe.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteIngredientDetailCell", for: indexPath)
-		recipeName.text = favoriteList[indexPath.row].nameRecipe
-		rateLabel.text = favoriteList[indexPath.row].rateRecipe
-		timeLabel.text = favoriteList[indexPath.row].totalTimeRecipe
-		 let test = favoriteList[indexPath.row].instructions?.nameInstruction 
-			print(test)
+		recipeName.text = recipe[indexPath.row].name
+		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
+		timeLabel.text = String("\(time / 60) mn")
+		guard let rate = recipe[indexPath.row].rate else {return cell}
+		rateLabel.text = rate + " / 5 "
+		//guard let test = favoriteList[indexPath.row].instructions?.nameInstruction else {return}
+			//print(test)
+		
+		//cell.textLabel?.text = favoriteList[indexPath.row].instructions?.name
+	
 		
 			//favoriteList[indexPath.row]
 //		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {

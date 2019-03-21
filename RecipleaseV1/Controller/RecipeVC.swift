@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class RecipeVC: UIViewController {
 	@IBOutlet weak var backViewRateAndTime: UIView!
@@ -17,39 +18,49 @@ class RecipeVC: UIViewController {
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
-	
+	var recipe = Recipe.fetchAll()
 	var matches: [Match]!
 	var recipeDetailAPIResult: RecipeDetailAPIResult?
 	
+	
 	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
 		print("add favorite button")
-		// ajouter une alert : you added recipe with success
-		let test:Bool = true
-		
-		saveFavorite()
+
+
+		// check si la recette est dans core data grace à l'id si oui je supprime la recette si non je l'enregistre. + modifier l'apparence du bouton
+			if Recipe.checkFavoriteID(id: (recipeDetailAPIResult?.id)!) {
+				print("delete favorite")
+				favoriteButton.tintColor = .white
+				Recipe.deleteFavoriteID(id: (recipeDetailAPIResult?.id)!)
+			} else {
+				print("save favorite")
+				saveFavorite()
+				favoriteButton.tintColor = .red
+			}
 	}
+	
 	func saveFavorite() {
-		let favorite = Favorite(context: AppDelegate.viewContext)// création de l'objet favoris
-		guard let recipeName = recipeName.text,
-			let idRecipe = recipeDetailAPIResult?.id,
-			let rateRecipe = rateLabel.text,
-			let totalTimeRecipe = timeLabel.text,
-			let source = recipeDetailAPIResult?.source.sourceRecipeUrl,
-			let instructions = recipeDetailAPIResult?.ingredientLines[0].firstUppercased,
-			let imageFavorite = imageRecipe.image else {return}
-		
-			
-		favorite.idRecipe = idRecipe
-		favorite.nameRecipe = recipeName
-		favorite.rateRecipe = rateRecipe
-		favorite.totalTimeRecipe = totalTimeRecipe
-		favorite.instructions?.nameInstruction = instructions
-		//let test = try? Data(imageFavorite)
-		//favorite.imageRecipe = UIImage(data: test)
-		favorite.sourceRecipe = source
+			let recipe = Recipe(context: AppDelegate.viewContext)// création de l'objet favoris
+			guard let recipeName = recipeDetailAPIResult?.name,
+				let idRecipe = recipeDetailAPIResult?.id,
+				let rateRecipe = recipeDetailAPIResult?.rating,
+				let totalTimeRecipe = recipeDetailAPIResult?.totalTimeInSeconds,
+				let source = recipeDetailAPIResult?.source.sourceRecipeUrl//,
+				//let instructions = recipeDetailAPIResult?.ingredientLines,
+				//let imageFavorite = recipeDetailAPIResult?.images[0]
+				else {return}
+			recipe.id = idRecipe
+			recipe.name = recipeName
+			recipe.rate = String(rateRecipe)
+			recipe.totalTime = String(totalTimeRecipe)
+			//recipe.instructions = instructions
+			recipe.source = source
+			//favorite.favorite = favoriteChoice
+			try? AppDelegate.viewContext.save() // sauvegarde du context avec try car cela peut générer une erreur.
+				//let test = try? NSData(data: )
+		//favorite.imageRecipe = Data(data: imageFavorite)
 		//let imageConverted = imageFavorite
 		//favorite.imageRecipe = Data(imageFavorite)
-		try? AppDelegate.viewContext.save() // sauvegarde du context avec try car cela peut générer une erreur.
 	}
 
 	
@@ -75,6 +86,9 @@ class RecipeVC: UIViewController {
 		}
 	override func viewWillAppear(_ animated: Bool) {
 		ingredientsTableView.reloadData()
+		// 1- check dans core data si la recette est présente en fonction de l'id de la recette est en favori ou pas.
+		
+		
 	}
 }
 
@@ -89,9 +103,9 @@ extension RecipeVC: UITableViewDataSource {
 		recipeName.text =  recipeDetailAPIResult?.name
 		rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
 		timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
-		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
-			cell.textLabel!.text = "\(String(describing: ingredientLines))"
-		}
+//		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
+//			cell.textLabel!.text = "\(String(describing: ingredientLines))"
+//		}
 		//let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
 		//let source = recipeDetailAPIResult!.source
 		//guard let recipeDetailAPIResult = recipeDetailAPIResult else {return 0}

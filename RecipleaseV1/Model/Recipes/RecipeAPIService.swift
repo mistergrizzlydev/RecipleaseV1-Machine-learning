@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-//import CoreData
 
 class RecipeAPIService{
 	
@@ -55,7 +54,6 @@ class RecipeAPIService{
 		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)"
 	}
 	
-	// requete id 
 	func requestListRecipes(recipeList: [String], completionHandler: @escaping(Bool, RecipeListAPIResult?) -> Void) {
 		 let url = urlConstructRecipeList(recipeList: recipeList)
 		guard let urlString = URL(string: url) else {return} // changer avec la methode de creation

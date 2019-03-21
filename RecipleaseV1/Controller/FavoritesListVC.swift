@@ -8,16 +8,15 @@
 import CoreData
 import UIKit
 
-class FavoritesVC: UIViewController {
-	
+class FavoritesListVC: UIViewController {
 	var matches: [Match]!
-	var favoriteList = Favorite.fetchAll() // var qui va contenir tous les objets favoris
+	var recipe = Recipe.fetchAll() // var qui va contenir tous les objets favoris
 	@IBOutlet weak var favoriteTableView: UITableView!
 	
-	
 	@IBAction func deleteFavorites(_ sender: UIBarButtonItem) {
-		Favorite.deleteAll()
-		favoriteList.removeAll()
+		print("delete all favorites")
+		Recipe.deleteAll()
+		recipe.removeAll()
 		favoriteTableView.reloadData()
 		try? AppDelegate.viewContext.save()
 	}
@@ -29,58 +28,60 @@ class FavoritesVC: UIViewController {
 		favoriteTableView.register(nib, forCellReuseIdentifier: "CustomTableViewCell")
 		favoriteTableView.delegate = self
 		favoriteTableView.dataSource = self
+		recipe = Recipe.fetchAll()
 		favoriteTableView.tableFooterView = UIView()
-		
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		favoriteList = Favorite.fetchAll()
+		recipe = Recipe.fetchAll()
 		favoriteTableView.reloadData()
-	}
-//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//		if segue.identifier == SegueIdentifiers.FromFavoriteListOfRecipeViewControllerTo.FavoriteRecipeViewController {
-//			if let destinationVC = segue.destination as? FavoriteRecipeViewController {
-//				destinationVC.recipe = recipeForDetail
-//			}
-//		}
-//	}
-	//=================================================
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "segueFavoritesToDisplay" {
-			let successVC = segue.destination as! FavoriteDetailVC
-//			successVC.favoriteList = sender as? 
-//			successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
-		}
 	}
 }
 
 //=================================================
 // MARK : - ResultListRecipeVC: UITableViewDelegate
 //=================================================
-extension FavoritesVC: UITableViewDelegate {
+extension FavoritesListVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.performSegue(withIdentifier: "segueFavoritesToDisplay", sender: nil)
 	}
 }
-extension FavoritesVC: UITableViewDataSource {
+extension FavoritesListVC: UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return favoriteList.count
+		return recipe.count
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else {return UITableViewCell()}
-			cell.recipeLabel.text = favoriteList[indexPath.row].nameRecipe
-			cell.timeLabel.text = favoriteList[indexPath.row].totalTimeRecipe
-			cell.ratesLabel.text = favoriteList[indexPath.row].rateRecipe
+		cell.recipeLabel.text = recipe[indexPath.row].name
+		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
+		cell.timeLabel.text = String("\(time / 60) mn")
+		guard let rate = recipe[indexPath.row].rate else {return cell}
+		cell.rateLabel.text = rate + " / 5 "
+//		for i in (recipe[indexPath.row].ingredients?.allObjects)! {
+//			print(i)
+//			cell.ingredientLabel.text = (i as! String)
+//		}
+		guard let imageData = recipe[indexPath.row].imageData else {return cell}
+		if recipe[indexPath.row].imageData == nil {
+			cell.imageRecipe.backgroundColor = Colors.grey
+			cell.imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
+		} else {
+			print("bonne photo")
+			cell.imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
+			cell.imageRecipe.image = UIImage(data: imageData as Data)
+		}
+		print(imageData)
 		return cell
 	}
+
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		favoriteList.remove(at: indexPath.row)
+		recipe.remove(at: indexPath.row)
 		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
 		favoriteTableView.reloadData()
-		favoriteList = Favorite.fetchAll()
+		// probleme delete id
 		try? AppDelegate.viewContext.save()
 	}
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -92,7 +93,7 @@ extension FavoritesVC: UITableViewDataSource {
 		return label
 	}
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return favoriteList.isEmpty ? 200: 0
+		return recipe.isEmpty ? 200: 0
 	}
 }
 

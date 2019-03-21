@@ -11,17 +11,14 @@ import Alamofire
 
 protocol UrlYummlyConstructProtocol {
 	
-	var urlStringApi: String {get}
+	var urlStringApi:String {get}
 	var urlStringApiDetail:String {get}
 	var appId:String {get}
-	var appKey: String {get}
+	var appKey:String {get}
 	func request(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void)// la fonction request va prendre en compte mon url et qui va me renvoyer un completion handler du même type que celui que renvoie Alamofire (cf data response)
 }
 extension UrlYummlyConstructProtocol {
-
-	var urlStringApi: String { // Je réécris la variable au dessus et lui attribue une valeur l'url en dessous		
-		//let requiredPhoto:String = "&requirePictures=true"
-		////let recipeUser = String(recipes.ingredientsUserToUrl)
+	var urlStringApi: String { // Je réécris la variable au dessus et lui attribue une valeur l'url en dessous
 		let urlRecipeList = "https://api.yummly.com/v1/api/recipes?"
 		return urlRecipeList
 	}
@@ -35,5 +32,4 @@ extension UrlYummlyConstructProtocol {
 	var appKey:String {
 		return "7c4b6ee18b43f40b31fbd410264f2376"
 	}
-	
 }

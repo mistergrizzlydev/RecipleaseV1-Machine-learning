@@ -79,12 +79,16 @@ extension ResultListRecipeVC: UITableViewDataSource {
 		if matches!.count > 0 {
 			cell.recipeLabel.text = String(resultMatches.recipeName)
 			cell.timeLabel.text = String("\((resultMatches.totalTimeInSeconds)/60) mn")
-			cell.ratesLabel.text = String("\(resultMatches.rating) / 5")
+			cell.rateLabel.text = String("\(resultMatches.rating) / 5")
+			for i in resultMatches.ingredients {
+				cell.ingredientLabel.text = i.firstUppercased
+			}
+			//cell.ingredientLabel.text = String(resultMatches.ingredients[0].firstUppercased)
 			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
 			if let url = URL(string: images) {
 				if let data = try? Data(contentsOf: url as URL) {
-					cell.recipeImage.contentMode = UIView.ContentMode.scaleAspectFit
-					cell.recipeImage.image = UIImage(data: data as Data)
+					cell.imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
+					cell.imageRecipe.image = UIImage(data: data as Data)
 				}
 			}
 		} else {

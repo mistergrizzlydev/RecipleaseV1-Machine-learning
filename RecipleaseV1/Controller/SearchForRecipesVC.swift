@@ -19,11 +19,12 @@ class SearchForRecipesVC: UIViewController {
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	@IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var searchForRecipesButton: UIButton!
-	
+
+	@IBOutlet weak var recognizer: UIView!
 	let recipeAPIService = RecipeAPIService()
-	var userListIngredient = [String]()
+	var ingredientList = [String]()
 	var matches: [Match]!
-	
+	//var userIngredient = UserIngredient()
 	func addIngredientToDisplay() {
 		if searchIngredientsTextField.text == "" {
 			presentAlert(title: "An Omission ?", message: "You must enter an ingredient ! ")
@@ -31,7 +32,7 @@ class SearchForRecipesVC: UIViewController {
 		} else {
 			guard let userIngredients = searchIngredientsTextField.text?.changeToArray else {return}
 			for i in userIngredients {
-				userListIngredient.append(i.firstUppercased)
+				ingredientList.append(i.firstUppercased)
 			}
 			ingredientsTableView.reloadData()
 			hideKeyboard()
@@ -50,7 +51,7 @@ class SearchForRecipesVC: UIViewController {
 	func requestSearchForRecipes() {
 		//toggleActivityIndicator(shown: true)
 		print("requestSearchForRecipes")
-		recipeAPIService.requestListRecipes(recipeList: userListIngredient) { (success, dataYum) in
+		recipeAPIService.requestListRecipes(recipeList: ingredientList) { (success, dataYum) in
 			if success {
 				guard let dataYum = dataYum else {return}
 				self.matches = dataYum.matches
@@ -70,7 +71,7 @@ class SearchForRecipesVC: UIViewController {
 	}
 	@IBAction func clearButtonIBAction(_ sender: UIButton) {
 		print("clear ingredient button")
-		userListIngredient.removeAll()
+		ingredientList.removeAll()
 		searchIngredientsTextField.text = ""
 		ingredientsTableView.reloadData()
 	}
@@ -106,8 +107,8 @@ class SearchForRecipesVC: UIViewController {
 	//================================
 	func designItemBarNavigation() {
 		self.navigationItem.title = "Reciplease"
-		//			let test = UINavigationBar.appearance()
-		//			test.layer = UIColor.white
+		//	let test = UINavigationBar.appearance()
+		//	test.layer = UIColor.white
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -119,38 +120,29 @@ class SearchForRecipesVC: UIViewController {
 		addButtonOutlet.layer.cornerRadius = 5
 		clearButtonOutlet.layer.cornerRadius = 5
 		searchForRecipesButton.layer.cornerRadius = 5
-		// call userfault
-		//let ingredient1 = UserDefaults.standard.object(forKey: "ingredient1") as? String
-		
-		//let ingredientsRequestData: NSFetchRequest<IngredientCD> = IngredientCD.fetchRequest() //creation de la requete ingredient dans CoreData
-		//guard let ingredients = try? AppDelegate.viewContext.fetch(ingredientsRequestData) else {return} // recupération des infos ingredienst en bdd Core Data
 	}
-	
 	override func viewWillAppear(_ animated: Bool) {
 		toggleActivityIndicator(shown: false)
-		//ingredientsCD = IngredientCD.all // rechargement visuel de la liste dans Core Data
-	//	ingredientsTableView.reloadData()
+		ingredientsTableView.reloadData()
 	}
 }
 extension SearchForRecipesVC: UITableViewDataSource {
-	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return userListIngredient.count
+		return ingredientList.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
-		let recipe = userListIngredient[indexPath.row]
+		let recipe = ingredientList[indexPath.row]
 		cell.textLabel?.text = "\(recipe)"
 		return cell
 	}
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		userListIngredient.remove(at: indexPath.row)
+		ingredientList.remove(at: indexPath.row)
 		ingredientsTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
 		ingredientsTableView.reloadData()
 	}
 }
-
 
 extension SearchForRecipesVC : UITextFieldDelegate {
 	func hideKeyboard() {
