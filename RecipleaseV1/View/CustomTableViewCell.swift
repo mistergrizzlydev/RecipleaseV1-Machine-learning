@@ -14,7 +14,7 @@ class CustomTableViewCell: UITableViewCell {
 	@IBOutlet weak var imageRecipe: UIImageView!
 	@IBOutlet weak var timeLabel: UILabel!
 	@IBOutlet weak var rateLabel: UILabel!
-	@IBOutlet weak var ingredientLabel: UILabel!
+	@IBOutlet weak var ingredientsLabel: UILabel!
 	
 	override func awakeFromNib() {
         super.awakeFromNib()

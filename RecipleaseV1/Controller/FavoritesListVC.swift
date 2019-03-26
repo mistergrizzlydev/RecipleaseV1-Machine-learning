@@ -11,6 +11,7 @@ import UIKit
 class FavoritesListVC: UIViewController {
 	var matches: [Match]!
 	var recipe = Recipe.fetchAll() // var qui va contenir tous les objets favoris
+	var recipeDetail: Recipe?
 	@IBOutlet weak var favoriteTableView: UITableView!
 	
 	@IBAction func deleteFavorites(_ sender: UIBarButtonItem) {
@@ -36,6 +37,19 @@ class FavoritesListVC: UIViewController {
 		recipe = Recipe.fetchAll()
 		favoriteTableView.reloadData()
 	}
+	//faire passer avec un segue l'id de la recette
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "segueFavoritesToDisplay" {
+			guard let successVC = segue.destination as? FavoriteDetailVC else {return}
+				successVC.recipeDetail = sender as? Recipe
+		}
+	}
+//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//		if segue.identifier == "SegueRecipeToSuccess" {
+//			let successVC = segue.destination as! RecipeVC
+//			successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
+//		}
+//	}
 }
 
 //=================================================
@@ -60,19 +74,25 @@ extension FavoritesListVC: UITableViewDataSource {
 		cell.timeLabel.text = String("\(time / 60) mn")
 		guard let rate = recipe[indexPath.row].rate else {return cell}
 		cell.rateLabel.text = rate + " / 5 "
-//		for i in (recipe[indexPath.row].ingredients?.allObjects)! {
-//			print(i)
-//			cell.ingredientLabel.text = (i as! String)
+		let instructionsEntity = Instruction(context: AppDelegate.viewContext)
+		cell.ingredientsLabel.text = instructionsEntity.name
+		print(instructionsEntity.name)
+//		for i in instructionsEntity {
+//			print(i.description)
+//			cell.ingredientLabel.text = i.description
 //		}
 		guard let imageData = recipe[indexPath.row].imageData else {return cell}
-		if recipe[indexPath.row].imageData == nil {
-			cell.imageRecipe.backgroundColor = Colors.grey
-			cell.imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
-		} else {
+		print("imageData : \(imageData)")
+		if recipe[indexPath.row].imageData != nil {
 			print("bonne photo")
-			cell.imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
-			cell.imageRecipe.image = UIImage(data: imageData as Data)
+			let image = UIImage(data: recipe[indexPath.row].imageData!)
+			cell.imageRecipe.image = image
+		} else {
+			cell.imageRecipe.backgroundColor = Colors.grey
+			let image = UIImage(named: "pizza.jpeg")
+			cell.imageRecipe.image = image //UIImage(defaultImage)
 		}
+	
 		print(imageData)
 		return cell
 	}
@@ -82,6 +102,10 @@ extension FavoritesListVC: UITableViewDataSource {
 		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
 		favoriteTableView.reloadData()
 		// probleme delete id
+		//AppDelegate.viewContext.delete(listOfFavoriteRecipe[indexPath.row]) syskam
+		guard let recipeDetails = recipeDetail else {return}
+		print("id 2:============\(recipeDetails.id!)")
+		Recipe.deleteFavoriteID(id: recipeDetails.id!)
 		try? AppDelegate.viewContext.save()
 	}
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

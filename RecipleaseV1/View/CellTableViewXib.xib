@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="616" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Capture d’écran 2019-01-24 à 03.21.47" translatesAutoresizingMaskIntoConstraints="NO" id="Nvr-1x-6Zt">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nvr-1x-6Zt">
                     <rect key="frame" x="0.0" y="0.0" width="175" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Nvr-1x-6Zt" secondAttribute="height" multiplier="7:4" id="Rfp-Qy-93s"/>
@@ -66,7 +66,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="imageRecipe" destination="Nvr-1x-6Zt" id="rED-ei-XCO"/>
-                <outlet property="ingredientLabel" destination="Hee-lj-5lK" id="kRj-Mg-mMo"/>
+                <outlet property="ingredientsLabel" destination="Hee-lj-5lK" id="kRj-Mg-mMo"/>
                 <outlet property="rateLabel" destination="CxE-JR-AYh" id="WQU-dX-wQu"/>
                 <outlet property="recipeLabel" destination="3yc-5o-xYk" id="5jl-NH-V1v"/>
                 <outlet property="timeLabel" destination="zMe-08-fzy" id="LUi-Xg-v5Y"/>
@@ -74,7 +74,4 @@
             <point key="canvasLocation" x="336" y="-73.763118440779621"/>
         </view>
     </objects>
-    <resources>
-        <image name="Capture d’écran 2019-01-24 à 03.21.47" width="345" height="130"/>
-    </resources>
 </document>

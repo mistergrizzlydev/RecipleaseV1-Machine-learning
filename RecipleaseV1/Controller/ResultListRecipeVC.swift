@@ -29,7 +29,6 @@ class ResultListRecipeVC: UIViewController {
 		//print(matches)
 		recipesTableView.reloadData()
 	}
-	
 }
 //================================================
 // MARK : - ResultListRecipeVC: UITableViewDelegate
@@ -80,14 +79,15 @@ extension ResultListRecipeVC: UITableViewDataSource {
 			cell.recipeLabel.text = String(resultMatches.recipeName)
 			cell.timeLabel.text = String("\((resultMatches.totalTimeInSeconds)/60) mn")
 			cell.rateLabel.text = String("\(resultMatches.rating) / 5")
-			for i in resultMatches.ingredients {
-				cell.ingredientLabel.text = i.firstUppercased
+			for _ in resultMatches.ingredients {
+				let test = resultMatches.ingredients[0..<3]
+				cell.ingredientsLabel?.text = "\(test[0].firstUppercased), \(test[1].firstUppercased), \(test[2].firstUppercased)"
 			}
-			//cell.ingredientLabel.text = String(resultMatches.ingredients[0].firstUppercased)
+			
+			//cell.ingredientsLabel.text = String(resultMatches.ingredients[0].firstUppercased)
 			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
 			if let url = URL(string: images) {
 				if let data = try? Data(contentsOf: url as URL) {
-					cell.imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
 					cell.imageRecipe.image = UIImage(data: data as Data)
 				}
 			}
