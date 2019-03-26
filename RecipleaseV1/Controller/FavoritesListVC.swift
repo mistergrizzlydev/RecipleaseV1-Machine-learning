@@ -37,13 +37,7 @@ class FavoritesListVC: UIViewController {
 		recipe = Recipe.fetchAll()
 		favoriteTableView.reloadData()
 	}
-	//faire passer avec un segue l'id de la recette
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "segueFavoritesToDisplay" {
-			guard let successVC = segue.destination as? FavoriteDetailVC else {return}
-				successVC.recipeDetail = sender as? Recipe
-		}
-	}
+	
 //	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //		if segue.identifier == "SegueRecipeToSuccess" {
 //			let successVC = segue.destination as! RecipeVC
@@ -58,6 +52,14 @@ class FavoritesListVC: UIViewController {
 extension FavoritesListVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.performSegue(withIdentifier: "segueFavoritesToDisplay", sender: nil)
+		
+	}
+	//faire passer avec un segue l'id de la recette
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "segueFavoritesToDisplay" {
+			guard let successVC = segue.destination as? FavoriteDetailVC else {return}
+			successVC.recipeDetail = sender as? Recipe
+		}
 	}
 }
 extension FavoritesListVC: UITableViewDataSource {
@@ -69,21 +71,30 @@ extension FavoritesListVC: UITableViewDataSource {
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else {return UITableViewCell()}
+		
 		cell.recipeLabel.text = recipe[indexPath.row].name
 		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
 		cell.timeLabel.text = String("\(time / 60) mn")
 		guard let rate = recipe[indexPath.row].rate else {return cell}
 		cell.rateLabel.text = rate + " / 5 "
+		let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
 		let instructionsEntity = Instruction(context: AppDelegate.viewContext)
-		cell.ingredientsLabel.text = instructionsEntity.name
-		print(instructionsEntity.name)
+		print()
+		cell.ingredientsLabel.text = "ingredientEntity.name"
+		print("ingredientEntity.name : \(ingredientEntity.name)")
+		//guard let test = ingredientEntity else {return cell}
 //		for i in instructionsEntity {
-//			print(i.description)
-//			cell.ingredientLabel.text = i.description
+//			cell.ingredientsLabel?.text = i
 //		}
+//		for _ in resultMatches.ingredients {
+//			let test = resultMatches.ingredients[0..<3]
+//			cell.ingredientsLabel?.text = "\(test[0].firstUppercased), \(test[1].firstUppercased), \(test[2].firstUppercased)"
+//		}
+
+
 		guard let imageData = recipe[indexPath.row].imageData else {return cell}
 		print("imageData : \(imageData)")
-		if recipe[indexPath.row].imageData != nil {
+		if (recipe[indexPath.row].imageData != nil) {
 			print("bonne photo")
 			let image = UIImage(data: recipe[indexPath.row].imageData!)
 			cell.imageRecipe.image = image

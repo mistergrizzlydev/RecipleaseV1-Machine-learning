@@ -83,8 +83,6 @@ extension ResultListRecipeVC: UITableViewDataSource {
 				let test = resultMatches.ingredients[0..<3]
 				cell.ingredientsLabel?.text = "\(test[0].firstUppercased), \(test[1].firstUppercased), \(test[2].firstUppercased)"
 			}
-			
-			//cell.ingredientsLabel.text = String(resultMatches.ingredients[0].firstUppercased)
 			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
 			if let url = URL(string: images) {
 				if let data = try? Data(contentsOf: url as URL) {
@@ -92,8 +90,8 @@ extension ResultListRecipeVC: UITableViewDataSource {
 				}
 			}
 		} else {
-			// ajouter une alerte
-			
+			// ajouter une alerte!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
 			print("error recipe List")
 		}
 		return cell

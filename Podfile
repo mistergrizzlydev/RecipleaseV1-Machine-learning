@@ -7,5 +7,8 @@ target 'RecipleaseV1' do
 
   # Pods for RecipleaseV1
   pod 'Alamofire', '~> 4.7''Alamofire', '~> 4.7'
-
+end
+  target 'RecipleaseV1Tests' do
+	  use_frameworks!
+	  pod 'Alamofire', '~> 4.7''Alamofire', '~> 4.7'
 end

@@ -51,6 +51,7 @@ class RecipeAPIService{
 		for i in recipeList {
 			ingredient += "&allowedIngredient[]=\(i.firstLowerCased)"
 		}
+		print("\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)")
 		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)"
 	}
 	

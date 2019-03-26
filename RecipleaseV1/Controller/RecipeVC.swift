@@ -46,13 +46,16 @@ class RecipeVC: UIViewController {
 		}
 	}
 	func checkIngredientsEntity(recipeEntity: Recipe) {
-		//guard let matches = matches else {return}
-//		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
-//		for ingredients in recipeDetailAPiResult {
-//			let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
-//			ingredientEntity.name = ingredients
-//			ingredientEntity.recipe = recipeEntity
-//		}
+		guard let matches = matches else {return}
+		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
+		let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
+		for ingredients in matches[0].ingredients {
+			
+			ingredientEntity.name = ingredients
+			ingredientEntity.recipe = recipeEntity
+			print("ingredientEntity.name = \(ingredients)")
+			print("ingredientEntity.recipe = \(recipeEntity)")
+		}
 	}
 	func checkInstructionsEntity(recipeEntity: Recipe) {
 		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
@@ -81,6 +84,7 @@ class RecipeVC: UIViewController {
 		recipe.totalTime = String(totalTimeRecipe)
 		recipe.url = url
 		checkInstructionsEntity(recipeEntity: recipe)
+		checkIngredientsEntity(recipeEntity: recipe)
 		print("url : \(String(describing: url))")
 
 		try? AppDelegate.viewContext.save() // sauvegarde du context avec try car cela peut générer une erreur.

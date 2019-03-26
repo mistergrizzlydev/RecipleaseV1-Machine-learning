@@ -1,0 +1,51 @@
+{
+	"yield": "Serves 6-8",
+	"nutritionEstimates": [],
+	"prepTimeInSeconds": 600,
+	"totalTime": "8 hr 10 min",
+	"images": [
+		{
+			"hostedSmallUrl": "https://lh3.googleusercontent.com/1x3fTKCD9VI2KApSf7voLfQ1ZrhXsTUDNH7RJ2eLBMdaJx1xDiHsXsY6dg79YEcMRT2vA_IhBcx4wBx9ynFf=s90",
+			"hostedMediumUrl": "https://lh3.googleusercontent.com/1x3fTKCD9VI2KApSf7voLfQ1ZrhXsTUDNH7RJ2eLBMdaJx1xDiHsXsY6dg79YEcMRT2vA_IhBcx4wBx9ynFf=s180",
+			"hostedLargeUrl": "https://lh3.googleusercontent.com/1x3fTKCD9VI2KApSf7voLfQ1ZrhXsTUDNH7RJ2eLBMdaJx1xDiHsXsY6dg79YEcMRT2vA_IhBcx4wBx9ynFf=s360",
+			"imageUrlsBySize": {
+				"90": "https://lh3.googleusercontent.com/sTvcbaq-gop7k1liqh3q6N4Qn5EjcuMqrWZJ8TVXSTMAGpFgliDjcjPZRHr3NtS4MXcwkpu4N-aXfLNcPquSlw=s90-c",
+				"360": "https://lh3.googleusercontent.com/sTvcbaq-gop7k1liqh3q6N4Qn5EjcuMqrWZJ8TVXSTMAGpFgliDjcjPZRHr3NtS4MXcwkpu4N-aXfLNcPquSlw=s360-c"
+			}
+		}
+	],
+	"name": "The BEST Crockpot Pot Roast",
+	"source": {
+		"sourceDisplayName": "Mrs. Happy Homemaker",
+		"sourceSiteUrl": "mrshappyhomemaker.com",
+		"sourceRecipeUrl": "https://www.mrshappyhomemaker.com/the-best-slow-cooker-pot-roast-5-ingredients/"
+	},
+	"prepTime": "10 Min",
+	"id": "The-BEST-Crockpot-Pot-Roast-2631670",
+	"ingredientLines": [
+		"1 – 4 to 5 pound chuck roast (a tri-tip roast is also really good)",
+		"2 cans low-sodium cream of mushroom soup",
+		"1 envelope dry onion soup mix",
+		"potatoes, baby carrots, & onion (if you don’t like one of those, simply don’t add it. No biggie! I don’t have specific",
+		"potatoes, baby carrots, & onion (if you don’t like one of those, simply don’t add it. No biggie! I don’t have specific",
+		"potatoes, baby carrots, & onion (if you don’t like one of those, simply don’t add it. No biggie! I don’t have specific",
+		"pepper (to taste)"
+	],
+	"cookTime": "8 Hr",
+	"attribution": {
+		"html": "<a href='http://www.yummly.co/recipe/The-BEST-Crockpot-Pot-Roast-2631670'>The BEST Crockpot Pot Roast recipe</a> information powered by <img alt='Yummly' src='https://static.yummly.co/api-logo.png'/>",
+		"url": "http://www.yummly.co/recipe/The-BEST-Crockpot-Pot-Roast-2631670",
+		"text": "The BEST Crockpot Pot Roast recipes: information powered by Yummly",
+		"logo": "https://static.yummly.co/api-logo.png"
+	},
+	"numberOfServings": 7,
+	"totalTimeInSeconds": 29400,
+	"attributes": {
+		"course": [
+			"Main Dishes"
+		]
+	},
+	"cookTimeInSeconds": 28800,
+	"flavors": {},
+	"rating": 4
+}

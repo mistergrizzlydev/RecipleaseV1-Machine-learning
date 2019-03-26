@@ -28,10 +28,15 @@ class FavoriteDetailVC: UIViewController {
 		let recipe = Recipe(context: AppDelegate.viewContext)
 		guard let recipeID = recipeDetail?.id else {return}
 		//print("recipe : \(recipeID.description)")
-		print(recipe)
+		print("recipeID \(recipeID)")
 		if Recipe.checkFavoriteID(id: recipeID) {
 			Recipe.deleteFavoriteID(id: recipe.id!)
+			favoriteButton.tintColor = .white
+		} else {
+			print("erreur (Recipe.checkFavoriteID)")
+			favoriteButton.tintColor = .red
 		}
+		try? AppDelegate.viewContext.save() 
 		//Recipe.deleteFavoriteID(id: (recipeDetailAPIResult?.id)!)
 		//Go controller précédent
 		//navigationController?.popViewController(animated: true)
@@ -76,7 +81,7 @@ extension FavoriteDetailVC: UITableViewDataSource {
 //		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
 //			cell.textLabel!.text = "\(String(describing: ingredientLines))"
 //		}
-		//recipeName.text =
+//		recipeName.text =
 		recipeName.text = recipe[indexPath.row].name
 		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
 		timeLabel.text = String("\(time / 60) mn")

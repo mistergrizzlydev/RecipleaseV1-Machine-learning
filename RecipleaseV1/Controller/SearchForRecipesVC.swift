@@ -24,7 +24,6 @@ class SearchForRecipesVC: UIViewController {
 	let recipeAPIService = RecipeAPIService()
 	var ingredientList = [String]()
 	var matches: [Match]!
-	//var userIngredient = UserIngredient()
 	func addIngredientToDisplay() {
 		if searchIngredientsTextField.text == "" {
 			presentAlert(title: "An Omission ?", message: "You must enter an ingredient ! ")
@@ -53,6 +52,7 @@ class SearchForRecipesVC: UIViewController {
 		print("requestSearchForRecipes")
 		recipeAPIService.requestListRecipes(recipeList: ingredientList) { (success, dataYum) in
 			if success {
+				
 				guard let dataYum = dataYum else {return}
 				self.matches = dataYum.matches
 				self.performSegue(withIdentifier: "segueRecipesToDisplay", sender: nil)
