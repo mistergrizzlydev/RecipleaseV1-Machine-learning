@@ -9,8 +9,12 @@
 import Foundation
 import Alamofire
 
-class FixerSession: FixerProtocol {
-	func request(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void) {
+class UrlSession: UrlProtocol {
+	func requestList(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void) {
+		Alamofire.request(url).responseJSON { responseData in completionHandler(responseData)
+		}
+	}
+	func requestDetail(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void) {
 		Alamofire.request(url).responseJSON { responseData in completionHandler(responseData)
 		}
 	}

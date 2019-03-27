@@ -43,14 +43,16 @@
 		BFD12B142226EA190005686F /* RecognizerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD12B132226EA190005686F /* RecognizerVC.swift */; };
 		BFD3075322295B4C0054C80E /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFD3075222295B4C0054C80E /* Inceptionv3.mlmodel */; };
 		BFD58609224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58608224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift */; };
-		BFD58611224AD61100F78CD5 /* FixerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58610224AD61100F78CD5 /* FixerProtocol.swift */; };
-		BFD58613224ADD4600F78CD5 /* FixerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58612224ADD4600F78CD5 /* FixerSession.swift */; };
+		BFD58611224AD61100F78CD5 /* UrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58610224AD61100F78CD5 /* UrlProtocol.swift */; };
+		BFD58613224ADD4600F78CD5 /* UrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58612224ADD4600F78CD5 /* UrlSession.swift */; };
 		BFD58617224AE2BD00F78CD5 /* FakeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58616224AE2BD00F78CD5 /* FakeResponse.swift */; };
 		BFD58619224AE31800F78CD5 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58618224AE31800F78CD5 /* FakeResponseData.swift */; };
 		BFD5861B224AE5E700F78CD5 /* FixerSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5861A224AE5E700F78CD5 /* FixerSessionFake.swift */; };
-		BFD58622224AFB2500F78CD5 /* FixerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58614224ADF1A00F78CD5 /* FixerService.swift */; };
+		BFD58622224AFB2500F78CD5 /* UrlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58614224ADF1A00F78CD5 /* UrlService.swift */; };
 		BFD58623224AFBA600F78CD5 /* RecipeListAPIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25534421F4E22100350118 /* RecipeListAPIResult.swift */; };
 		BFD58624224AFBAA00F78CD5 /* RecipeDetailAPIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAB1B0F2220967C00B8F55E /* RecipeDetailAPIResult.swift */; };
+		BFD58628224B813200F78CD5 /* CoreDataTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58627224B813200F78CD5 /* CoreDataTestCase.swift */; };
+		BFD5862A224B993800F78CD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92BFA521BF67E700EDF694 /* AppDelegate.swift */; };
 		BFF48F20222D340600C312BE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F1F222D340600C312BE /* Colors.swift */; };
 		BFF48F22222D735B00C312BE /* FavoritesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F21222D735B00C312BE /* FavoritesListVC.swift */; };
 		BFF48F2B222D866200C312BE /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F2A222D866200C312BE /* Recipe.swift */; };
@@ -110,12 +112,13 @@
 		BFD58606224AD34A00F78CD5 /* RecipleaseV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD58608224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPIServiceTestCase.swift; sourceTree = "<group>"; };
 		BFD5860A224AD34A00F78CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BFD58610224AD61100F78CD5 /* FixerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FixerProtocol.swift; path = RecipleaseV1/Model/FixerProtocol.swift; sourceTree = SOURCE_ROOT; };
-		BFD58612224ADD4600F78CD5 /* FixerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSession.swift; sourceTree = "<group>"; };
-		BFD58614224ADF1A00F78CD5 /* FixerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerService.swift; sourceTree = "<group>"; };
+		BFD58610224AD61100F78CD5 /* UrlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UrlProtocol.swift; path = RecipleaseV1/Model/UrlProtocol.swift; sourceTree = SOURCE_ROOT; };
+		BFD58612224ADD4600F78CD5 /* UrlSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSession.swift; sourceTree = "<group>"; };
+		BFD58614224ADF1A00F78CD5 /* UrlService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlService.swift; sourceTree = "<group>"; };
 		BFD58616224AE2BD00F78CD5 /* FakeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponse.swift; sourceTree = "<group>"; };
 		BFD58618224AE31800F78CD5 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FakeResponseData.swift; path = ../FakeResponseData.swift; sourceTree = "<group>"; };
 		BFD5861A224AE5E700F78CD5 /* FixerSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixerSessionFake.swift; sourceTree = "<group>"; };
+		BFD58627224B813200F78CD5 /* CoreDataTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTestCase.swift; sourceTree = "<group>"; };
 		BFF48F1F222D340600C312BE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		BFF48F21222D735B00C312BE /* FavoritesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListVC.swift; sourceTree = "<group>"; };
 		BFF48F2A222D866200C312BE /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
@@ -288,11 +291,12 @@
 		BFD58607224AD34A00F78CD5 /* RecipleaseV1Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BFD58608224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift */,
-				BFD58610224AD61100F78CD5 /* FixerProtocol.swift */,
-				BFD58612224ADD4600F78CD5 /* FixerSession.swift */,
+				BFD58626224B80C900F78CD5 /* RequestAPIServiceTests */,
+				BFD58625224B809200F78CD5 /* CoreDataTests */,
+				BFD58610224AD61100F78CD5 /* UrlProtocol.swift */,
+				BFD58612224ADD4600F78CD5 /* UrlSession.swift */,
 				BFD5861A224AE5E700F78CD5 /* FixerSessionFake.swift */,
-				BFD58614224ADF1A00F78CD5 /* FixerService.swift */,
+				BFD58614224ADF1A00F78CD5 /* UrlService.swift */,
 				BFD58618224AE31800F78CD5 /* FakeResponseData.swift */,
 				BFD58616224AE2BD00F78CD5 /* FakeResponse.swift */,
 				BFD5860A224AD34A00F78CD5 /* Info.plist */,
@@ -300,6 +304,22 @@
 				BFAB1B0D2220839200B8F55E /* recipeDetail.json */,
 			);
 			path = RecipleaseV1Tests;
+			sourceTree = "<group>";
+		};
+		BFD58625224B809200F78CD5 /* CoreDataTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreDataTests;
+			sourceTree = "<group>";
+		};
+		BFD58626224B80C900F78CD5 /* RequestAPIServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFD58608224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift */,
+				BFD58627224B813200F78CD5 /* CoreDataTestCase.swift */,
+			);
+			path = RequestAPIServiceTests;
 			sourceTree = "<group>";
 		};
 		BFF48F2C222D86A700C312BE /* Favorite */ = {
@@ -550,15 +570,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD5862A224B993800F78CD5 /* AppDelegate.swift in Sources */,
 				BFD58624224AFBAA00F78CD5 /* RecipeDetailAPIResult.swift in Sources */,
 				BFD58617224AE2BD00F78CD5 /* FakeResponse.swift in Sources */,
 				BFD58623224AFBA600F78CD5 /* RecipeListAPIResult.swift in Sources */,
 				BFD58619224AE31800F78CD5 /* FakeResponseData.swift in Sources */,
-				BFD58611224AD61100F78CD5 /* FixerProtocol.swift in Sources */,
+				BFD58611224AD61100F78CD5 /* UrlProtocol.swift in Sources */,
 				BFD58609224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift in Sources */,
-				BFD58613224ADD4600F78CD5 /* FixerSession.swift in Sources */,
+				BFD58613224ADD4600F78CD5 /* UrlSession.swift in Sources */,
 				BFD5861B224AE5E700F78CD5 /* FixerSessionFake.swift in Sources */,
-				BFD58622224AFB2500F78CD5 /* FixerService.swift in Sources */,
+				BFD58628224B813200F78CD5 /* CoreDataTestCase.swift in Sources */,
+				BFD58622224AFB2500F78CD5 /* UrlService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
