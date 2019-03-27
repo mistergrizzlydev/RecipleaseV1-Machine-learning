@@ -16,80 +16,243 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		super.setUp()
 		recipeAPIService = RecipeAPIService()
     }
+	
+	//========================================
+	// MARK : - test Recipe Detail
+	//========================================
 	// - Test URLRequest
 	
-	func testGetCurrencyShouldPostFailedCallbackIfError () {
+	func testRequestRecipeDetailShouldPostFailedCallbackIfError () {
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
 		let fixerService = FixerService(fixerSession: fixerSessionFake)
-//		let recipeAPIService  = RecipeAPIService(
-//			currencySession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.error))
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		fixerService.requestRecipeDetail(recipeID: ""){ (success, currency) in // changement de Queue
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
 			//Then
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
 	
-	func testGetCurrencyShouldPostFailedcallbackIfErrorNoData () {// NoData
+	func testRequestRecipeShouldPostFailedcallbackIfErrorNoData () {// NoData
 		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: nil, response: nil, error: nil))
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getCurrency(targetDevise: ""){ (success, currency) in // changement de Queue
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
 			//Then
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
 	
-	func testGetCurrencyShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
-		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: FakeResponseData.networkCorrectData, response: FakeResponseData.responseKO, error: nil))
+	func testRequestRecipeShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getCurrency(targetDevise: ""){ (success, currency) in // changement de Queue
-			//Then
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+//			//Then
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testGetCurrencyShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
-		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: FakeResponseData.networkIncorrectData , response: FakeResponseData.responseOK, error: nil))
+	func testRequestRecipeShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getCurrency(targetDevise: ""){ (success, currency) in // changement de Queue
-			//Then
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
 	
 	// - Test Succes callback
-	func testGetCurrencyShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// NoData
+	func testRequestRecipeShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// NoData
 		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: FakeResponseData.networkCorrectData, response: FakeResponseData.responseOK, error: nil))
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getCurrency(targetDevise: ""){ (success, currency) in // changement de Queue
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
 			XCTAssertTrue(success)
-			XCTAssertNotNil(currency)
-			XCTAssertEqual(currency?.rates["USD"], 1.131305)
+			XCTAssertNotNil(data)
+			//XCTAssertEqual(currency?.rates["USD"], 1.131305)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	//=================================================================================================
+	// test testRequestListRecipes
+	//=================================================================================================
+	func testRequestRecipeShouldPostFailedCallbackIfError () { // CallbackIfError
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+//			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	func testRequestRecipeShouldPostFailedCallbackIfErrorNoData () {// NoData
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+//			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	func testRequestRecipeShouldPostFailedCallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
+//		// given
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+//			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	func testRequestRecipeShouldPostFailedCallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+		// given
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	func testRequestRecipeShouldPostSuccessCallbackIfNoErrorAndCorrectData22222() {// Data correct and no error
+		// given
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: "The-BEST-Crockpot-Pot-Roast-2631670"){ (success, data) in // changement de Queue
+			XCTAssertTrue(success)
+			XCTAssertNotNil(data)
+			//XCTAssertEqual(data?.id[0] , "The-BEST-Crockpot-Pot-Roast-2631670")
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	//========================================================================================
+	//========================================================================================
+	// MARK : - test Recipe List
+	//========================================================================================
+	//========================================================================================
+	
+	
+	// - Test URLRequest
+	
+	func testRequestListRecipesShouldPostFailedCallbackIfError () {
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	
+	func testRequestListRecipesShouldPostFailedcallbackIfErrorNoData () {// NoData
+		// given
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	
+	func testRequestListRecipesShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			//			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	func testRequestListRecipesShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	
+	// - Test Succes callback
+	func testRequestListRecipesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// NoData
+		// given
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			XCTAssertTrue(success)
+			XCTAssertNotNil(data)
+			//XCTAssertEqual(currency?.rates["USD"], 1.131305)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
@@ -97,76 +260,78 @@ class RecipeAPIServiceTestCase: XCTestCase {
 	//=================================================================================================
 	// test GetListCurrencies
 	//=================================================================================================
-	func testGetListCurrenciesShouldPostFailedCallbackIfError () { // CallbackIfError
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.error))
+	func testRequestListRecipesCurrenciesShouldPostFailedCallbackIfError () { // CallbackIfError
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getListCurrencies(){ (success, currency) in // changement de Queue
-			//Then
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			//			//Then
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testGetListCurrenciesShouldPostFailedcallbackIfErrorNoData () {// NoData
-		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: nil, response: nil, error: nil))
-		
+	func testRequestListRecipesCurrenciesShouldPostFailedcallbackIfErrorNoData () {// NoData
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getListCurrencies(){ (success, currency) in // changement de Queue
-			//Then
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			//			//Then
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testGetListCurrenciesShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
-		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: FakeResponseData.networkCorrectData, response: FakeResponseData.responseKO, error: nil))
+	func testRequestListRecipesCurrenciesShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
+		//		// given
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getListCurrencies(){ (success, currency) in // changement de Queue
-			//Then
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
+			//			//Then
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testGetListCurrenciesShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+	func testRequestListRecipesCurrenciesShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
 		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: FakeResponseData.networkIncorrectData , response: FakeResponseData.responseOK, error: nil))
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getListCurrencies(){ (success, currency) in // changement de Queue
+		fixerService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
 			//Then
 			XCTAssertFalse(success)
-			XCTAssertNil(currency)
+			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testGetListCurrenciesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// Data correct and no error
+	func testRequestListRecipesCurrenciesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// Data correct and no error
 		// given
-		let currencyAPIService  = CurrencyAPIService(
-			currencySession: URLSessionFake(data: FakeResponseData.listCurrenciesCorrectData, response: FakeResponseData.responseOK, error: nil))
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let fixerSessionFake = FixerSessionFake(fakeResponse: fakeResponse)
+		let fixerService = FixerService(fixerSession: fixerSessionFake)
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		currencyAPIService.getListCurrencies(){ (success, currency) in // changement de Queue
+		fixerService.requestRecipeDetail(recipeID: "The-BEST-Crockpot-Pot-Roast-2631670"){ (success, data) in // changement de Queue
 			XCTAssertTrue(success)
-			XCTAssertNotNil(currency)
-			XCTAssertEqual(currency?.symbols["AED"], "United Arab Emirates Dirham")
-			
+			XCTAssertNotNil(data)
+			//XCTAssertEqual(data?.id[0] , "The-BEST-Crockpot-Pot-Roast-2631670")
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-
 }
+

@@ -27,7 +27,7 @@ class Recipe: NSManagedObject {
 	static func checkFavoriteID(id: String, viewContext: NSManagedObjectContext = AppDelegate.viewContext) -> Bool {
 		let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
 		request.predicate = NSPredicate(format: "id == %@", id)
-		guard let recipes = try? viewContext.fetch(request) else {return false} // je récupère un tableau avec une seule valeur  avec le filtre que j'ai appliqué ligne 30
+		guard let recipes = try? viewContext.fetch(request) else {return false} // je récupère un tableau avec une seule valeur avec le filtre que j'ai appliqué ligne 30
 		if recipes.isEmpty { // je viens vérifier qu'il y a bien une valeur dans le tableau
 			return false
 		}

@@ -9,7 +9,7 @@
 import Foundation
 class FixerService {
 	private var fixerSession: FixerSession
-	//var recipe : RecipeDetailAPIResult?
+//	var recipeDetailAPIResult = RecipeDetailAPIResult!
 	init(fixerSession: FixerSession = FixerSession()) {
 		self.fixerSession = fixerSession
 	}

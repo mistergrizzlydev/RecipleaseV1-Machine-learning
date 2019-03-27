@@ -45,10 +45,12 @@
 		BFD58609224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58608224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift */; };
 		BFD58611224AD61100F78CD5 /* FixerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58610224AD61100F78CD5 /* FixerProtocol.swift */; };
 		BFD58613224ADD4600F78CD5 /* FixerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58612224ADD4600F78CD5 /* FixerSession.swift */; };
-		BFD58615224ADF1A00F78CD5 /* FixerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58614224ADF1A00F78CD5 /* FixerService.swift */; };
 		BFD58617224AE2BD00F78CD5 /* FakeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58616224AE2BD00F78CD5 /* FakeResponse.swift */; };
 		BFD58619224AE31800F78CD5 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58618224AE31800F78CD5 /* FakeResponseData.swift */; };
 		BFD5861B224AE5E700F78CD5 /* FixerSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5861A224AE5E700F78CD5 /* FixerSessionFake.swift */; };
+		BFD58622224AFB2500F78CD5 /* FixerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58614224ADF1A00F78CD5 /* FixerService.swift */; };
+		BFD58623224AFBA600F78CD5 /* RecipeListAPIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF25534421F4E22100350118 /* RecipeListAPIResult.swift */; };
+		BFD58624224AFBAA00F78CD5 /* RecipeDetailAPIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAB1B0F2220967C00B8F55E /* RecipeDetailAPIResult.swift */; };
 		BFF48F20222D340600C312BE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F1F222D340600C312BE /* Colors.swift */; };
 		BFF48F22222D735B00C312BE /* FavoritesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F21222D735B00C312BE /* FavoritesListVC.swift */; };
 		BFF48F2B222D866200C312BE /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF48F2A222D866200C312BE /* Recipe.swift */; };
@@ -548,13 +550,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD58624224AFBAA00F78CD5 /* RecipeDetailAPIResult.swift in Sources */,
 				BFD58617224AE2BD00F78CD5 /* FakeResponse.swift in Sources */,
-				BFD58615224ADF1A00F78CD5 /* FixerService.swift in Sources */,
+				BFD58623224AFBA600F78CD5 /* RecipeListAPIResult.swift in Sources */,
 				BFD58619224AE31800F78CD5 /* FakeResponseData.swift in Sources */,
 				BFD58611224AD61100F78CD5 /* FixerProtocol.swift in Sources */,
 				BFD58609224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift in Sources */,
 				BFD58613224ADD4600F78CD5 /* FixerSession.swift in Sources */,
 				BFD5861B224AE5E700F78CD5 /* FixerSessionFake.swift in Sources */,
+				BFD58622224AFB2500F78CD5 /* FixerService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

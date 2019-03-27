@@ -11,7 +11,7 @@ import Alamofire
 
 class FixerSession: FixerProtocol {
 	func request(url: URL, completionHandler: @escaping (DataResponse<Any>) -> Void) {
-		Alamofire.request(url).responseJSON { DataResponse in completionHandler(DataResponse)
+		Alamofire.request(url).responseJSON { responseData in completionHandler(responseData)
 		}
 	}
 }
