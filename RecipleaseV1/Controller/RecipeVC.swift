@@ -33,6 +33,7 @@ class RecipeVC: UIViewController {
 			print("delete favorite")
 			favoriteButton.tintColor = .white
 			Recipe.deleteFavoriteID(id: (recipeID))
+			try? AppDelegate.viewContext.save()
 		} else {
 			print("save favorite")
 			saveFavorite()
@@ -70,8 +71,6 @@ class RecipeVC: UIViewController {
 		let rateRecipe = recipeDetailAPiResult.rating
 		let totalTimeRecipe = recipeDetailAPiResult.totalTimeInSeconds
 		let url = recipeDetailAPiResult.source.sourceRecipeUrl
-//		guard let imageFavorite = recipeDetailAPIResult?.images[0].hostedLargeUrl else {return}
-//		print("image favorite : \(imageFavorite)")
 		recipe.id = idRecipe
 		recipe.name = recipeName
 		recipe.rate = String(rateRecipe)
@@ -80,13 +79,6 @@ class RecipeVC: UIViewController {
 		recipe.imageData = imageRecipe.image?.jpegData(compressionQuality: 0.75)
 		checkInstructionsEntity(recipeEntity: recipe)
 		checkIngredientsEntity(recipeEntity: recipe)
-		
-
-		
-//		let test = try? NSData(data: )
-//		favorite.imageRecipe = Data(data: imageFavorite)
-//		let imageConverted = imageFavorite
-//		favorite.imageRecipe = Data(imageFavorite)
 		try? AppDelegate.viewContext.save() //sauvegarde du context avec try car cela peut générer une erreur.
 	}
 	

@@ -53,19 +53,17 @@ class CustomRecipeViewCell: UITableViewCell {
 			timeLabel.text = "\(time.convertIntToTime)" // gerer les heures // minutes - > extension de string
 			guard let rate = recipeEntity.rate else {return}
 			rateLabel.text = "\(rate) / 5 "
+			//===========================================================
 			let recipeEntityAllObjects = recipeEntity.ingredients?.allObjects as? [Ingredient]
 			let ingredients = recipeEntityAllObjects?.map({$0.name ?? ""}) ?? []
 			let ingredientsString = ingredients.joined(separator: ", ")
-			//print("ingredientsMap: \(recipeEntityAllObjects?.description) :")
+
 			print("ingredientsString : \(ingredientsString.changeToArray)")
 			ingredientsLabel?.text = ingredientsString.firstUppercased
-
+			
 			//===========================================================
-			guard let test2 = recipeEntity.imageData else {return}
-		
-			//guard let test3 = Data(base64Encoded: test2) else {return}
-			imageRecipe.image = UIImage(data: test2)
-			//===========================================================
+			guard let data = recipeEntity.imageData else {return}
+			imageRecipe.image = UIImage(data: data)
 		}
 	}
 	override func awakeFromNib() {

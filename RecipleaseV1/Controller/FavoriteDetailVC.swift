@@ -24,18 +24,21 @@ class FavoriteDetailVC: UIViewController {
 	
 	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
 		print("unlike favorite")
-		guard let recipeID = recipeDetail?.id else {return}
-		if Recipe.checkFavoriteID(id: recipeID) {
-			Recipe.deleteFavoriteID(id: recipeID)
-			favoriteButton.tintColor = .white
-			
-		} else {
-			print("erreur (Recipe.checkFavoriteID)")
-			favoriteButton.tintColor = .red
-		}
-		try? AppDelegate.viewContext.save()
+		deleteFavoriteID()
 		//Go controller précédent
 		//navigationController?.popViewController(animated: true)
+	}
+	func deleteFavoriteID() {
+		guard let recipeID = recipeDetail?.id else {return}
+		if Recipe.checkFavoriteID(id: recipeID) {
+			print("delete favorite")
+			favoriteButton.tintColor = .white
+			Recipe.deleteFavoriteID(id: recipeID)
+			try? AppDelegate.viewContext.save()
+		} else {
+			print("save favorite")
+			favoriteButton.tintColor = .red
+		}
 	}
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
 		print("getRecipeDirection Detail")
@@ -68,7 +71,6 @@ extension FavoriteDetailVC: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteIngredientDetailCell", for: indexPath)
-		
 		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
 		timeLabel.text = String("\(time.convertIntToTime)")
 		guard let rate = recipe[indexPath.row].rate else {return cell}

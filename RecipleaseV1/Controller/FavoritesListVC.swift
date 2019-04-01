@@ -74,11 +74,9 @@ extension FavoritesListVC: UITableViewDataSource {
 		favoriteTableView.reloadData()
 		// probleme delete id
 		//AppDelegate.viewContext.delete(listOfFavoriteRecipe[indexPath.row]) 
-		guard let recipeDetails = recipeDetail else {return}
-		
-		print("id 2:============\(recipeDetails.id!)")
-		Recipe.deleteFavoriteID(id: recipeDetails.id!)
-		try? AppDelegate.viewContext.save()
+		guard let recipeID = recipeDetail?.id else {return}
+		print("id 2:============\(recipeID)")
+		Recipe.deleteFavoriteID(id: recipeID)
 	}
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		let label = UILabel()

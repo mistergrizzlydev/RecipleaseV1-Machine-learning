@@ -12,7 +12,6 @@ extension Int {
 	var convertIntToTime: String {
 		let h = self / 3600
 		let m = (self % 3600) / 60
-		let s = (self % 3600) % 60
-		return h > 0 ? String(format: "%1d:%02d:%02d", h, m, s) : String(format: "%1d:%02d", m, s)
+		return h > 0 ? String(format: "%1dh%02d mn", h, m) : String(format: "%1d mn", m)
 	}
 }
