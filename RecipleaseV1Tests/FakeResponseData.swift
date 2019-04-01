@@ -5,7 +5,6 @@
 //  Created by VINCENT BOULANGER on 26/03/2019.
 //  Copyright © 2019 VBoulanger. All rights reserved.
 //
-
 import Foundation
 import Alamofire
 
@@ -31,3 +30,4 @@ class FakeResponseData {
 	
 	static let incorrectData = "error".data(using: .utf8)
 }
+

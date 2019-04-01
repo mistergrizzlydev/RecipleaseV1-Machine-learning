@@ -28,11 +28,11 @@ class RecipeVC: UIViewController {
 		checkFavoriteID()
 	}
 	func checkFavoriteID() {
-		guard let recipeID = recipeDetailAPIResult else {return}
-		if Recipe.checkFavoriteID(id: (recipeID.id)) {
+		guard let recipeID = recipeDetailAPIResult?.id else {return}
+		if Recipe.checkFavoriteID(id: (recipeID)) {
 			print("delete favorite")
 			favoriteButton.tintColor = .white
-			Recipe.deleteFavoriteID(id: (recipeID.id))
+			Recipe.deleteFavoriteID(id: (recipeID))
 		} else {
 			print("save favorite")
 			saveFavorite()
@@ -47,25 +47,19 @@ class RecipeVC: UIViewController {
 	}
 	func checkIngredientsEntity(recipeEntity: Recipe) {
 		guard let matches = matches else {return}
-		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
 		let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
 		for ingredients in matches[0].ingredients {
-			
 			ingredientEntity.name = ingredients
 			ingredientEntity.recipe = recipeEntity
-			print("ingredientEntity.name = \(ingredients)")
-			print("ingredientEntity.recipe = \(recipeEntity)")
 		}
 	}
 	func checkInstructionsEntity(recipeEntity: Recipe) {
 		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
 		 // création de l'objet instructions
+		let instructionsEntity = Instruction(context: AppDelegate.viewContext) // création de l'objet instructions
 		for instructions in recipeDetailAPiResult.ingredientLines {
-			let instructionsEntity = Instruction(context: AppDelegate.viewContext) // création de l'objet instructions
 			instructionsEntity.name = instructions
 			instructionsEntity.recipe = recipeEntity
-			print("instructionsEntity.name : \(instructions)")
-			print("instructionsEntity.recipe \(recipeEntity)")
 		}
 	}
 	func saveFavorite() {
@@ -76,23 +70,24 @@ class RecipeVC: UIViewController {
 		let rateRecipe = recipeDetailAPiResult.rating
 		let totalTimeRecipe = recipeDetailAPiResult.totalTimeInSeconds
 		let url = recipeDetailAPiResult.source.sourceRecipeUrl
-		guard let imageFavorite = recipeDetailAPIResult?.images[0].hostedLargeUrl else {return}
-		print("image favorite : \(imageFavorite)")
+//		guard let imageFavorite = recipeDetailAPIResult?.images[0].hostedLargeUrl else {return}
+//		print("image favorite : \(imageFavorite)")
 		recipe.id = idRecipe
 		recipe.name = recipeName
 		recipe.rate = String(rateRecipe)
 		recipe.totalTime = String(totalTimeRecipe)
 		recipe.url = url
+		recipe.imageData = imageRecipe.image?.jpegData(compressionQuality: 0.75)
 		checkInstructionsEntity(recipeEntity: recipe)
 		checkIngredientsEntity(recipeEntity: recipe)
-		print("url : \(String(describing: url))")
+		
 
-		try? AppDelegate.viewContext.save() // sauvegarde du context avec try car cela peut générer une erreur.
 		
 //		let test = try? NSData(data: )
 //		favorite.imageRecipe = Data(data: imageFavorite)
 //		let imageConverted = imageFavorite
 //		favorite.imageRecipe = Data(imageFavorite)
+		try? AppDelegate.viewContext.save() //sauvegarde du context avec try car cela peut générer une erreur.
 	}
 	
 	
@@ -107,7 +102,6 @@ class RecipeVC: UIViewController {
 	func designButton() {
 		backViewRateAndTime.layer.cornerRadius = 5
 		getDirections.layer.cornerRadius = 5
-		
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -135,19 +129,13 @@ extension RecipeVC: UITableViewDataSource {
 		recipeName.text =  recipeDetailAPIResult?.name
 		rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
 		timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
-
 		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
 			cell.textLabel!.text = "\(String(describing: ingredientLines))"
 		}
-		 //cell.textLabel!.text = String(checkInstructionsEntity(recipeEntity: recipe[indexPath.row]))
-		//let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
-		//let source = recipeDetailAPIResult!.source
-		//guard let recipeDetailAPIResult = recipeDetailAPIResult else {return 0}
 		guard let image = recipeDetailAPIResult?.images[0].hostedLargeUrl else {return cell}
 		if let url = URL(string: image) {
 			if let data = try? Data(contentsOf: url as URL) {
 				print(data)
-				//imageRecipe.contentMode = UIView.ContentMode.scaleAspectFit
 				imageRecipe.image = UIImage(data: data as Data)
 			}
 		} else {

@@ -28,10 +28,17 @@ class CoreDataTestCase: XCTestCase {
 		recipeID.id = "The-BEST-Crockpot-Pot-Roast-2631670"
 		
 	}
+	//MARK: - Unit Tests
+	func testInsertManyRecipesInPersistentContainer() {
+		for _ in 0 ..< 100000 {
+			insertRecipe(into: mockContainer.newBackgroundContext())
+		}
+		XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
+	}
 	func testDeleteAllItemsInPersistentContainer() {
 		insertRecipe(into: mockContainer.viewContext)
 		try? mockContainer.viewContext.save()
 		Recipe.deleteAll()
-		XCTAssertEqual(Recipe.fetchAll(), [])
+		XCTAssertEqual(Recipe.fetchAll(viewContext: mockContainer.viewContext ), [])
 	}
 }

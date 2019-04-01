@@ -24,26 +24,21 @@ class FavoriteDetailVC: UIViewController {
 	
 	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
 		print("unlike favorite")
-		let instructionsEntity = Instruction(context: AppDelegate.viewContext)
-		let recipe = Recipe(context: AppDelegate.viewContext)
 		guard let recipeID = recipeDetail?.id else {return}
-		//print("recipe : \(recipeID.description)")
-		print("recipeID \(recipeID)")
 		if Recipe.checkFavoriteID(id: recipeID) {
-			Recipe.deleteFavoriteID(id: recipe.id!)
+			Recipe.deleteFavoriteID(id: recipeID)
 			favoriteButton.tintColor = .white
+			
 		} else {
 			print("erreur (Recipe.checkFavoriteID)")
 			favoriteButton.tintColor = .red
 		}
-		try? AppDelegate.viewContext.save() 
-		//Recipe.deleteFavoriteID(id: (recipeDetailAPIResult?.id)!)
+		try? AppDelegate.viewContext.save()
 		//Go controller précédent
 		//navigationController?.popViewController(animated: true)
 	}
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
 		print("getRecipeDirection Detail")
-
 	}
 	func designButton() {
 		backViewRateAndTime.layer.cornerRadius = 5
@@ -63,7 +58,6 @@ class FavoriteDetailVC: UIViewController {
 		recipe = Recipe.fetchAll()
 		instructionsTableView.reloadData()
 	}
-	let test = ["test1", "test2", "test3", "test4"]
 }
 
 
@@ -74,34 +68,18 @@ extension FavoriteDetailVC: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteIngredientDetailCell", for: indexPath)
-//		recipeName.text =  recipeDetailAPIResult?.name
-//		rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
-//		timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
-//
-//		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
-//			cell.textLabel!.text = "\(String(describing: ingredientLines))"
-//		}
-//		recipeName.text =
-		recipeName.text = recipe[indexPath.row].name
-		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
-		timeLabel.text = String("\(time / 60) mn")
-		guard let rate = recipe[indexPath.row].rate else {return cell}
 		
+		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
+		timeLabel.text = String("\(time.convertIntToTime)")
+		guard let rate = recipe[indexPath.row].rate else {return cell}
 		rateLabel.text = rate + " / 5 "
 		print("================ instruction entity")
-		let instructionsEntity = Instruction(context: AppDelegate.viewContext)
-		//guard let instructions = instructionsEntity else {return cell}
-		guard let recipeID = recipeDetail?.id else {return cell}
-		print("recipeID \(recipeID)")
-		cell.detailTextLabel?.text = "test ingredients"
-//		if Recipe.checkFavoriteID(id: recipeID) {
-//
-//			cell.textLabel?.text = recipeDetail?.id
-//		}
 		
-		if let ingredientLines = instructionsEntity.name  {
-			print("ingredientLines : \(ingredientLines)")
-		}
+		let recipeInstructionsAllObjects = recipeDetail?.instructions?.allObjects as? [Instruction]
+		guard let resultInstructions = recipeInstructionsAllObjects else {return cell}
+		let instructions = resultInstructions.map({$0.name ?? ""})
+		let instructionsString = instructions.joined(separator: ", ")
+		cell.detailTextLabel?.text = instructionsString.firstUppercased
 		
 		return cell
 	}

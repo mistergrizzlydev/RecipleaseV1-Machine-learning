@@ -9,11 +9,9 @@ import CoreData
 import UIKit
 
 class FavoritesListVC: UIViewController {
-	var matches: [Match]!
 	var recipe = Recipe.fetchAll() // var qui va contenir tous les objets favoris
 	var recipeDetail: Recipe?
 	@IBOutlet weak var favoriteTableView: UITableView!
-	
 	@IBAction func deleteFavorites(_ sender: UIBarButtonItem) {
 		print("delete all favorites")
 		Recipe.deleteAll()
@@ -25,7 +23,7 @@ class FavoritesListVC: UIViewController {
 		super.viewDidLoad()
 		print("FavoritesVC ")
 		self.navigationItem.title = "Favorites"
-		let nib = UINib(nibName: "CellTableViewXib", bundle: nil)
+		let nib = UINib(nibName: "CustomRecipeViewCellXib", bundle: nil)
 		favoriteTableView.register(nib, forCellReuseIdentifier: "CustomTableViewCell")
 		favoriteTableView.delegate = self
 		favoriteTableView.dataSource = self
@@ -37,13 +35,6 @@ class FavoritesListVC: UIViewController {
 		recipe = Recipe.fetchAll()
 		favoriteTableView.reloadData()
 	}
-	
-//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//		if segue.identifier == "SegueRecipeToSuccess" {
-//			let successVC = segue.destination as! RecipeVC
-//			successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
-//		}
-//	}
 }
 
 //=================================================
@@ -70,41 +61,10 @@ extension FavoritesListVC: UITableViewDataSource {
 		return recipe.count
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else {return UITableViewCell()}
-		
-		cell.recipeLabel.text = recipe[indexPath.row].name
-		guard let time = Int(recipe[indexPath.row].totalTime!) else {return cell}
-		cell.timeLabel.text = String("\(time / 60) mn")
-		guard let rate = recipe[indexPath.row].rate else {return cell}
-		cell.rateLabel.text = rate + " / 5 "
-		let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
-		let instructionsEntity = Instruction(context: AppDelegate.viewContext)
-		print()
-		cell.ingredientsLabel.text = "ingredientEntity.name"
-		print("ingredientEntity.name : \(ingredientEntity.name)")
-		//guard let test = ingredientEntity else {return cell}
-//		for i in instructionsEntity {
-//			cell.ingredientsLabel?.text = i
-//		}
-//		for _ in resultMatches.ingredients {
-//			let test = resultMatches.ingredients[0..<3]
-//			cell.ingredientsLabel?.text = "\(test[0].firstUppercased), \(test[1].firstUppercased), \(test[2].firstUppercased)"
-//		}
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {return UITableViewCell()}
+		let resultRecipe = recipe[indexPath.row]
+		cell.recipeEntity = resultRecipe
 
-
-		guard let imageData = recipe[indexPath.row].imageData else {return cell}
-		print("imageData : \(imageData)")
-		if (recipe[indexPath.row].imageData != nil) {
-			print("bonne photo")
-			let image = UIImage(data: recipe[indexPath.row].imageData!)
-			cell.imageRecipe.image = image
-		} else {
-			cell.imageRecipe.backgroundColor = Colors.grey
-			let image = UIImage(named: "pizza.jpeg")
-			cell.imageRecipe.image = image //UIImage(defaultImage)
-		}
-	
-		print(imageData)
 		return cell
 	}
 
@@ -113,8 +73,9 @@ extension FavoritesListVC: UITableViewDataSource {
 		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
 		favoriteTableView.reloadData()
 		// probleme delete id
-		//AppDelegate.viewContext.delete(listOfFavoriteRecipe[indexPath.row]) syskam
+		//AppDelegate.viewContext.delete(listOfFavoriteRecipe[indexPath.row]) 
 		guard let recipeDetails = recipeDetail else {return}
+		
 		print("id 2:============\(recipeDetails.id!)")
 		Recipe.deleteFavoriteID(id: recipeDetails.id!)
 		try? AppDelegate.viewContext.save()

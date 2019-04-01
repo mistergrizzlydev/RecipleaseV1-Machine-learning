@@ -466,7 +466,7 @@
                                 <rect key="frame" x="10" y="74" width="355" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomTableViewCell" id="2Db-a7-sVR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomRecipeViewCell" id="2Db-a7-sVR">
                                         <rect key="frame" x="0.0" y="28" width="355" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Db-a7-sVR" id="A09-IT-NZU">
@@ -515,7 +515,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResultRecipeCell" rowHeight="100" id="XJa-uw-WiV" customClass="CustomTableViewCell" customModule="RecipleaseV1" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomRecipeViewCell" rowHeight="100" id="XJa-uw-WiV" customClass="CustomRecipeViewCell" customModule="RecipleaseV1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XJa-uw-WiV" id="xlX-N4-Bw7">
@@ -531,10 +531,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hyg-Qh-PKK" firstAttribute="bottom" secondItem="6kk-jM-uds" secondAttribute="bottom" id="AAv-KI-thD"/>
-                            <constraint firstItem="6kk-jM-uds" firstAttribute="top" secondItem="hyg-Qh-PKK" secondAttribute="top" id="LWH-Eb-xTO"/>
-                            <constraint firstAttribute="trailing" secondItem="6kk-jM-uds" secondAttribute="trailing" id="ZJQ-Iv-s8b"/>
-                            <constraint firstItem="6kk-jM-uds" firstAttribute="leading" secondItem="hyg-Qh-PKK" secondAttribute="leading" id="sC4-Wa-Dy1"/>
+                            <constraint firstItem="6kk-jM-uds" firstAttribute="top" secondItem="hyg-Qh-PKK" secondAttribute="top" id="Qcn-z2-lbV"/>
+                            <constraint firstItem="6kk-jM-uds" firstAttribute="trailing" secondItem="hyg-Qh-PKK" secondAttribute="trailing" id="WRZ-gF-QtS"/>
+                            <constraint firstItem="6kk-jM-uds" firstAttribute="bottom" secondItem="hyg-Qh-PKK" secondAttribute="bottom" id="YjW-U0-YK3"/>
+                            <constraint firstItem="6kk-jM-uds" firstAttribute="leading" secondItem="hyg-Qh-PKK" secondAttribute="leading" id="bzT-2l-j1W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hyg-Qh-PKK"/>
                     </view>

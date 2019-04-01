@@ -94,6 +94,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		urlService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
 			XCTAssertTrue(success)
 			XCTAssertNotNil(data)
+			XCTAssertEqual(data?.name, "The BEST Crockpot Pot Roast")
 			//XCTAssertEqual(currency?.rates["USD"], 1.131305)
 			expectation.fulfill()
 		}
@@ -331,7 +332,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
 			XCTAssertTrue(success)
 			XCTAssertNotNil(data)
-			XCTAssertEqual(data?.matches[0].id , "The-BEST-Crockpot-Pot-Roast-2631670")
+			XCTAssertEqual(data?.matches[0].id, "The-BEST-Crockpot-Pot-Roast-2631670")
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)

@@ -17,7 +17,7 @@ class ResultListRecipeVC: UIViewController {
 	//========================================
     override func viewDidLoad() {
         super.viewDidLoad()
-		let nib = UINib(nibName: "CellTableViewXib", bundle: nil)
+		let nib = UINib(nibName: "CustomRecipeViewCellXib", bundle: nil)
 		recipesTableView.register(nib, forCellReuseIdentifier: "CustomTableViewCell")
 		self.navigationItem.title = "Reciplease"
 		recipesTableView.delegate = self
@@ -71,29 +71,32 @@ extension ResultListRecipeVC: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell else {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {
 			return UITableViewCell()
 		}
+		
+//		if matches!.count > 0 {
+//			cell.recipeLabel.text = String(resultMatches.recipeName)
+//			cell.timeLabel.text = String("\((resultMatches.totalTimeInSeconds)/60) mn")
+//			cell.rateLabel.text = String("\(resultMatches.rating) / 5")
+//			for _ in resultMatches.ingredients {
+//				let ingredient = resultMatches.ingredients[0..<3]
+//				cell.ingredientsLabel?.text = "\(ingredient[0].firstUppercased), \(ingredient[1].firstUppercased), \(ingredient[2].firstUppercased)"
+//			}
+//			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
+//			if let url = URL(string: images) {
+//				if let data = try? Data(contentsOf: url as URL) {
+//					cell.imageRecipe.image = UIImage(data: data as Data)
+//				}
+//			}
+//		} else {
+//			// ajouter une alerte!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//			//self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
+//			print("error recipe List")
+//		}
 		let resultMatches = matches![indexPath.row]
-		if matches!.count > 0 {
-			cell.recipeLabel.text = String(resultMatches.recipeName)
-			cell.timeLabel.text = String("\((resultMatches.totalTimeInSeconds)/60) mn")
-			cell.rateLabel.text = String("\(resultMatches.rating) / 5")
-			for _ in resultMatches.ingredients {
-				let test = resultMatches.ingredients[0..<3]
-				cell.ingredientsLabel?.text = "\(test[0].firstUppercased), \(test[1].firstUppercased), \(test[2].firstUppercased)"
-			}
-			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
-			if let url = URL(string: images) {
-				if let data = try? Data(contentsOf: url as URL) {
-					cell.imageRecipe.image = UIImage(data: data as Data)
-				}
-			}
-		} else {
-			// ajouter une alerte!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			//self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
-			print("error recipe List")
-		}
+		
+		cell.recipe = resultMatches
 		return cell
 	}
 }
