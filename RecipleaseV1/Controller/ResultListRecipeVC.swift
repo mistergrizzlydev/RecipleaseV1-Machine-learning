@@ -37,7 +37,6 @@ extension ResultListRecipeVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		guard let idRecipe = matches?[indexPath.row].id else {return}
 		recipeAPIService.requestRecipeDetail(recipeID: idRecipe) { (success, recipe) in
-			print("idRecipeTest : \(self.recipeAPIService.urlConstructRecipeDetail(recipeID: idRecipe))")
 			if success {
 				print("test success")
 				guard let recipe = recipe else {return}
@@ -74,28 +73,7 @@ extension ResultListRecipeVC: UITableViewDataSource {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {
 			return UITableViewCell()
 		}
-		
-//		if matches!.count > 0 {
-//			cell.recipeLabel.text = String(resultMatches.recipeName)
-//			cell.timeLabel.text = String("\((resultMatches.totalTimeInSeconds)/60) mn")
-//			cell.rateLabel.text = String("\(resultMatches.rating) / 5")
-//			for _ in resultMatches.ingredients {
-//				let ingredient = resultMatches.ingredients[0..<3]
-//				cell.ingredientsLabel?.text = "\(ingredient[0].firstUppercased), \(ingredient[1].firstUppercased), \(ingredient[2].firstUppercased)"
-//			}
-//			let images = resultMatches.smallImageUrls![0].updateSizeUrlImageString
-//			if let url = URL(string: images) {
-//				if let data = try? Data(contentsOf: url as URL) {
-//					cell.imageRecipe.image = UIImage(data: data as Data)
-//				}
-//			}
-//		} else {
-//			// ajouter une alerte!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//			//self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
-//			print("error recipe List")
-//		}
 		let resultMatches = matches![indexPath.row]
-		
 		cell.recipe = resultMatches
 		return cell
 	}

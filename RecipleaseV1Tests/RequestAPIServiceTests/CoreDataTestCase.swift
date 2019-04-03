@@ -24,7 +24,7 @@ class CoreDataTestCase: XCTestCase {
 	}()
 	//MARK: - Helper Methods
 	private func insertRecipe(into managedObjectContext: NSManagedObjectContext) {
-		let recipeID = Recipe(context: managedObjectContext)
+		let recipeID = Instruction(context: managedObjectContext)
 		recipeID.id = "The-BEST-Crockpot-Pot-Roast-2631670"
 		
 	}
@@ -38,7 +38,7 @@ class CoreDataTestCase: XCTestCase {
 	func testDeleteAllItemsInPersistentContainer() {
 		insertRecipe(into: mockContainer.viewContext)
 		try? mockContainer.viewContext.save()
-		Recipe.deleteAll()
-		XCTAssertEqual(Recipe.fetchAll(viewContext: mockContainer.viewContext ), [])
+		Instruction.deleteAll()
+		XCTAssertEqual(Instruction.fetchAll(viewContext: mockContainer.viewContext ), [])
 	}
 }

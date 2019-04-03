@@ -46,7 +46,7 @@ class CustomRecipeViewCell: UITableViewCell {
 		}
 	}
 
-	var recipeEntity: Recipe! {
+	var recipeEntity:Recipe! {
 		didSet {
 			recipeLabel.text = recipeEntity.name
 			guard let time = Int(recipeEntity.totalTime!) else {return}

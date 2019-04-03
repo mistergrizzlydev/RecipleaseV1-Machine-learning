@@ -11,6 +11,7 @@ import UIKit
 class FavoritesListVC: UIViewController {
 	var recipe = Recipe.fetchAll() // var qui va contenir tous les objets favoris
 	var recipeDetail: Recipe?
+	
 	@IBOutlet weak var favoriteTableView: UITableView!
 	@IBAction func deleteFavorites(_ sender: UIBarButtonItem) {
 		print("delete all favorites")
@@ -50,6 +51,7 @@ extension FavoritesListVC: UITableViewDelegate {
 		if segue.identifier == "segueFavoritesToDisplay" {
 			guard let successVC = segue.destination as? FavoriteDetailVC else {return}
 			successVC.recipeDetail = sender as? Recipe
+//			successVC.instructions = sender as? Instruction
 		}
 	}
 }

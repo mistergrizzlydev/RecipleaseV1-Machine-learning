@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 class Recipe: NSManagedObject {
 	
 	static var all: [Recipe] {
@@ -33,7 +32,7 @@ class Recipe: NSManagedObject {
 		}
 		return true
 	}
-
+	
 	// fonction qui delete une recette en fonction de son id
 	static func deleteFavoriteID(id: String, viewContext: NSManagedObjectContext = AppDelegate.viewContext) {
 		let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
@@ -47,7 +46,6 @@ class Recipe: NSManagedObject {
 	static func deleteAll() {
 		let deleteRequest = NSBatchDeleteRequest(fetchRequest: Recipe.fetchRequest())// le batch c'est pour tout supprimer
 		let _ = try? AppDelegate.viewContext.execute(deleteRequest)
-		// cf TP core data- git core data test 
+		// cf TP core data- git core data test
 	}
 }
-
