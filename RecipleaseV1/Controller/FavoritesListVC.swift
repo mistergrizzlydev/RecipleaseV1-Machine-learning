@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesListVC: UIViewController {
 	var recipe = Recipe.fetchAll() // var qui va contenir tous les objets favoris
-	var recipeDetail: Recipe?
+	//var recipeDetail: Recipe?
 	
 	@IBOutlet weak var favoriteTableView: UITableView!
 	@IBAction func deleteFavorites(_ sender: UIBarButtonItem) {
@@ -43,15 +43,15 @@ class FavoritesListVC: UIViewController {
 //=================================================
 extension FavoritesListVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		self.performSegue(withIdentifier: "segueFavoritesToDisplay", sender: nil)
-		
+	
+		self.performSegue(withIdentifier: "segueFavoritesToDisplay", sender: recipe[indexPath.row].id)
 	}
 	//faire passer avec un segue l'id de la recette
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "segueFavoritesToDisplay" {
 			guard let successVC = segue.destination as? FavoriteDetailVC else {return}
-			successVC.recipeDetail = sender as? Recipe
-//			successVC.instructions = sender as? Instruction
+			let recipeEntity = Recipe.fetchRecipe(id: sender as? String ?? "default value").first
+			successVC.recipeDetail = recipeEntity
 		}
 	}
 }
@@ -66,19 +66,17 @@ extension FavoritesListVC: UITableViewDataSource {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {return UITableViewCell()}
 		let resultRecipe = recipe[indexPath.row]
 		cell.recipeEntity = resultRecipe
-
 		return cell
 	}
 
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		recipe.remove(at: indexPath.row)
-		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
-		favoriteTableView.reloadData()
-		// probleme delete id
-		//AppDelegate.viewContext.delete(listOfFavoriteRecipe[indexPath.row]) 
-		guard let recipeID = recipeDetail?.id else {return}
-		print("id 2:============\(recipeID)")
+		guard let recipeID = recipe[indexPath.row].id else {return}
 		Recipe.deleteFavoriteID(id: recipeID)
+		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
+
+		try? AppDelegate.viewContext.save()
+		favoriteTableView.reloadData()
 	}
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		let label = UILabel()

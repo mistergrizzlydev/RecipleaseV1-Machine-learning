@@ -23,7 +23,6 @@ class CustomRecipeViewCell: UITableViewCell {
 	}
 	var recipe:Match! {
 		didSet {
-//			if recipe.count > 0 {
 			recipeLabel.text = recipe.recipeName
 			timeLabel.text = String(recipe.totalTimeInSeconds.convertIntToTime)
 			rateLabel.text = String("\(recipe.rating) / 5")
@@ -38,14 +37,8 @@ class CustomRecipeViewCell: UITableViewCell {
 					defaultImage()
 				}
 			}
-			//	} else {
-			//		ajouter une alerte!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			//		self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
-			//		print("error recipe List")
-			//	}
 		}
 	}
-
 	var recipeEntity:Recipe! {
 		didSet {
 			recipeLabel.text = recipeEntity.name
@@ -58,7 +51,7 @@ class CustomRecipeViewCell: UITableViewCell {
 			let ingredients = recipeEntityAllObjects?.map({$0.name ?? ""}) ?? []
 			let ingredientsString = ingredients.joined(separator: ", ")
 
-			print("ingredientsString : \(ingredientsString.changeToArray)")
+			//print("ingredientsString : \(ingredientsString.firstUppercased)")
 			ingredientsLabel?.text = ingredientsString.firstUppercased
 			
 			//===========================================================

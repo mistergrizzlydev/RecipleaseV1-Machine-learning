@@ -14,4 +14,10 @@ class Instruction: NSManagedObject {
 		guard let instructions = try? AppDelegate.viewContext.fetch(request) else {return []}
 		return instructions
 	}
+	static func fetchAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) -> [Instruction] {
+		let request: NSFetchRequest<Instruction> = Instruction.fetchRequest()
+		guard let instructions = try? AppDelegate.viewContext.fetch(request) else {return []}
+		return instructions
+	}
+	
 }

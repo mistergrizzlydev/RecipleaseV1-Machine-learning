@@ -49,7 +49,7 @@ class RecipeVC: UIViewController {
 	func checkIngredientsEntity(recipeEntity: Recipe) {
 		guard let matches = matches else {return}
 		let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
-		for ingredients in matches[0].ingredients {
+		for ingredients in matches[0].ingredients { // attention
 			ingredientEntity.name = ingredients
 			ingredientEntity.recipe = recipeEntity
 		}

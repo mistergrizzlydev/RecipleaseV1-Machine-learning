@@ -52,7 +52,7 @@ extension ResultListRecipeVC: UITableViewDelegate {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "SegueRecipeToSuccess" {
 				let successVC = segue.destination as! RecipeVC
-			successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
+				successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
 		}
 	}
 }
