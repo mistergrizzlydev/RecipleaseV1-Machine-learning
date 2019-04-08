@@ -14,26 +14,23 @@ import Vision
 class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 	@IBOutlet weak var recognizerView: UIView!
 	@IBOutlet weak var ui_Label: UILabel!
-	var ingredientList = [String]()
-	var userIngredientRecognizer = [String]()
+	@IBOutlet weak var recogTableView: UITableView!
+	
+	@IBOutlet weak var newIngredientButtonOutlet: UIButton!
+	@IBOutlet weak var finishButtonOutlet: UIButton!
+	
 	let captureSession = AVCaptureSession()
+	var userTabIngredientRecognizer = [String]()
+	var ingredientRecognized = ""
+	
 	lazy var imageRecognizerRequest: VNRequest = { // propriété calculé de type lazy, chargée uniquement lorsque la variable est appelée et réutilisée par la suite sans être de nouveau chargée
-		let model = try! VNCoreMLModel(for: Inceptionv3().model) // on charge le fichier datamodel InceptionV3
+		let model = try! VNCoreMLModel(for: FruitAndVegetables().model) // on charge le fichier datamodel InceptionV3
 		let request = VNCoreMLRequest(model: model, completionHandler: self.imageRecognizerHandler) // il charge le model et lance le completion handler de la fonction ci dessous
 		return request
 	}()
 	
 	
-	@IBAction func addIngredientButtonRecognizer(_ sender: UIButton) {
-		addIngredientRecognized()
-	}
-	@IBAction func terminateIngredientListRecognizer(_ sender: UIButton) {
 
-	}
-	func addIngredientRecognized() {
-	//	print(guess.identifier)
-		
-	}
 	func configureCaptureSession() {
 		// 1 - configurer les entrées, le flux entrant
 		if let camera = AVCaptureDevice.default(for: AVMediaType.video), // start camera, continue si la caméra a été trouvée.
@@ -47,6 +44,7 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 			// 3 - configurer l'aperçu
 			let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 			previewLayer.frame = recognizerView.bounds
+			previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
 			recognizerView.layer.addSublayer(previewLayer)
 		}
 	}
@@ -62,6 +60,8 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	
 	func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) { // quand le processeur est surchargé. Il perd des frames. Permet de prévenir l'utilisateur qu'il y a un ralentissement
 	}
+	
+
 	func imageRecognizerHandler(request:VNRequest, error: Error?) {
 		// si je n'ai pas les bonnes observations au bon format et si il n'y a pas un élément à l'intérieur(best  guesss.first)
 		guard let observations = request.results as? [VNClassificationObservation], let bestGuess = observations.first else {return}
@@ -69,20 +69,33 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 		DispatchQueue.main.async { // le code utilisé ici ne sera fait que sur le thread graphique pendant que la capture tourne en tache de fond
 			if bestGuess.confidence > 0.6 {
 				self.ui_Label.text = bestGuess.identifier
-				self.ingredientList.append(bestGuess.identifier)
-				print("Vous avez rajouté \(bestGuess.identifier)")
-			} else {
-				print("Recherche en cours...")
+				//self.userTabIngredientRecognizer.append(bestGuess.identifier)
+				print("Vous avez identifié : \(bestGuess.identifier)")
+				self.ingredientRecognized = bestGuess.identifier
 			}
 		}
 	}
-//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//		if segue.identifier == "segueAddIngredientRecognizer" {
-//			let successVC = segue.destination as! SearchForRecipesVC
-//			successVC.ingredientList.append
-//			//successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
-//		}
-//	}
+	@IBAction func addIngredientButtonRecognizer(_ sender: UIButton) {
+		addIngredientRecognized()
+	}
+	@IBAction func terminateIngredientListRecognizer(_ sender: UIButton) {
+		//userTabIngredientRecognizer.removeAll()
+		captureSession.stopRunning()
+	}
+	func addIngredientRecognized() {
+		//	print(guess.identifier)
+		print("addIngredientRecognized()")
+		userTabIngredientRecognizer.append(ingredientRecognized)
+		recogTableView.reloadData()
+	}
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "segueAddIngredientRecognizer" {
+			let successVC = segue.destination as! SearchForRecipesVC
+			for i in userTabIngredientRecognizer {
+				successVC.ingredientList.append(i)
+			}
+		}
+	}
 	func recognizeSession() {
 		if captureSession.isRunning {
 			captureSession.stopRunning()
@@ -94,12 +107,47 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 			captureSession.startRunning()
 		}
 	}
-	
+	func designItemBarNavigation() {
+		self.navigationItem.title = "Image recognition"
+		UINavigationBar.appearance().tintColor = .white
+	}
+	func designButton() {
+		newIngredientButtonOutlet.layer.cornerRadius = 5
+		finishButtonOutlet.layer.cornerRadius = 5
+		ui_Label.layer.cornerRadius = 5
+	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		designItemBarNavigation()
+		designButton()
+		recogTableView.dataSource = self
+		recogTableView.backgroundColor = UIColor.clear
+		recognizerView.backgroundColor = UIColor.clear
 		recognizeSession()
 	}
-
+	override func viewWillAppear(_ animated: Bool) {
+		//recogTableView.reloadData()
+		
+	}
 	
 	
+}
+extension RecognizerVC: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return userTabIngredientRecognizer.count
+	}
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "recogCell", for: indexPath)
+		let ingredients = userTabIngredientRecognizer.map({$0})
+		let ingredientsList = ingredients[indexPath.row]
+		cell.textLabel?.textColor = .white
+		cell.textLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+		cell.textLabel?.text = ingredientsList.firstUppercased
+		return cell
+	}
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		userTabIngredientRecognizer.remove(at: indexPath.row)
+		recogTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
+		recogTableView.reloadData()
+	}
 }

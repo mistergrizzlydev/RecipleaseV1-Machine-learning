@@ -12,6 +12,10 @@ class ResultListRecipeVC: UIViewController {
 	@IBOutlet weak var recipesTableView: UITableView!
 	var matches: [Match]?
 	
+	func designItemBarNavigation() {
+		self.navigationItem.title = "Reciplease"
+		UINavigationBar.appearance().tintColor = .white
+	}
 	//========================================
 	// MARK : - viewDidLoad() & viewWillAppear
 	//========================================
@@ -19,7 +23,7 @@ class ResultListRecipeVC: UIViewController {
         super.viewDidLoad()
 		let nib = UINib(nibName: "CustomRecipeViewCellXib", bundle: nil)
 		recipesTableView.register(nib, forCellReuseIdentifier: "CustomTableViewCell")
-		self.navigationItem.title = "Reciplease"
+		designItemBarNavigation()
 		recipesTableView.delegate = self
 		recipesTableView.dataSource = self
 		recipesTableView.reloadData()
@@ -70,11 +74,21 @@ extension ResultListRecipeVC: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {
-			return UITableViewCell()
-		}
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {return UITableViewCell()}
 		let resultMatches = matches![indexPath.row]
 		cell.recipe = resultMatches
 		return cell
+	}
+	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		let label = UILabel()
+		label.text = "No matches found"
+		label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+		label.textAlignment = .center
+		label.textColor = .darkGray
+		return label
+	}
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		guard let matchEmpty = matches?.isEmpty else {return 0}
+		return matchEmpty ? 200: 0
 	}
 }

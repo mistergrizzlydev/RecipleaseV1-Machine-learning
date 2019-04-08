@@ -36,7 +36,6 @@ class Recipe: NSManagedObject {
 		let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
 		request.predicate = NSPredicate(format: "id == %@", id)
 		guard let recipes = try? viewContext.fetch(request) else {return []}
-		
 		return recipes
 	}
 	// fonction qui delete une recette en fonction de son id

@@ -38,6 +38,7 @@ class RecipeVC: UIViewController {
 			print("save favorite")
 			saveFavorite()
 			favoriteButton.tintColor = .red
+			try? AppDelegate.viewContext.save()
 		}
 	}
 	func checkToColorFavoriteButton() {
@@ -59,9 +60,23 @@ class RecipeVC: UIViewController {
 		 // création de l'objet instructions
 		let instructionsEntity = Instruction(context: AppDelegate.viewContext) // création de l'objet instructions
 		for instructions in recipeDetailAPiResult.ingredientLines {
+			print("test instrauction : \(instructions)")
 			instructionsEntity.name = instructions
 			instructionsEntity.recipe = recipeEntity
 		}
+	}
+	
+	// launch URL
+	@IBAction func getRecipeDirection(_ sender: UIButton) {
+		print("getRecipeDirection")
+		guard let urlSource = recipeDetailAPIResult?.source.sourceRecipeUrl else {return}
+		print("source : \(urlSource)")
+		guard let url = URL(string: urlSource) else {return}
+		UIApplication.shared.open(url)
+	}
+	func designButton() {
+		backViewRateAndTime.layer.cornerRadius = 5
+		getDirections.layer.cornerRadius = 5
 	}
 	func saveFavorite() {
 		let recipe = Recipe(context: AppDelegate.viewContext)// création de l'objet recette
@@ -81,24 +96,11 @@ class RecipeVC: UIViewController {
 		checkIngredientsEntity(recipeEntity: recipe)
 		try? AppDelegate.viewContext.save() //sauvegarde du context avec try car cela peut générer une erreur.
 	}
-	
-	
-	// launch URL
-	@IBAction func getRecipeDirection(_ sender: UIButton) {
-		print("getRecipeDirection")
-		guard let urlSource = recipeDetailAPIResult?.source.sourceRecipeUrl else {return}
-		print("source : \(urlSource)")
-		guard let url = URL(string: urlSource) else {return}
-		UIApplication.shared.open(url)
-	}
-	func designButton() {
-		backViewRateAndTime.layer.cornerRadius = 5
-		getDirections.layer.cornerRadius = 5
-	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		print("viewDidLoad Reciple detail ")
 		self.navigationItem.title = "Reciplease"
+		recipeDetailDisplay()
 		designButton()
 		ingredientsTableView.dataSource = self
 		ingredientsTableView.reloadData()
@@ -107,6 +109,21 @@ class RecipeVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		ingredientsTableView.reloadData()
 		checkToColorFavoriteButton()
+	}
+	func recipeDetailDisplay() {
+		recipeName.text =  recipeDetailAPIResult?.name
+		rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
+		timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
+		guard let image = recipeDetailAPIResult?.images[0].hostedLargeUrl else {return}
+		if let url = URL(string: image) {
+			if let data = try? Data(contentsOf: url as URL) {
+				print(data)
+				imageRecipe.image = UIImage(data: data as Data)
+			}
+		} else {
+			imageRecipe.backgroundColor = Colors.grey
+			imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
+		}
 	}
 }
 
@@ -118,22 +135,10 @@ extension RecipeVC: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientDetailCell", for: indexPath)
-		recipeName.text =  recipeDetailAPIResult?.name
-		rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
-		timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
 		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
 			cell.textLabel!.text = "\(String(describing: ingredientLines))"
 		}
-		guard let image = recipeDetailAPIResult?.images[0].hostedLargeUrl else {return cell}
-		if let url = URL(string: image) {
-			if let data = try? Data(contentsOf: url as URL) {
-				print(data)
-				imageRecipe.image = UIImage(data: data as Data)
-			}
-		} else {
-			imageRecipe.backgroundColor = Colors.grey
-			imageRecipe.image = UIImage(named: "recipe-no-photo.jpg") //UIImage(defaultImage)
-		}
+		
 		return cell
 	}
 }

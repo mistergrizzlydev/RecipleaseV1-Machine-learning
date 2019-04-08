@@ -50,11 +50,9 @@ class CustomRecipeViewCell: UITableViewCell {
 			let recipeEntityAllObjects = recipeEntity.ingredients?.allObjects as? [Ingredient]
 			let ingredients = recipeEntityAllObjects?.map({$0.name ?? ""}) ?? []
 			let ingredientsString = ingredients.joined(separator: ", ")
-
-			//print("ingredientsString : \(ingredientsString.firstUppercased)")
-			ingredientsLabel?.text = ingredientsString.firstUppercased
-			
+			ingredientsLabel?.text = "\(ingredientsString.firstUppercased)"
 			//===========================================================
+			
 			guard let data = recipeEntity.imageData else {return}
 			imageRecipe.image = UIImage(data: data)
 		}

@@ -43,7 +43,6 @@ class FavoritesListVC: UIViewController {
 //=================================================
 extension FavoritesListVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-	
 		self.performSegue(withIdentifier: "segueFavoritesToDisplay", sender: recipe[indexPath.row].id)
 	}
 	//faire passer avec un segue l'id de la recette
@@ -74,9 +73,8 @@ extension FavoritesListVC: UITableViewDataSource {
 		guard let recipeID = recipe[indexPath.row].id else {return}
 		Recipe.deleteFavoriteID(id: recipeID)
 		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
-
-		try? AppDelegate.viewContext.save()
 		favoriteTableView.reloadData()
+		try? AppDelegate.viewContext.save()
 	}
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		let label = UILabel()

@@ -47,7 +47,7 @@ class SearchForRecipesVC: UIViewController {
 		}
 	}
 	
-	func requestSearchForRecipes() {
+	func requestSearchForRecipes()  {
 		//toggleActivityIndicator(shown: true)
 		print("requestSearchForRecipes")
 		recipeAPIService.requestListRecipes(recipeList: ingredientList) { (success, dataYum) in
@@ -57,6 +57,7 @@ class SearchForRecipesVC: UIViewController {
 				self.performSegue(withIdentifier: "segueRecipesToDisplay", sender: nil)
 			} else {
 				self.presentAlert(title: "No matches", message: "You must enter an ingredient ! ")
+				self.toggleActivityIndicator(shown: false)
 			}
 		}
 	}
@@ -103,17 +104,15 @@ class SearchForRecipesVC: UIViewController {
 		toolBar.isUserInteractionEnabled = true
 		searchIngredientsTextField.inputAccessoryView = toolBar
 	}
+	func designItemBarNavigation() {
+		self.navigationItem.title = "Reciplease"
+		UINavigationBar.appearance().tintColor = .white
+	}
 	//================================
 	// MARK : - ViewDidLoad
 	//================================
-	func designItemBarNavigation() {
-		self.navigationItem.title = "Reciplease"
-		//	let test = UINavigationBar.appearance()
-		//	test.layer = UIColor.white
-	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		//toggleActivityIndicator(shown: false)
 		designItemBarNavigation()
 		ingredientsTableView.dataSource = self
 		

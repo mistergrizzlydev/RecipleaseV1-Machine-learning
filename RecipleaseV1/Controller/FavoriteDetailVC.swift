@@ -27,6 +27,7 @@ class FavoriteDetailVC: UIViewController {
 		if Recipe.checkFavoriteID(id: recipeID) {
 			Recipe.deleteFavoriteID(id: recipeID)
 			favoriteButton.tintColor = .white
+			
 			try? AppDelegate.viewContext.save()
 		} else {
 			print("erreur (Recipe.checkFavoriteID)")
@@ -51,47 +52,45 @@ class FavoriteDetailVC: UIViewController {
 		self.navigationItem.title = "Favorites"
 		designButton()
 		recipeDetailDisplay()
-		let instructionsEntityAllObjects = recipeDetail?.instructions?.allObjects as? [Instruction]
-		let instructions = instructionsEntityAllObjects?.map({$0.name ?? ""}) ?? []
-		instructionTab = instructions
-		print(instructions)
-		for i in instructionTab {
-			print(i)
-		}
-		print(instructionsEntityAllObjects)
+		let test = recipeDetail?.ingredients?.allObjects as? [Ingredient]
+		print(test?.description as Any)
+
+		
+
+		print(instructionTab.description)
+		//print(instructionsEntityAllObjects as? String)
 		instructionsTableView.dataSource = self
 		favoriteButton.tintColor = .red
 	}
 	override func viewWillAppear(_ animated: Bool) {
 
-		
 		// cf bouton favoris
 	}
 	func recipeDetailDisplay() {
-		guard let name = recipeDetail?.name else {return }
+		guard let name = recipeDetail?.name else {return}
 		recipeName.text = name.firstUppercased
-		guard let time = recipeDetail?.totalTime else {return }
-		print("time\(time)")
+		guard let time = recipeDetail?.totalTime else {return}
 		guard let timeToInt = Int(time) else {return}
 		timeLabel.text = String(timeToInt.convertIntToTime)
-		guard let rate = recipeDetail?.rate else {return }
+		guard let rate = recipeDetail?.rate else {return}
 		rateLabel.text = rate + " / 5 "
-		guard let data = recipeDetail?.imageData else {return }
+		guard let data = recipeDetail?.imageData else {return}
 		imageRecipe.image = UIImage(data: data)
 	}
 }
-
-
 extension FavoriteDetailVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return instructionTab.count
 	}
-	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteIngredientDetailCell", for: indexPath)
+		let instructionsEntityAllObjects = recipeDetail?.instructions?.allObjects as? [Instruction]
+		let instructions = instructionsEntityAllObjects?.map({$0.name ?? ""}) ?? []
+		instructionTab = instructions
 		let instructionIndex = instructionTab[indexPath.row]
-		cell.textLabel?.text = instructionIndex
+		cell.textLabel?.text = instructionIndex.firstUppercased
 		print("recipe ID true")
+		
 		return cell
 	}
 }
