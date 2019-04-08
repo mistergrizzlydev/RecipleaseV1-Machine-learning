@@ -81,6 +81,7 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	@IBAction func terminateIngredientListRecognizer(_ sender: UIButton) {
 		//userTabIngredientRecognizer.removeAll()
 		captureSession.stopRunning()
+		//navigationController?.popViewController(animated: false)
 	}
 	func addIngredientRecognized() {
 		//	print(guess.identifier)

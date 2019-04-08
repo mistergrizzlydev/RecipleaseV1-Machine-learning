@@ -27,15 +27,13 @@ class FavoriteDetailVC: UIViewController {
 		if Recipe.checkFavoriteID(id: recipeID) {
 			Recipe.deleteFavoriteID(id: recipeID)
 			favoriteButton.tintColor = .white
-			
 			try? AppDelegate.viewContext.save()
 		} else {
 			print("erreur (Recipe.checkFavoriteID)")
 			favoriteButton.tintColor = .red
 		}
 		try? AppDelegate.viewContext.save()
-		//Go controller précédent
-		//navigationController?.popViewController(animated: true)
+		navigationController?.popViewController(animated: true)
 	}
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
 		guard let urlSource = recipeDetail?.url else {return}
