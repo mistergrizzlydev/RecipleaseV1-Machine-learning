@@ -11,6 +11,8 @@ class ResultListRecipeVC: UIViewController {
 	var recipeAPIService = RecipeAPIService()
 	@IBOutlet weak var recipesTableView: UITableView!
 	var matches: [Match]?
+	var ingredients = [String]()
+	
 	
 	func designItemBarNavigation() {
 		self.navigationItem.title = "Reciplease"
@@ -44,6 +46,9 @@ extension ResultListRecipeVC: UITableViewDelegate {
 			if success {
 				print("test success")
 				guard let recipe = recipe else {return}
+				guard let ingredients = self.matches?[indexPath.row].ingredients else {return}
+				self.ingredients = ingredients // deballer
+				//self.instructions = ( )
 				self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
 			} else {
 				print("request error")
@@ -57,6 +62,7 @@ extension ResultListRecipeVC: UITableViewDelegate {
 		if segue.identifier == "SegueRecipeToSuccess" {
 				let successVC = segue.destination as! RecipeVC
 				successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
+				successVC.ingredients = ingredients
 		}
 	}
 }

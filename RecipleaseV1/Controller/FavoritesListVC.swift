@@ -10,7 +10,6 @@ import UIKit
 
 class FavoritesListVC: UIViewController {
 	var recipe = Recipe.fetchAll() // var qui va contenir tous les objets favoris
-	//var recipeDetail: Recipe?
 	
 	@IBOutlet weak var favoriteTableView: UITableView!
 	@IBAction func deleteFavorites(_ sender: UIBarButtonItem) {
@@ -69,12 +68,15 @@ extension FavoritesListVC: UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		recipe.remove(at: indexPath.row)
 		guard let recipeID = recipe[indexPath.row].id else {return}
-		Recipe.deleteFavoriteID(id: recipeID)
-		favoriteTableView.deleteRows(at: [indexPath], with: .automatic) // je confirme la suppression
-		favoriteTableView.reloadData()
-		try? AppDelegate.viewContext.save()
+		if Recipe.checkFavoriteID(id: recipeID) {
+			Recipe.deleteFavoriteID(id: recipeID)
+			recipe.remove(at: indexPath.row)
+			favoriteTableView.deleteRows(at: [indexPath], with: .automatic )
+			try? AppDelegate.viewContext.save()
+		} else {
+			print("erreur (Recipe.deleteFavoriteID)")
+		}
 	}
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		let label = UILabel()

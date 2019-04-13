@@ -59,6 +59,12 @@
       "idiom" : "ios-marketing",
       "filename" : "Icon.png",
       "scale" : "1x"
+    },
+    {
+      "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "Icon@1x.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

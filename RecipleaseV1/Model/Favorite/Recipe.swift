@@ -38,6 +38,7 @@ class Recipe: NSManagedObject {
 		guard let recipes = try? viewContext.fetch(request) else {return []}
 		return recipes
 	}
+	
 	// fonction qui delete une recette en fonction de son id
 	static func deleteFavoriteID(id: String, viewContext: NSManagedObjectContext = AppDelegate.viewContext) {
 		let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()

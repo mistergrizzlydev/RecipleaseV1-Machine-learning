@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuickLook" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Ta-14x">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuickLook" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Ta-14x">
                                 <rect key="frame" x="150" y="296" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="7fW-aB-oNR"/>
@@ -27,7 +27,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.55052280426025391" blue="0.068974398076534271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.83306562900000003" green="0.00094042241109999996" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jOZ-Ta-14x" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="7.5" id="WRG-iJ-b9U"/>
                             <constraint firstItem="jOZ-Ta-14x" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="7.5" id="g1f-kh-RiH"/>

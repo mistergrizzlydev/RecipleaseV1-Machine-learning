@@ -22,7 +22,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 	//========================================
 	// - Test URLRequest
 	
-	func testRequestRecipeDetailShouldPostFailedCallbackIfError () {
+	func testRequestRecipesDetailShouldPostFailedCallbackIfError () {
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
 		let urlService = UrlService(urlSession: urlSessionFake)
@@ -37,7 +37,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		wait(for: [expectation], timeout: 0.01)
 	}
 	
-	func testRequestRecipeShouldPostFailedcallbackIfErrorNoData () {// NoData
+	func testRequestRecipesShouldPostFailedcallbackIfErrorNoData () {// NoData
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -53,7 +53,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		wait(for: [expectation], timeout: 0.01)
 	}
 	
-	func testRequestRecipeShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
+	func testRequestRecipesShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -68,7 +68,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testRequestRecipeShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+	func testRequestRecipesShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -84,7 +84,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 	}
 	
 	// - Test Succes callback
-	func testRequestRecipeShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// No Error and CorrectData
+	func testRequestRecipesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// No Error and CorrectData
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -101,7 +101,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		wait(for: [expectation], timeout: 0.01)
 	}
 
-	func testRequestRecipeShouldPostFailedCallbackIfError () { // CallbackIfError
+	func testRequestRecipesShouldPostFailedCallbackIfError () { // CallbackIfError
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -116,7 +116,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testRequestRecipeShouldPostFailedCallbackIfErrorNoData () {// NoData
+	func testRequestRecipesShouldPostFailedCallbackIfErrorNoData () {// NoData
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -131,7 +131,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testRequestRecipeShouldPostFailedCallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
+	func testRequestRecipesShouldPostFailedCallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -146,7 +146,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testRequestRecipeShouldPostFailedCallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+	func testRequestRecipesShouldPostFailedCallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -161,7 +161,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testRequestRecipeShouldPostSuccessCallbackIfNoErrorAndNoData() {// Data correct and no error
+	func testRequestRecipesShouldPostSuccessCallbackIfNoErrorAndNoData() {// Data correct and no error
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -169,39 +169,18 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
 		urlService.requestRecipeDetail(recipeID: ""){ (success, data) in // changement de Queue
-			XCTAssertTrue(success)
-			XCTAssertNotNil(data)
-			XCTAssertEqual(data?.id , "The-BEST-Crockpot-Pot-Roast-2631670")
-			expectation.fulfill()
-		}
-		wait(for: [expectation], timeout: 0.01)
-	}
-	//========================================================================================
-	//========================================================================================
-	// MARK : - test request Recipe List
-	//========================================================================================
-	//========================================================================================
-	
-	
-	// - Test URLRequest
-	
-	func testRequestListRecipesShouldPostFailedCallbackIfError () {
-		// given
-		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
-		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
-		let urlService = UrlService(urlSession: urlSessionFake)
-		// When
-		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
-			//Then
-			XCTAssertFalse(success)
 			XCTAssertNil(data)
+			XCTAssertEqual(data?.id , nil)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
+
+	//========================================================================================
+	// MARK : - test request Recipe
+	//========================================================================================
 	
-	func testRequestListRecipesShouldPostFailedcallbackIfErrorNoData () {// NoData
+	func testGetRecipeDetailShouldPostFailedCallbackIfError () { // CallbackIfError
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -217,7 +196,7 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		wait(for: [expectation], timeout: 0.01)
 	}
 	
-	func testRequestListRecipesShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
+	func testGetRecipeDetailShouldPostFailedcallbackIfErrorNoData () {// NoData
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -225,14 +204,15 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
 		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
-		//Then
+			//Then
 			XCTAssertFalse(success)
 			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testRequestListRecipesShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+	
+	func testGetRecipeDetailShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -240,14 +220,31 @@ class RecipeAPIServiceTestCase: XCTestCase {
 		// When
 		let expectation = XCTestExpectation(description: "Wait for queue change ")
 		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
+			//Then
 			XCTAssertFalse(success)
 			XCTAssertNil(data)
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
+	func testGetRecipeDetailShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
+		// given
+		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
+		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
+		let urlService = UrlService(urlSession: urlSessionFake)
+		// When
+		let expectation = XCTestExpectation(description: "Wait for queue change ")
+		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
+			//Then
+			XCTAssertFalse(success)
+			XCTAssertNil(data)
+			expectation.fulfill()
+		}
+		wait(for: [expectation], timeout: 0.01)
+	}
+	
 	// - Test Succes callback
-	func testRequestListRecipesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// NoData
+	func testGetRecipeDetailShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// NoData
 		// given
 		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
 		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
@@ -258,84 +255,11 @@ class RecipeAPIServiceTestCase: XCTestCase {
 			XCTAssertTrue(success)
 			XCTAssertNotNil(data)
 			//XCTAssertEqual(currency?.rates["USD"], 1.131305)
+			//XCTAssertEqual(data?.name , "The BEST Crockpot Pot Roast")
 			expectation.fulfill()
 		}
 		wait(for: [expectation], timeout: 0.01)
 	}
-	func testRequestListRecipesCurrenciesShouldPostFailedCallbackIfError () { // CallbackIfError
-		// given
-		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
-		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
-		let urlService = UrlService(urlSession: urlSessionFake)
-		// When
-		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
-		//Then
-			XCTAssertFalse(success)
-			XCTAssertNil(data)
-			expectation.fulfill()
-		}
-		wait(for: [expectation], timeout: 0.01)
-	}
-	func testRequestListRecipesCurrenciesShouldPostFailedcallbackIfErrorNoData () {// NoData
-		// given
-		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
-		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
-		let urlService = UrlService(urlSession: urlSessionFake)
-		// When
-		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
-		//Then
-			XCTAssertFalse(success)
-			XCTAssertNil(data)
-			expectation.fulfill()
-		}
-		wait(for: [expectation], timeout: 0.01)
-	}
-	func testRequestListRecipesCurrenciesShouldPostFailedcallbackIfErrorIfIncorrectResponse() { // IfIncorrectResponse
-		// given
-		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
-		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
-		let urlService = UrlService(urlSession: urlSessionFake)
-		// When
-		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
-		//Then
-			XCTAssertFalse(success)
-			XCTAssertNil(data)
-			expectation.fulfill()
-		}
-		wait(for: [expectation], timeout: 0.01)
-	}
-	func testRequestListRecipesCurrenciesShouldPostFailedcallbackIfErrorIfIncorrectData() { // ErrorIfIncorrectData
-		// given
-		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
-		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
-		let urlService = UrlService(urlSession: urlSessionFake)
-		// When
-		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
-		// Then
-			XCTAssertFalse(success)
-			XCTAssertNil(data)
-			expectation.fulfill()
-		}
-		wait(for: [expectation], timeout: 0.01)
-	}
-	func testRequestListRecipesCurrenciesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {// Data correct and no error
-		// given
-		let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)// CallbackIfError
-		let urlSessionFake = UrlSessionFake(fakeResponse: fakeResponse)
-		let urlService = UrlService(urlSession: urlSessionFake)
-		// When
-		let expectation = XCTestExpectation(description: "Wait for queue change ")
-		urlService.requestListRecipes(recipeList: []){ (success, data) in // changement de Queue
-			XCTAssertTrue(success)
-			XCTAssertNotNil(data)
-			XCTAssertEqual(data?.matches[0].id, "The-BEST-Crockpot-Pot-Roast-2631670")
-			expectation.fulfill()
-		}
-		wait(for: [expectation], timeout: 0.01)
-	}
+
 }
 

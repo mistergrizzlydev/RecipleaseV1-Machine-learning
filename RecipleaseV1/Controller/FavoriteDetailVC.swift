@@ -20,19 +20,17 @@ class FavoriteDetailVC: UIViewController {
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
 	
 	var recipeDetail: Recipe?// reception du segue
-	var instructionTab = [String]()
+	var instructionTab = [Instruction]()
+	
 	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
-		print("unlike favorite")
 		guard let recipeID = recipeDetail?.id else {return}
 		if Recipe.checkFavoriteID(id: recipeID) {
 			Recipe.deleteFavoriteID(id: recipeID)
 			favoriteButton.tintColor = .white
 			try? AppDelegate.viewContext.save()
 		} else {
-			print("erreur (Recipe.checkFavoriteID)")
-			favoriteButton.tintColor = .red
+			favoriteButton.tintColor = .black
 		}
-		try? AppDelegate.viewContext.save()
 		navigationController?.popViewController(animated: true)
 	}
 	@IBAction func getRecipeDirection(_ sender: UIButton) {
@@ -50,19 +48,9 @@ class FavoriteDetailVC: UIViewController {
 		self.navigationItem.title = "Favorites"
 		designButton()
 		recipeDetailDisplay()
-		let test = recipeDetail?.ingredients?.allObjects as? [Ingredient]
-		print(test?.description as Any)
-
-		
-
-		print(instructionTab.description)
-		//print(instructionsEntityAllObjects as? String)
 		instructionsTableView.dataSource = self
-		favoriteButton.tintColor = .red
-	}
-	override func viewWillAppear(_ animated: Bool) {
+		favoriteButton.tintColor = .black
 
-		// cf bouton favoris
 	}
 	func recipeDetailDisplay() {
 		guard let name = recipeDetail?.name else {return}
@@ -71,24 +59,50 @@ class FavoriteDetailVC: UIViewController {
 		guard let timeToInt = Int(time) else {return}
 		timeLabel.text = String(timeToInt.convertIntToTime)
 		guard let rate = recipeDetail?.rate else {return}
-		rateLabel.text = rate + " / 5 "
+		rateLabel.text = rate + "/5"
 		guard let data = recipeDetail?.imageData else {return}
 		imageRecipe.image = UIImage(data: data)
 	}
 }
 extension FavoriteDetailVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return instructionTab.count
+		guard let recipeInstructions = recipeDetail?.instructions?.allObjects else {return 0}
+		return recipeInstructions.count
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteIngredientDetailCell", for: indexPath)
-		let instructionsEntityAllObjects = recipeDetail?.instructions?.allObjects as? [Instruction]
-		let instructions = instructionsEntityAllObjects?.map({$0.name ?? ""}) ?? []
-		instructionTab = instructions
-		let instructionIndex = instructionTab[indexPath.row]
-		cell.textLabel?.text = instructionIndex.firstUppercased
-		print("recipe ID true")
 		
+	 let instructionsTab = Instruction.fetchAll()
+	//	print(instructionTab[indexPath.row].description)
+		print("instructionsTab\(instructionsTab.description)")
+		let test = instructionsTab[indexPath.row]
+		for i in instructionsTab {
+			print(i.name)
+		}
+		cell.textLabel?.text = test.name
+//		for i in instructionsTab[indexPath.row] {
+//			print(i)
+//
+//		}
+//		let instructions = instructionsTab.map({$0 ?? ""}) ?? []
+//		print("=instructions.count :\(instructions.count)===============================")
+//		print("=instructions :\(instructions)===============================")
+	
+		//let resultMatches = instructionsTab[indexPath.row]
+		
+//
+//		let ingredientsString = ingredients.joined(separator: ", ")
+		//print("instructions \(ingredientsString))")
+	
+//		if  ingredientLines = instructions[indexPath.row]  {
+//			cell.textLabel!.text = "\(String(describing: ingredientLines))"
+//		}
+//		let recipeEntityAllObjects = recipeEntity.ingredients?.allObjects as? [Ingredient]
+//		let ingredients = recipeEntityAllObjects?.map({$0.name ?? ""}) ?? []
+//
+		
+		
+		print("recipe ID true")
 		return cell
 	}
 }

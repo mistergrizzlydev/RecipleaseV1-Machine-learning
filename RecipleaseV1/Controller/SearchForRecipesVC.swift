@@ -9,58 +9,21 @@
 import UIKit
 
 class SearchForRecipesVC: UIViewController {
-	
+
 	//===================================
 	// -MARK : OUTLETS
 	//===================================
 	@IBOutlet weak var searchIngredientsTextField: UITextField!
 	@IBOutlet weak var addButtonOutlet: UIButton!
+	@IBOutlet weak var addLargeButtonOutlet: UIButton!
 	@IBOutlet weak var clearButtonOutlet: UIButton!
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	@IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
 	@IBOutlet weak var searchForRecipesButton: UIButton!
-
-	@IBOutlet weak var recognizer: UIView!
 	let recipeAPIService = RecipeAPIService()
 	var ingredientList = [String]()
 	var matches: [Match]!
-	func addIngredientToDisplay() {
-		if searchIngredientsTextField.text == "" {
-			presentAlert(title: "An Omission ?", message: "You must enter an ingredient ! ")
-			return
-		} else {
-			guard let userIngredients = searchIngredientsTextField.text?.changeToArray else {return}
-			for i in userIngredients {
-				ingredientList.append(i.firstUppercased)
-			}
-			ingredientsTableView.reloadData()
-			hideKeyboard()
-		}
-	}
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "segueRecipesToDisplay" {
-			if let matches = matches {
-				let successVC = segue.destination as! ResultListRecipeVC
-				successVC.matches = matches
-			}
-		}
-	}
-	
-	func requestSearchForRecipes()  {
-		//toggleActivityIndicator(shown: true)
-		print("requestSearchForRecipes")
-		recipeAPIService.requestListRecipes(recipeList: ingredientList) { (success, dataYum) in
-			if success {
-				guard let dataYum = dataYum else {return}
-				self.matches = dataYum.matches
-				self.performSegue(withIdentifier: "segueRecipesToDisplay", sender: nil)
-			} else {
-				self.presentAlert(title: "No matches", message: "You must enter an ingredient ! ")
-				self.toggleActivityIndicator(shown: false)
-			}
-		}
-	}
 	
 	//===================================
 	// -MARK : IBACTION
@@ -83,7 +46,48 @@ class SearchForRecipesVC: UIViewController {
 		toggleActivityIndicator(shown: true)
 		requestSearchForRecipes()
 	}
+	func addIngredientToDisplay() {
+		if searchIngredientsTextField.text == "" {
+			presentAlert(title: "An Omission ?", message: "You must enter an ingredient ! ")
+			return
+		} else {
+			guard let userIngredients = searchIngredientsTextField.text?.changeToArray else {return}
+			for i in userIngredients {
+				ingredientList.append(i.firstUppercased)
+			}
+			ingredientsTableView.reloadData()
+			hideKeyboard()
+		}
+	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "segueRecipesToDisplay" {
+			if let matches = matches {
+				let successVC = segue.destination as! ResultListRecipeVC
+				successVC.matches = matches
+			}
+		}
+		if segue.identifier == "segueIngredientToDisplayRecognizerVC" {
+			let successVC = segue.destination as! RecognizerVC
+			successVC.userTabIngredientRecognizer = ingredientList
+		}
+	}
+	func requestSearchForRecipes()  {
+		//toggleActivityIndicator(shown: true)
+		print("requestSearchForRecipes")
+		recipeAPIService.requestListRecipes(recipeList: ingredientList) { (success, dataYum) in
+			if success {
+				guard let dataYum = dataYum else {return}
+				self.matches = dataYum.matches
+				self.performSegue(withIdentifier: "segueRecipesToDisplay", sender: nil)
+			} else {
+				self.presentAlert(title: "No matches", message: "You must enter an ingredient ! ")
+				self.toggleActivityIndicator(shown: false)
+			}
+		}
+	}
+	
+
 	//================================
 	// MARK : - Animation
 	//================================
@@ -115,9 +119,10 @@ class SearchForRecipesVC: UIViewController {
 		super.viewDidLoad()
 		designItemBarNavigation()
 		ingredientsTableView.dataSource = self
-		
 		createToolbar()
+		
 		addButtonOutlet.layer.cornerRadius = 5
+		addLargeButtonOutlet.layer.cornerRadius = 5
 		clearButtonOutlet.layer.cornerRadius = 5
 		searchForRecipesButton.layer.cornerRadius = 5
 	}
@@ -151,7 +156,7 @@ extension SearchForRecipesVC : UITextFieldDelegate {
 	@IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
 		hideKeyboard()
 	}
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool { // delegate added with the storyboard
 		print("Return Pressed")
 		addIngredientToDisplay()
 		hideKeyboard()

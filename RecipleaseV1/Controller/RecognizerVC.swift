@@ -67,11 +67,12 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 		guard let observations = request.results as? [VNClassificationObservation], let bestGuess = observations.first else {return}
 		// Vision utilise le thread sur lequel il est programmé
 		DispatchQueue.main.async { // le code utilisé ici ne sera fait que sur le thread graphique pendant que la capture tourne en tache de fond
-			if bestGuess.confidence > 0.6 {
+			if bestGuess.confidence > 0.90 && bestGuess.identifier != "" { 
 				self.ui_Label.text = bestGuess.identifier
-				//self.userTabIngredientRecognizer.append(bestGuess.identifier)
-				print("Vous avez identifié : \(bestGuess.identifier)")
+			
 				self.ingredientRecognized = bestGuess.identifier
+			} else {
+				self.ui_Label.text = "wait for research..."
 			}
 		}
 	}
@@ -79,12 +80,11 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 		addIngredientRecognized()
 	}
 	@IBAction func terminateIngredientListRecognizer(_ sender: UIButton) {
-		//userTabIngredientRecognizer.removeAll()
 		captureSession.stopRunning()
-		//navigationController?.popViewController(animated: false)
+		//navigationController?.popViewController(animated: true)
+		//dismiss(animated: true, completion: nil)
 	}
 	func addIngredientRecognized() {
-		//	print(guess.identifier)
 		print("addIngredientRecognized()")
 		userTabIngredientRecognizer.append(ingredientRecognized)
 		recogTableView.reloadData()
@@ -121,6 +121,7 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 		super.viewDidLoad()
 		designItemBarNavigation()
 		designButton()
+		ui_Label.text = "wait for research..."
 		recogTableView.dataSource = self
 		recogTableView.backgroundColor = UIColor.clear
 		recognizerView.backgroundColor = UIColor.clear

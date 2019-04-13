@@ -12,7 +12,7 @@ import XCTest
 import CoreData
 @testable import RecipleaseV1
 
-class CoreDataTestCase: XCTestCase {
+class IngredientCoreDataTestCase: XCTestCase {
 	//MARK: - Properties
 	lazy var mockContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "Reciplease")
@@ -23,22 +23,28 @@ class CoreDataTestCase: XCTestCase {
 		return container
 	}()
 	//MARK: - Helper Methods
-	private func insertRecipe(into managedObjectContext: NSManagedObjectContext) {
-		let recipeID = Instruction(context: managedObjectContext)
-		recipeID.id = "The-BEST-Crockpot-Pot-Roast-2631670"
+	private func insertIngredient(into managedObjectContext: NSManagedObjectContext) {
+		let ingredients = Ingredient(context: managedObjectContext)
+		ingredients.name = ""
 		
 	}
 	//MARK: - Unit Tests
 	func testInsertManyRecipesInPersistentContainer() {
 		for _ in 0 ..< 100000 {
-			insertRecipe(into: mockContainer.newBackgroundContext())
+			insertIngredient(into: mockContainer.newBackgroundContext())
 		}
 		XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
 	}
 	func testDeleteAllItemsInPersistentContainer() {
-		insertRecipe(into: mockContainer.viewContext)
+		insertIngredient(into: mockContainer.viewContext)
 		try? mockContainer.viewContext.save()
-		Instruction.deleteAll()
-		XCTAssertEqual(Instruction.fetchAll(viewContext: mockContainer.viewContext ), [])
+		Ingredient.deleteAll()
+		XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext ), [])
+	}
+	func testfetchAllIngredientInPersistentContainer () {
+		insertIngredient(into: mockContainer.viewContext)
+		try? mockContainer.viewContext.save()
+		XCTAssertEqual(Recipe.fetchAll(viewContext: mockContainer.viewContext ), Ingredient.all)
 	}
 }
+

@@ -19,5 +19,11 @@ class Instruction: NSManagedObject {
 		guard let instructions = try? AppDelegate.viewContext.fetch(request) else {return []}
 		return instructions
 	}
+	// function to deleta all favorites
+	static func deleteAll() {
+		let deleteRequest = NSBatchDeleteRequest(fetchRequest: Instruction.fetchRequest())// le batch c'est pour tout supprimer
+		let _ = try? AppDelegate.viewContext.execute(deleteRequest)
+		// cf TP core data- git core data test
+	}
 	
 }

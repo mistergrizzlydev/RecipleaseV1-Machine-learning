@@ -18,8 +18,10 @@ class RecipeVC: UIViewController {
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
-	var recipe = Recipe.fetchAll()
-	var matches: [Match]!
+	//var recipe = Recipe.fetchAll()
+
+	var ingredients = [String]() // test 1
+	//var instructionsDetail = [String]()
 	var recipeDetailAPIResult: RecipeDetailAPIResult?
 	
 	// check si la recette est dans core data grace à l'id si oui je supprime la recette si non je l'enregistre. + modifier l'apparence du bouton
@@ -37,33 +39,44 @@ class RecipeVC: UIViewController {
 		} else {
 			print("save favorite")
 			saveFavorite()
-			favoriteButton.tintColor = .red
+			favoriteButton.tintColor = .black
 			try? AppDelegate.viewContext.save()
 		}
 	}
 	func checkToColorFavoriteButton() {
 		guard let recipeDetail = recipeDetailAPIResult else {return}
 		if Recipe.checkFavoriteID(id: (recipeDetail.id)) {
-			favoriteButton.tintColor = .red
+			favoriteButton.tintColor = .black
 		}
 	}
 	func checkIngredientsEntity(recipeEntity: Recipe) {
-		guard let matches = matches else {return}
 		let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
-		for ingredients in matches[0].ingredients { // attention
-			ingredientEntity.name = ingredients
-			ingredientEntity.recipe = recipeEntity
-		}
+		print("saveIngredients \(ingredients)")
+		let ingredientsDetail = ingredients.joined(separator: ", ")
+		ingredientEntity.name = ingredientsDetail
+		ingredientEntity.recipe = recipeEntity
 	}
 	func checkInstructionsEntity(recipeEntity: Recipe) {
-		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
-		 // création de l'objet instructions
 		let instructionsEntity = Instruction(context: AppDelegate.viewContext) // création de l'objet instructions
-		for instructions in recipeDetailAPiResult.ingredientLines {
-			print("test instrauction : \(instructions)")
-			instructionsEntity.name = instructions
-			instructionsEntity.recipe = recipeEntity
+		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
+		let instructionsDetail = recipeDetailAPiResult.ingredientLines
+		for i in instructionsDetail {
+			instructionsEntity.name = i
 		}
+		let test = instructionsDetail.map({$0.firstUppercased})
+		let instructions = instructionsDetail.joined(separator: " ,")
+		//guard let test = instructions else {return}
+		
+		print("=instructionsdetail ===============\(instructionsDetail)")
+		print("=instructions ===============\(instructions)")
+//		print("checkInstruction : \(instructionsDetail)")
+//		print("checkInstruction : \(instructionsDetail.count)")
+//		let ingredients = instructionsDetail.map({$0.firstUppercased ?? ""}) ?? []
+//		//instructionsEntity.name = instructionsDetail
+//		print("instructionsEntity.name : \(instructionsEntity.name?.firstUppercased)")
+//		print("instructionsEntity.name : \(instructionsEntity.name?.count)")
+//		//print("ingredientsDetail : \(ingredientsDetail.count)")
+		instructionsEntity.recipe = recipeEntity
 	}
 	
 	// launch URL
@@ -111,10 +124,11 @@ class RecipeVC: UIViewController {
 		checkToColorFavoriteButton()
 	}
 	func recipeDetailDisplay() {
-		recipeName.text =  recipeDetailAPIResult?.name
-		rateLabel.text = String("\((recipeDetailAPIResult!.rating))/5")
-		timeLabel.text = String("\((recipeDetailAPIResult!.totalTimeInSeconds)/60) mn")
-		guard let image = recipeDetailAPIResult?.images[0].hostedLargeUrl else {return}
+		guard let recipeDetailAPI = recipeDetailAPIResult else {return}
+		recipeName.text =  recipeDetailAPI.name
+		rateLabel.text = String("\((recipeDetailAPI.rating))/5")
+		timeLabel.text = String("\((recipeDetailAPI.totalTimeInSeconds.convertIntToTime))")
+		guard let image = recipeDetailAPI.images[0].hostedLargeUrl else {return}
 		if let url = URL(string: image) {
 			if let data = try? Data(contentsOf: url as URL) {
 				print(data)

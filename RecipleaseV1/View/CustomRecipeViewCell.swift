@@ -29,7 +29,8 @@ class CustomRecipeViewCell: UITableViewCell {
 			let ingredients = recipe.ingredients.map({$0.firstUppercased})
 			let ingredientsString = ingredients.joined(separator: ", ")
 			ingredientsLabel.text = ingredientsString
-			let images = recipe.smallImageUrls![0]
+			guard let image = recipe.smallImageUrls else {return}
+			let images = image[0]
 			if let url = URL(string: images) {
 				if let data = try? Data(contentsOf: url as URL) {
 					imageRecipe.image = UIImage(data: data as Data)
@@ -42,17 +43,14 @@ class CustomRecipeViewCell: UITableViewCell {
 	var recipeEntity:Recipe! {
 		didSet {
 			recipeLabel.text = recipeEntity.name
-			guard let time = Int(recipeEntity.totalTime!) else {return}
+			guard let time = Int(recipeEntity.totalTime ?? "") else {return}
 			timeLabel.text = "\(time.convertIntToTime)" // gerer les heures // minutes - > extension de string
 			guard let rate = recipeEntity.rate else {return}
 			rateLabel.text = "\(rate) / 5 "
-			//===========================================================
 			let recipeEntityAllObjects = recipeEntity.ingredients?.allObjects as? [Ingredient]
 			let ingredients = recipeEntityAllObjects?.map({$0.name ?? ""}) ?? []
 			let ingredientsString = ingredients.joined(separator: ", ")
 			ingredientsLabel?.text = "\(ingredientsString.firstUppercased)"
-			//===========================================================
-			
 			guard let data = recipeEntity.imageData else {return}
 			imageRecipe.image = UIImage(data: data)
 		}
@@ -66,8 +64,6 @@ class CustomRecipeViewCell: UITableViewCell {
 	}
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-    
 }
