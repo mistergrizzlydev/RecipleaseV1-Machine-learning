@@ -5,7 +5,7 @@ Langage : Swift 5
 IDE : Xcode 10.2  
 iOS : 12.2  
 Compatible : Iphone 5S et +  
-Version : 1.1    
+Version : 1    
 Modèle de données : MVC
 Technologies : CoreData, Alamofire, CoreML, Vision
 Orientation device : portrait
