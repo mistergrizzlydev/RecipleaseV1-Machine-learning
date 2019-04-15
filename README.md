@@ -21,13 +21,10 @@ L'application Reciplease permet de saisir des ingrédients via des un champ text
 
 ## Quelques photos de l'application 
 
-![enter image description here](https://picasaweb.google.com/116314767098125820688/6680120974407558113#6680120976819159186)
-
-![enter image description here](https://picasaweb.google.com/116314767098125820688/6680121159082801425#6680121163415269266)
-
-![enter image description here](https://picasaweb.google.com/116314767098125820688/6680121282652459169#6680121283176732850)
-
-![enter image description here](https://picasaweb.google.com/116314767098125820688/6680121500565256945#6680121497926007954)
+![enter image description here](https://lh3.googleusercontent.com/1QCw3JsQttTw7LDKY5ss0_tkOyqMiMbIVE8H3dvzWXGISTmaL6Wf1AxJ4KvDY255AxSq0UQ0zvI9)
+![enter image description here](https://lh3.googleusercontent.com/C3tYwZGgCxKjtx3hIyxhRdyDSTwRzgxi0-ewAIbMrXgLzpwAKT85VTvMpt31QmFKB8Scjk5nw_UZ)
+![enter image description here](https://lh3.googleusercontent.com/hhf-e3Yvb3mtiSVha8RTf5DUEIAAnEUGn4nl_te3rqZ4zkn14okGVJkZzT6EXYmadjnKDRS6aRbu)
+![enter image description here](https://lh3.googleusercontent.com/eXGPGR_YktPcEKMxf5AWbt6_b-onbrXKkNyIem-dW31jI5dtOmTjThg046DzhmvoUl0KAEA1s37E)
 
 ## -----------------------------------------------
 
