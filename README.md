@@ -1,7 +1,7 @@
 # Bienvenue sur Reciplease!
 
 Date : Avril 2019  
-Langage : Swift 4+  
+Langage : Swift 5  
 IDE : Xcode 10.2  
 iOS : 12.2  
 Compatible : Iphone 5S et +  
