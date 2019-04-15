@@ -6,7 +6,8 @@ IDE : Xcode 10.2
 iOS : 12.2  
 Compatible : Iphone 5S et +  
 Version : 1.1    
-Modèle de données : MVC  
+Modèle de données : MVC
+Technologies : CoreData, Alamofire, CoreML, Vision
 Orientation device : portrait
 Contexte : Application réalisée dans le cadre du parcours développeur iOS d'OpenClassRooms  
 https://openclassrooms.com/fr/paths/69-developpeur-dapplication-ios  
@@ -15,7 +16,7 @@ Développeur : Vincent Boulanger
 
 ## Le concept de Reciplease
 
-L'application Reciplease permet de saisir des ingrédients via des un champ texte et/ou d’en reconnaître via la reconnaissance d’images. Ces ingrédients sont envoyés vers l’API Yummly. Une liste de recettes de cuisine s’affichent enseuite. Vous pouvez ensuite consulter chaque recette séparément et les enregistrer dans votre téléphone afin de pouvoir les consulterez sans connexion.
+L'application Reciplease permet de saisir des ingrédients via des un champ texte et/ou d’en reconnaître via la reconnaissance d’images. Ces ingrédients sont envoyés vers l’API Yummly grâce au framework Alamofire. Une liste de recettes de cuisine s’affichent. Vous pouvez ensuite consulter le détail de chaque recette sur le site internet sur laquelle elle est publié. Et enfin les enregistrer dans votre téléphone en cliquant sur le coeur afin de les ajouter à vos favoris et pouvoir les consulter hors - connexion. 
 
 
 ## Quelques photos de l'application 
@@ -32,9 +33,15 @@ L'application Reciplease permet de saisir des ingrédients via des un champ text
 
 Ajout d'un controller permettant la reconnaissance d'image via CoreML and Vision.   
 Ci-dessous un lien vers une vidéo de démonstration :  
-https://www.youtube.com/embed/Y1k7V92xhcA   
-![enter image description here](https://lh3.googleusercontent.com/ss0LpM1kjv8JbvgCrbSWrErL7izH0GMsQqsTirKD7uBNkFx_zpzDqLiWwgZdxNoP4OMnSFOJbeF_)
-![enter image description here](https://lh3.googleusercontent.com/8vZX3Q5xvKe-ePRmTfyrLgL4af-vFshMQqzfZhR_kYi90ipdrtU4zVdHG6IQD4yE44GsOLCCFMB8)
+https://www.youtube.com/embed/Y1k7V92xhcA
+
+![enter image description here](https://picasaweb.google.com/116314767098125820688/6680120974407558113#6680120976819159186)
+
+![enter image description here](https://picasaweb.google.com/116314767098125820688/6680121159082801425#6680121163415269266)
+
+![enter image description here](https://picasaweb.google.com/116314767098125820688/6680121282652459169#6680121283176732850)
+
+![enter image description here](https://picasaweb.google.com/116314767098125820688/6680121500565256945#6680121497926007954)
 
 
 
