@@ -34,12 +34,6 @@ https://youtu.be/fPBvPTsFwPE
 ## -----------------------------------------------
 
 
-## Fonctionnalités supplémentaires: Reciplease
-
-Ajout d'un controller permettant la reconnaissance d'image via CoreML and Vision.   
-Ci-dessous un lien vers une vidéo de démonstration :  
-https://www.youtube.com/embed/Y1k7V92xhcA
-
 
 
 
