@@ -22,9 +22,6 @@ L'application Reciplease permet de saisir des ingrédients via des un champ text
 
 https://youtu.be/fPBvPTsFwPE
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fPBvPTsFwPE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
 ## Quelques photos de l'application 
 
 
