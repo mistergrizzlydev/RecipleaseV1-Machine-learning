@@ -17,7 +17,5 @@ class RecipesSession: UrlYummlyConstructProtocol {
 			completionHandler(responseData)
 		}
 	}// en gros quand j'appelle request j'ai dans mon callback la reponse d'alamofire
-	
-	
 }
 

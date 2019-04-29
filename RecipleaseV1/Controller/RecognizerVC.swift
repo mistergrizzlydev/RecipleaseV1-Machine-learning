@@ -15,7 +15,6 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	@IBOutlet weak var recognizerView: UIView!
 	@IBOutlet weak var ui_Label: UILabel!
 	@IBOutlet weak var recogTableView: UITableView!
-	
 	@IBOutlet weak var newIngredientButtonOutlet: UIButton!
 	@IBOutlet weak var finishButtonOutlet: UIButton!
 	
@@ -24,7 +23,7 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	var ingredientRecognized = ""
 	
 	lazy var imageRecognizerRequest: VNRequest = { // propriété calculé de type lazy, chargée uniquement lorsque la variable est appelée et réutilisée par la suite sans être de nouveau chargée
-		let model = try! VNCoreMLModel(for: FruitAndVegetables().model) // on charge le fichier datamodel InceptionV3
+		let model = try! VNCoreMLModel(for: FruitAndVegetables().model) // on charge le fichier datamodel
 		let request = VNCoreMLRequest(model: model, completionHandler: self.imageRecognizerHandler) // il charge le model et lance le completion handler de la fonction ci dessous
 		return request
 	}()
@@ -60,8 +59,6 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	
 	func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) { // quand le processeur est surchargé. Il perd des frames. Permet de prévenir l'utilisateur qu'il y a un ralentissement
 	}
-	
-
 	func imageRecognizerHandler(request:VNRequest, error: Error?) {
 		// si je n'ai pas les bonnes observations au bon format et si il n'y a pas un élément à l'intérieur(best  guesss.first)
 		guard let observations = request.results as? [VNClassificationObservation], let bestGuess = observations.first else {return}
@@ -81,8 +78,6 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	}
 	@IBAction func terminateIngredientListRecognizer(_ sender: UIButton) {
 		captureSession.stopRunning()
-		//navigationController?.popViewController(animated: true)
-		//dismiss(animated: true, completion: nil)
 	}
 	func addIngredientRecognized() {
 		print("addIngredientRecognized()")
@@ -127,12 +122,6 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 		recognizerView.backgroundColor = UIColor.clear
 		recognizeSession()
 	}
-	override func viewWillAppear(_ animated: Bool) {
-		//recogTableView.reloadData()
-		
-	}
-	
-	
 }
 extension RecognizerVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

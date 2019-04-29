@@ -1,3 +1,4 @@
-import UIKit
-
-var str = "Hello, playground"
+//import CreateMLUI
+//
+//let builder = MLImageClassifierBuilder()
+//builder.showInLiveView()

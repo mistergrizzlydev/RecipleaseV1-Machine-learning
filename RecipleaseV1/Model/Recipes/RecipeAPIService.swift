@@ -19,9 +19,10 @@ class RecipeAPIService{
 	// MARK : - construct URL one recipe
 	//========================================
 	func urlConstructRecipeDetail(recipeID: String) -> String {
+		print("\(recipesSession.urlStringApiDetail)\(recipeID)?_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)")
 		return "\(recipesSession.urlStringApiDetail)\(recipeID)?_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)"
 	}
-	
+
 	func requestRecipeDetail(recipeID: String, completionHandler: @escaping(Bool, RecipeDetailAPIResult?) -> Void) {
 		let url = urlConstructRecipeDetail(recipeID: recipeID)
 		print(url)
@@ -42,7 +43,9 @@ class RecipeAPIService{
 			print("recipes.name: \(recipes)")
 			completionHandler(true, recipes)
 		}
+		
 	}
+	
 	//========================================
 	// MARK : - construct URL list of recipes
 	//========================================
@@ -51,7 +54,6 @@ class RecipeAPIService{
 		for i in recipeList {
 			ingredient += "&allowedIngredient[]=\(i.firstLowerCased)"
 		}
-		print("\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)")
 		return "\(recipesSession.urlStringApi)_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)\(ingredient)"
 	}
 	

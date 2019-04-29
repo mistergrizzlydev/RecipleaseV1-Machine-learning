@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-	var changeToArray: [String] { // transform a string to string array
+	var convertToArray: [String] { // transform a string to string array
 		get {
 			return self.components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter {!$0.isEmpty }
 		}

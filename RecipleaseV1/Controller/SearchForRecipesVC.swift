@@ -51,7 +51,7 @@ class SearchForRecipesVC: UIViewController {
 			presentAlert(title: "An Omission ?", message: "You must enter an ingredient ! ")
 			return
 		} else {
-			guard let userIngredients = searchIngredientsTextField.text?.changeToArray else {return}
+			guard let userIngredients = searchIngredientsTextField.text?.convertToArray else {return}
 			for i in userIngredients {
 				ingredientList.append(i.firstUppercased)
 			}
@@ -107,6 +107,7 @@ class SearchForRecipesVC: UIViewController {
 		toolBar.setItems ([searchRecipeButton], animated: false)
 		toolBar.isUserInteractionEnabled = true
 		searchIngredientsTextField.inputAccessoryView = toolBar
+		hideKeyboard()
 	}
 	func designItemBarNavigation() {
 		self.navigationItem.title = "Reciplease"
@@ -120,7 +121,6 @@ class SearchForRecipesVC: UIViewController {
 		designItemBarNavigation()
 		ingredientsTableView.dataSource = self
 		createToolbar()
-		
 		addButtonOutlet.layer.cornerRadius = 5
 		addLargeButtonOutlet.layer.cornerRadius = 5
 		clearButtonOutlet.layer.cornerRadius = 5
@@ -135,7 +135,6 @@ extension SearchForRecipesVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return ingredientList.count
 	}
-	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
 		let recipe = ingredientList[indexPath.row]

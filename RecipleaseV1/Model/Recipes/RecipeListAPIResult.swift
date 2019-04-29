@@ -12,7 +12,6 @@ struct RecipeListAPIResult: Decodable {
 	let matches: [Match]
 	let totalMatchCount: Int
 }
-
 struct Match: Decodable {
 	let id: String
 	let recipeName: String

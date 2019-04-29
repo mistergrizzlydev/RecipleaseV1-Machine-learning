@@ -45,8 +45,7 @@ class Recipe: NSManagedObject {
 		request.predicate = NSPredicate(format: "id == %@", id)
 		guard let recipes = try? viewContext.fetch(request) else {return} // je récupère un tableau avec une seule valeur  avec le filtre que j'ai appliqué ligne 30. on execute la requete avec le predicate
 		guard let recipe = recipes.first else {return}// on verifie qu'il contient bien une entrée et si oui on la met dans "recipe"
-		viewContext.delete(recipe) // on delete dans CoreData
-		 /// on sauve l'opération dans CoreData
+		viewContext.delete(recipe) // on delete dans CoreData la première valeur
 	}
 	// function to deleta all favorites
 	static func deleteAll() {

@@ -13,7 +13,6 @@ class ResultListRecipeVC: UIViewController {
 	var matches: [Match]?
 	var ingredients = [String]()
 	
-	
 	func designItemBarNavigation() {
 		self.navigationItem.title = "Reciplease"
 		UINavigationBar.appearance().tintColor = .white
@@ -47,8 +46,7 @@ extension ResultListRecipeVC: UITableViewDelegate {
 				print("test success")
 				guard let recipe = recipe else {return}
 				guard let ingredients = self.matches?[indexPath.row].ingredients else {return}
-				self.ingredients = ingredients // deballer
-				//self.instructions = ( )
+				self.ingredients = ingredients
 				self.performSegue(withIdentifier: "SegueRecipeToSuccess", sender: recipe)
 			} else {
 				print("request error")
@@ -78,7 +76,6 @@ extension ResultListRecipeVC: UITableViewDataSource {
 		guard let matches = matches else {return 0}
 		return matches.count
 	}
-	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {return UITableViewCell()}
 		let resultMatches = matches![indexPath.row]

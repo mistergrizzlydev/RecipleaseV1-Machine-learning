@@ -18,9 +18,7 @@ class FavoriteDetailVC: UIViewController {
 	@IBOutlet weak var instructionsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
-	
 	var recipeDetail: Recipe?// reception du segue
-	var instructionTab = [Instruction]()
 	
 	@IBAction func favoriteButtonAction(_ sender: UIBarButtonItem) {
 		guard let recipeID = recipeDetail?.id else {return}
@@ -29,7 +27,7 @@ class FavoriteDetailVC: UIViewController {
 			favoriteButton.tintColor = .white
 			try? AppDelegate.viewContext.save()
 		} else {
-			favoriteButton.tintColor = .black
+			favoriteButton.tintColor = .red
 		}
 		navigationController?.popViewController(animated: true)
 	}
@@ -49,7 +47,7 @@ class FavoriteDetailVC: UIViewController {
 		designButton()
 		recipeDetailDisplay()
 		instructionsTableView.dataSource = self
-		favoriteButton.tintColor = .black
+		favoriteButton.tintColor = .red
 
 	}
 	func recipeDetailDisplay() {
@@ -63,46 +61,21 @@ class FavoriteDetailVC: UIViewController {
 		guard let data = recipeDetail?.imageData else {return}
 		imageRecipe.image = UIImage(data: data)
 	}
+	
 }
 extension FavoriteDetailVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let recipeInstructions = recipeDetail?.instructions?.allObjects else {return 0}
+		guard let recipeInstructions = recipeDetail?.instructions?.allObjects as? [Instruction] else {return 0}
 		return recipeInstructions.count
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteIngredientDetailCell", for: indexPath)
-		
-	 let instructionsTab = Instruction.fetchAll()
-	//	print(instructionTab[indexPath.row].description)
-		print("instructionsTab\(instructionsTab.description)")
-		let test = instructionsTab[indexPath.row]
-		for i in instructionsTab {
-			print(i.name)
-		}
-		cell.textLabel?.text = test.name
-//		for i in instructionsTab[indexPath.row] {
-//			print(i)
-//
-//		}
-//		let instructions = instructionsTab.map({$0 ?? ""}) ?? []
-//		print("=instructions.count :\(instructions.count)===============================")
-//		print("=instructions :\(instructions)===============================")
-	
-		//let resultMatches = instructionsTab[indexPath.row]
-		
-//
-//		let ingredientsString = ingredients.joined(separator: ", ")
-		//print("instructions \(ingredientsString))")
-	
-//		if  ingredientLines = instructions[indexPath.row]  {
-//			cell.textLabel!.text = "\(String(describing: ingredientLines))"
-//		}
-//		let recipeEntityAllObjects = recipeEntity.ingredients?.allObjects as? [Ingredient]
-//		let ingredients = recipeEntityAllObjects?.map({$0.name ?? ""}) ?? []
-//
-		
-		
-		print("recipe ID true")
+		guard let recipeDetail = recipeDetail else {return cell}
+		guard let instruct = recipeDetail.instructions else {return cell}
+		guard let allInstructions = instruct.allObjects as? [Instruction] else {return cell}
+		let instructions = allInstructions[indexPath.row]
+		guard let name = instructions.name else {return cell}
+		cell.textLabel?.text = name
 		return cell
 	}
 }

@@ -18,10 +18,8 @@ class RecipeVC: UIViewController {
 	@IBOutlet weak var ingredientsTableView: UITableView!
 	@IBOutlet weak var getDirections: UIButton!
 	@IBOutlet weak var favoriteButton: UIBarButtonItem!
-	//var recipe = Recipe.fetchAll()
 
-	var ingredients = [String]() // test 1
-	//var instructionsDetail = [String]()
+	var ingredients = [String]()// segue reception
 	var recipeDetailAPIResult: RecipeDetailAPIResult?
 	
 	// check si la recette est dans core data grace à l'id si oui je supprime la recette si non je l'enregistre. + modifier l'apparence du bouton
@@ -30,6 +28,7 @@ class RecipeVC: UIViewController {
 		checkFavoriteID()
 	}
 	func checkFavoriteID() {
+		
 		guard let recipeID = recipeDetailAPIResult?.id else {return}
 		if Recipe.checkFavoriteID(id: (recipeID)) {
 			print("delete favorite")
@@ -39,44 +38,33 @@ class RecipeVC: UIViewController {
 		} else {
 			print("save favorite")
 			saveFavorite()
-			favoriteButton.tintColor = .black
+			favoriteButton.tintColor = .red
 			try? AppDelegate.viewContext.save()
 		}
 	}
 	func checkToColorFavoriteButton() {
 		guard let recipeDetail = recipeDetailAPIResult else {return}
 		if Recipe.checkFavoriteID(id: (recipeDetail.id)) {
-			favoriteButton.tintColor = .black
+			favoriteButton.tintColor = .red
+		} else {
+			favoriteButton.tintColor = .white
 		}
 	}
 	func checkIngredientsEntity(recipeEntity: Recipe) {
-		let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
-		print("saveIngredients \(ingredients)")
-		let ingredientsDetail = ingredients.joined(separator: ", ")
-		ingredientEntity.name = ingredientsDetail
-		ingredientEntity.recipe = recipeEntity
+		for ingredient in ingredients {
+			let ingredientEntity = Ingredient(context: AppDelegate.viewContext)
+			ingredientEntity.name = ingredient
+			ingredientEntity.recipe = recipeEntity
+		}
 	}
 	func checkInstructionsEntity(recipeEntity: Recipe) {
-		let instructionsEntity = Instruction(context: AppDelegate.viewContext) // création de l'objet instructions
 		guard let recipeDetailAPiResult = recipeDetailAPIResult else {return}
 		let instructionsDetail = recipeDetailAPiResult.ingredientLines
-		for i in instructionsDetail {
-			instructionsEntity.name = i
+		for instruction in instructionsDetail {
+			let instructionsEntity = Instruction(context: AppDelegate.viewContext)
+			instructionsEntity.name = instruction
+			instructionsEntity.recipe = recipeEntity
 		}
-		let test = instructionsDetail.map({$0.firstUppercased})
-		let instructions = instructionsDetail.joined(separator: " ,")
-		//guard let test = instructions else {return}
-		
-		print("=instructionsdetail ===============\(instructionsDetail)")
-		print("=instructions ===============\(instructions)")
-//		print("checkInstruction : \(instructionsDetail)")
-//		print("checkInstruction : \(instructionsDetail.count)")
-//		let ingredients = instructionsDetail.map({$0.firstUppercased ?? ""}) ?? []
-//		//instructionsEntity.name = instructionsDetail
-//		print("instructionsEntity.name : \(instructionsEntity.name?.firstUppercased)")
-//		print("instructionsEntity.name : \(instructionsEntity.name?.count)")
-//		//print("ingredientsDetail : \(ingredientsDetail.count)")
-		instructionsEntity.recipe = recipeEntity
 	}
 	
 	// launch URL
@@ -107,7 +95,7 @@ class RecipeVC: UIViewController {
 		recipe.imageData = imageRecipe.image?.jpegData(compressionQuality: 0.75)
 		checkInstructionsEntity(recipeEntity: recipe)
 		checkIngredientsEntity(recipeEntity: recipe)
-		try? AppDelegate.viewContext.save() //sauvegarde du context avec try car cela peut générer une erreur.
+		 //sauvegarde du context avec try car cela peut générer une erreur.
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -152,7 +140,6 @@ extension RecipeVC: UITableViewDataSource {
 		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
 			cell.textLabel!.text = "\(String(describing: ingredientLines))"
 		}
-		
 		return cell
 	}
 }
