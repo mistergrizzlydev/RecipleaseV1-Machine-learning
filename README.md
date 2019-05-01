@@ -18,6 +18,9 @@ Développeur : Vincent Boulanger
 
 L'application Reciplease permet de saisir des ingrédients via des un champ texte et/ou d’en reconnaître via la reconnaissance d’images. Ces ingrédients sont envoyés vers l’API Yummly grâce au framework Alamofire. Une liste de recettes de cuisine s’affichent. Vous pouvez ensuite consulter le détail de chaque recette sur le site internet sur laquelle elle est publié. Et enfin les enregistrer dans votre téléphone en cliquant sur le coeur afin de les ajouter à vos favoris et pouvoir les consulter hors - connexion. 
 
+## L'application en vidéo présentant la fonctionnalité de reconnaissance d'image
+
+https://youtu.be/fPBvPTsFwPE
 
 ## Quelques photos de l'application 
 
@@ -30,12 +33,6 @@ L'application Reciplease permet de saisir des ingrédients via des un champ text
 
 ## -----------------------------------------------
 
-
-## Fonctionnalités supplémentaires: Reciplease
-
-Ajout d'un controller permettant la reconnaissance d'image via CoreML and Vision.   
-Ci-dessous un lien vers une vidéo de démonstration :  
-https://www.youtube.com/embed/Y1k7V92xhcA
 
 
 
