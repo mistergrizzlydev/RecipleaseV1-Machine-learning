@@ -21,15 +21,15 @@ class CustomRecipeViewCell: UITableViewCell {
 		let image = UIImage(named: "recipe-no-photo.jpeg")
 		imageRecipe.image = image //UIImage(defaultImage)
 	}
-	var recipe:Match! {
+	var recipe:Match? {
 		didSet {
-			recipeLabel.text = recipe.recipeName
-			timeLabel.text = String(recipe.totalTimeInSeconds.convertIntToTime)
-			rateLabel.text = String("\(recipe.rating) / 5")
-			let ingredients = recipe.ingredients.map({$0.firstUppercased})
-			let ingredientsString = ingredients.joined(separator: ", ")
+			recipeLabel.text = recipe?.recipeName
+			timeLabel.text = String(recipe?.totalTimeInSeconds.convertIntToTime ?? "")
+			rateLabel.text = String("\(recipe?.rating) / 5")
+			let ingredients = recipe?.ingredients.map({$0.firstUppercased})
+			let ingredientsString = ingredients?.joined(separator: ", ")
 			ingredientsLabel.text = ingredientsString
-			guard let image = recipe.smallImageUrls else {return}
+			guard let image = recipe?.smallImageUrls else {return}
 			let images = image[0]
 			if let url = URL(string: images) {
 				if let data = try? Data(contentsOf: url as URL) {
@@ -40,18 +40,18 @@ class CustomRecipeViewCell: UITableViewCell {
 			}
 		}
 	}
-	var recipeEntity:Recipe! {
+	var recipeEntity:Recipe? {
 		didSet {
-			recipeLabel.text = recipeEntity.name
-			guard let time = Int(recipeEntity.totalTime ?? "") else {return}
+			recipeLabel.text = recipeEntity?.name
+			guard let time = Int(recipeEntity?.totalTime ?? "") else {return}
 			timeLabel.text = "\(time.convertIntToTime)" // gerer les heures // minutes - > extension de string
-			guard let rate = recipeEntity.rate else {return}
+			guard let rate = recipeEntity?.rate else {return}
 			rateLabel.text = "\(rate) / 5 "
-			let recipeEntityAllObjects = recipeEntity.ingredients?.allObjects as? [Ingredient]
+			let recipeEntityAllObjects = recipeEntity?.ingredients?.allObjects as? [Ingredient]
 			let ingredients = recipeEntityAllObjects?.map({$0.name ?? ""}) ?? []
 			let ingredientsString = ingredients.joined(separator: ", ")
 			ingredientsLabel?.text = "\(ingredientsString.firstUppercased)"
-			guard let data = recipeEntity.imageData else {return}
+			guard let data = recipeEntity?.imageData else {return}
 			imageRecipe.image = UIImage(data: data)
 		}
 	}

@@ -58,9 +58,10 @@ extension ResultListRecipeVC: UITableViewDelegate {
 	//================================
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "SegueRecipeToSuccess" {
-				let successVC = segue.destination as! RecipeVC
+			if let successVC = segue.destination as? RecipeVC {
 				successVC.recipeDetailAPIResult = sender as? RecipeDetailAPIResult
 				successVC.ingredients = ingredients
+			}
 		}
 	}
 }
@@ -78,7 +79,7 @@ extension ResultListRecipeVC: UITableViewDataSource {
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomRecipeViewCell else {return UITableViewCell()}
-		let resultMatches = matches![indexPath.row]
+		guard let resultMatches = matches?[indexPath.row] else {return cell}
 		cell.recipe = resultMatches
 		return cell
 	}

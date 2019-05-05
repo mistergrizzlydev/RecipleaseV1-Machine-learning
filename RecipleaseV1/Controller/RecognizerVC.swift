@@ -23,13 +23,11 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	var ingredientRecognized = ""
 	
 	lazy var imageRecognizerRequest: VNRequest = { // propriété calculé de type lazy, chargée uniquement lorsque la variable est appelée et réutilisée par la suite sans être de nouveau chargée
-		let model = try! VNCoreMLModel(for: FruitAndVegetables().model) // on charge le fichier datamodel
+		guard let model = try? VNCoreMLModel(for: FruitAndVegetables().model) else {return VNRequest()}// on charge le fichier datamodel
 		let request = VNCoreMLRequest(model: model, completionHandler: self.imageRecognizerHandler) // il charge le model et lance le completion handler de la fonction ci dessous
-		return request
+			return request
 	}()
 	
-	
-
 	func configureCaptureSession() {
 		// 1 - configurer les entrées, le flux entrant
 		if let camera = AVCaptureDevice.default(for: AVMediaType.video), // start camera, continue si la caméra a été trouvée.
@@ -66,7 +64,6 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 		DispatchQueue.main.async { // le code utilisé ici ne sera fait que sur le thread graphique pendant que la capture tourne en tache de fond
 			if bestGuess.confidence > 0.90 && bestGuess.identifier != "" { 
 				self.ui_Label.text = bestGuess.identifier
-			
 				self.ingredientRecognized = bestGuess.identifier
 			} else {
 				self.ui_Label.text = "wait for research..."
@@ -86,9 +83,10 @@ class RecognizerVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelega
 	}
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "segueAddIngredientRecognizer" {
-			let successVC = segue.destination as! SearchForRecipesVC
-			for i in userTabIngredientRecognizer {
-				successVC.ingredientList.append(i)
+			if let successVC = segue.destination as? SearchForRecipesVC {
+				for i in userTabIngredientRecognizer {
+					successVC.ingredientList.append(i)
+				}
 			}
 		}
 	}

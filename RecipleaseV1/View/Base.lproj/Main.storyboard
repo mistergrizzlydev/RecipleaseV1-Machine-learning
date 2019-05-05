@@ -29,7 +29,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Be-7e-cKH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3268" y="346"/>
+            <point key="canvasLocation" x="-2967" y="317"/>
         </scene>
         <!--RecipeVC-->
         <scene sceneID="DYE-87-GQA">
@@ -312,7 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1D-TS-1mG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-780" y="-886"/>
+            <point key="canvasLocation" x="-780" y="-838"/>
         </scene>
         <!--Search For RecipesVC-->
         <scene sceneID="B6l-lv-WhB">
@@ -424,9 +424,6 @@
                                     <action selector="searchForRecipeIBActionButton:" destination="ILS-I6-s2i" eventType="touchUpInside" id="WKO-oF-sgi"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B1G-EN-fG2">
-                                <rect key="frame" x="177.5" y="620" width="20" height="20"/>
-                            </activityIndicatorView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lemon, Cheese, Apple" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="vAZ-14-dmc">
                                 <rect key="frame" x="15" y="119" width="194" height="34"/>
                                 <color key="backgroundColor" red="0.94881182909011841" green="0.95301645994186401" blue="0.95287364721298218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -437,6 +434,9 @@
                                     <outlet property="delegate" destination="ILS-I6-s2i" id="sAr-Ss-DFP"/>
                                 </connections>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B1G-EN-fG2">
+                                <rect key="frame" x="177.5" y="620" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -461,20 +461,22 @@
                             <constraint firstItem="4Km-2b-2hT" firstAttribute="trailing" secondItem="sYW-7R-A8H" secondAttribute="trailing" constant="41" id="WH4-nI-XfS"/>
                             <constraint firstItem="4Km-2b-2hT" firstAttribute="trailing" secondItem="A3I-eJ-GGi" secondAttribute="trailing" constant="41" id="ZkG-Dr-DDl"/>
                             <constraint firstAttribute="trailing" secondItem="kWk-Sc-tYt" secondAttribute="trailing" constant="109" id="ZmF-kf-y6R"/>
-                            <constraint firstItem="B1G-EN-fG2" firstAttribute="top" secondItem="sYW-7R-A8H" secondAttribute="bottom" constant="-27" id="dzR-gf-f1h"/>
+                            <constraint firstItem="B1G-EN-fG2" firstAttribute="top" secondItem="A3I-eJ-GGi" secondAttribute="bottom" constant="27" id="a2W-kR-dIq"/>
+                            <constraint firstItem="B1G-EN-fG2" firstAttribute="leading" secondItem="4Km-2b-2hT" secondAttribute="leading" constant="177.5" id="ccu-F3-fE3"/>
                             <constraint firstItem="sYW-7R-A8H" firstAttribute="top" secondItem="A3I-eJ-GGi" secondAttribute="bottom" constant="20" id="ehw-oc-LJH"/>
                             <constraint firstItem="vAZ-14-dmc" firstAttribute="top" secondItem="SpE-HT-Lv7" secondAttribute="bottom" constant="12" id="hDh-Ro-S61"/>
                             <constraint firstItem="ovu-YI-4nO" firstAttribute="top" secondItem="8IH-rC-FiE" secondAttribute="bottom" constant="15" id="iTx-BZ-QZJ"/>
+                            <constraint firstItem="4Km-2b-2hT" firstAttribute="trailing" secondItem="B1G-EN-fG2" secondAttribute="trailing" constant="177.5" id="ihw-6r-szw"/>
                             <constraint firstItem="4Km-2b-2hT" firstAttribute="bottom" secondItem="sYW-7R-A8H" secondAttribute="bottom" constant="20" id="j7d-Hh-PNv"/>
                             <constraint firstItem="vAZ-14-dmc" firstAttribute="centerY" secondItem="ovu-YI-4nO" secondAttribute="centerY" id="jGy-xh-h7d"/>
                             <constraint firstItem="8IH-rC-FiE" firstAttribute="top" secondItem="97Q-cm-wqC" secondAttribute="bottom" constant="20" id="mj2-Cb-XIH"/>
                             <constraint firstItem="ovu-YI-4nO" firstAttribute="width" secondItem="8IH-rC-FiE" secondAttribute="width" id="p8u-bd-t2R"/>
                             <constraint firstItem="kWk-Sc-tYt" firstAttribute="top" secondItem="97Q-cm-wqC" secondAttribute="bottom" constant="24" id="pd1-y8-VoN"/>
                             <constraint firstItem="sYW-7R-A8H" firstAttribute="leading" secondItem="4Km-2b-2hT" secondAttribute="leading" constant="41" id="rMK-bd-sfr"/>
+                            <constraint firstItem="4Km-2b-2hT" firstAttribute="bottom" secondItem="B1G-EN-fG2" secondAttribute="bottom" constant="27" id="sHH-Ws-ChB"/>
                             <constraint firstItem="ovu-YI-4nO" firstAttribute="leading" secondItem="vAZ-14-dmc" secondAttribute="trailing" constant="65" id="uy8-KP-3RH"/>
                             <constraint firstItem="vAZ-14-dmc" firstAttribute="height" secondItem="ovu-YI-4nO" secondAttribute="height" id="wJG-h9-ndu"/>
                             <constraint firstItem="4Km-2b-2hT" firstAttribute="trailing" secondItem="FSM-D8-aQY" secondAttribute="trailing" constant="15" id="way-6e-dkD"/>
-                            <constraint firstItem="B1G-EN-fG2" firstAttribute="leading" secondItem="sYW-7R-A8H" secondAttribute="trailing" constant="-156.5" id="yIy-TZ-iVm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Km-2b-2hT"/>
                         <connections>
@@ -808,7 +810,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNJ-QS-Fcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88.799999999999997" y="694.90254872563719"/>
+            <point key="canvasLocation" x="89" y="695"/>
         </scene>
     </scenes>
     <resources>

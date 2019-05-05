@@ -40,7 +40,6 @@
 		BFC62BAA21FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BA921FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift */; };
 		BFC62BAC21FA69160097E0B0 /* RecipeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC62BAB21FA69160097E0B0 /* RecipeSession.swift */; };
 		BFD12B142226EA190005686F /* RecognizerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD12B132226EA190005686F /* RecognizerVC.swift */; };
-		BFD3075322295B4C0054C80E /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFD3075222295B4C0054C80E /* Inceptionv3.mlmodel */; };
 		BFD58609224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58608224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift */; };
 		BFD58617224AE2BD00F78CD5 /* FakeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD58616224AE2BD00F78CD5 /* FakeResponse.swift */; };
 		BFD5861B224AE5E700F78CD5 /* RecipesSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5861A224AE5E700F78CD5 /* RecipesSessionFake.swift */; };
@@ -100,7 +99,6 @@
 		BFC62BA921FA668E0097E0B0 /* UrlYummlyConstructProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlYummlyConstructProtocol.swift; sourceTree = "<group>"; };
 		BFC62BAB21FA69160097E0B0 /* RecipeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSession.swift; sourceTree = "<group>"; };
 		BFD12B132226EA190005686F /* RecognizerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizerVC.swift; sourceTree = "<group>"; };
-		BFD3075222295B4C0054C80E /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		BFD58606224AD34A00F78CD5 /* RecipleaseV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD58608224AD34A00F78CD5 /* RecipeAPIServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPIServiceTestCase.swift; sourceTree = "<group>"; };
 		BFD5860A224AD34A00F78CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -202,7 +200,10 @@
 		BF92BFBA21BF681200EDF694 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BFF48F2C222D86A700C312BE /* Favorite */,
+				BF8DCED5222EF10400A381DF /* Reciplease.xcdatamodeld */,
+				BFF48F2A222D866200C312BE /* Recipe.swift */,
+				BF165C5C223AF286003C48DF /* Ingredient.swift */,
+				BF1C882722347FBA0085787A /* Instruction.swift */,
 				BFD3075422295B6A0054C80E /* Model CoreML */,
 				BFC62BAF21FBCE7E0097E0B0 /* Recipes */,
 			);
@@ -269,7 +270,6 @@
 		BFD3075422295B6A0054C80E /* Model CoreML */ = {
 			isa = PBXGroup;
 			children = (
-				BFD3075222295B4C0054C80E /* Inceptionv3.mlmodel */,
 				BF2D0994225A7D760085388F /* FruitAndVegetables.mlmodel */,
 			);
 			path = "Model CoreML";
@@ -312,17 +312,6 @@
 				BFE3B437225E2F7A00E2B6B2 /* MyPlaygroundToTest.playground */,
 			);
 			path = PlaygroundToTest;
-			sourceTree = "<group>";
-		};
-		BFF48F2C222D86A700C312BE /* Favorite */ = {
-			isa = PBXGroup;
-			children = (
-				BF8DCED5222EF10400A381DF /* Reciplease.xcdatamodeld */,
-				BFF48F2A222D866200C312BE /* Recipe.swift */,
-				BF165C5C223AF286003C48DF /* Ingredient.swift */,
-				BF1C882722347FBA0085787A /* Instruction.swift */,
-			);
-			path = Favorite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -537,7 +526,6 @@
 				BF92BFA621BF67E700EDF694 /* AppDelegate.swift in Sources */,
 				BF2D0999225BEB5F0085388F /* UIView.swift in Sources */,
 				BF5DD2A1223902C2004D2533 /* CustomRecipeViewCell.swift in Sources */,
-				BFD3075322295B4C0054C80E /* Inceptionv3.mlmodel in Sources */,
 				BFD12B142226EA190005686F /* RecognizerVC.swift in Sources */,
 				BF25534121F4DF2A00350118 /* RecipeAPIService.swift in Sources */,
 				BF165C5D223AF286003C48DF /* Ingredient.swift in Sources */,

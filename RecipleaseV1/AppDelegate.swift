@@ -70,7 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	    }
 	}
 	static var persistentContainer: NSPersistentContainer { // refactorisation accéder à notre propriété persistentContainer,
-		return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+		guard let persistentContainer = UIApplication.shared.delegate as? AppDelegate else {return NSPersistentContainer()}
+		return persistentContainer.persistentContainer
 	}
 	/*
 	La dernière étape, c'est de récupérer le contexte puisque, comme on l'a vu au chapitre précédent, c'est dans le contexte que nous allons manipuler les données.

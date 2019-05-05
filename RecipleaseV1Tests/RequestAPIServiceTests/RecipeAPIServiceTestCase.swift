@@ -11,7 +11,7 @@ import XCTest
 
 class RecipeAPIServiceTestCase: XCTestCase {
 	var recipeSession = RecipesSession()
-	var recipeAPIService: RecipeAPIService!
+	var recipeAPIService: RecipeAPIService?
 	
 	//========================================
 	// MARK : - test Recipe Detail

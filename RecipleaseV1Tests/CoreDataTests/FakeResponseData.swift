@@ -10,7 +10,7 @@ import Alamofire
 
 class FakeResponseData {
 	static let responseOK = HTTPURLResponse(url: URL(string: "https://www.deepl.com/home")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-	static let responseKO = HTTPURLResponse(url: URL(string: "https://www.deepl.com/home")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
+	static let responseKO = HTTPURLResponse(url: URL(string: "https://www.deepl.com/home")!, statusCode: 500, httpVersion: nil, headerFields: nil)! // bundle test securisé // non utilisé par l'utilisateur 
 	class NetworkError:Error {}
 	
 	static let networkError = NetworkError()

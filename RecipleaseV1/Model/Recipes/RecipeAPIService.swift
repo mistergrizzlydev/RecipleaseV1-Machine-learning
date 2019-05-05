@@ -19,7 +19,7 @@ class RecipeAPIService{
 	// MARK : - construct URL one recipe
 	//========================================
 	func urlConstructRecipeDetail(recipeID: String) -> String {
-		print("\(recipesSession.urlStringApiDetail)\(recipeID)?_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)")
+	print("\(recipesSession.urlStringApiDetail)\(recipeID)?_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)")
 		return "\(recipesSession.urlStringApiDetail)\(recipeID)?_app_id=\(recipesSession.appId)&_app_key=\(recipesSession.appKey)"
 	}
 
@@ -43,7 +43,6 @@ class RecipeAPIService{
 			print("recipes.name: \(recipes)")
 			completionHandler(true, recipes)
 		}
-		
 	}
 	
 	//========================================

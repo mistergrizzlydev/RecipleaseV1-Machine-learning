@@ -22,7 +22,7 @@ class SearchForRecipesVC: UIViewController {
 	@IBOutlet weak var searchForRecipesButton: UIButton!
 	let recipeAPIService = RecipeAPIService()
 	var ingredientList = [String]()
-	var matches: [Match]!
+	var matches: [Match]?
 	
 	
 	//===================================
@@ -63,13 +63,16 @@ class SearchForRecipesVC: UIViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "segueRecipesToDisplay" {
 			if let matches = matches {
-				let successVC = segue.destination as! ResultListRecipeVC
-				successVC.matches = matches
+				if let successVC = segue.destination as? ResultListRecipeVC {
+					successVC.matches = matches
+				}
+				
 			}
 		}
 		if segue.identifier == "segueIngredientToDisplayRecognizerVC" {
-			let successVC = segue.destination as! RecognizerVC
-			successVC.userTabIngredientRecognizer = ingredientList
+			if let successVC = segue.destination as? RecognizerVC {
+				successVC.userTabIngredientRecognizer = ingredientList
+			}
 		}
 	}
 	func requestSearchForRecipes()  {

@@ -138,7 +138,7 @@ extension RecipeVC: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientDetailCell", for: indexPath)
 		if let ingredientLines = recipeDetailAPIResult?.ingredientLines[indexPath.row]  {
-			cell.textLabel!.text = "\(String(describing: ingredientLines))"
+			cell.textLabel?.text = "\(String(describing: ingredientLines))"
 		}
 		return cell
 	}
