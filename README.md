@@ -9,6 +9,7 @@ Version : 1
 Modèle de données : MVC
 Technologies : CoreData, Alamofire, CoreML, Vision
 Orientation device : portrait
+Framework : Alamofire, CoreML, Vision, AVfoundation
 Contexte : Application réalisée dans le cadre du parcours développeur iOS d'OpenClassRooms  
 https://openclassrooms.com/fr/paths/69-developpeur-dapplication-ios  
 Github : https://github.com/vincentBoulanger/RecipleaseV1  
@@ -31,7 +32,6 @@ https://youtu.be/fPBvPTsFwPE
 ![recognization-CoreML](https://lh3.googleusercontent.com/LCr9WEC_iHZEOPVywVOdK0NtySxj4bFyq6GHWUo-Dmyay14zIiMCX1mI1B2YJI-3dEyPBPSQfTED)
 ![enter image description here](https://lh3.googleusercontent.com/C3tYwZGgCxKjtx3hIyxhRdyDSTwRzgxi0-ewAIbMrXgLzpwAKT85VTvMpt31QmFKB8Scjk5nw_UZ)
 
-## -----------------------------------------------
 
 
 
