@@ -12,6 +12,7 @@ Technologies : CoreData, Alamofire, CoreML, Vision
 Orientation device : portrait
 
 Framework : Alamofire, CoreML, Vision, AVfoundation
+
 Contexte : Application réalisée dans le cadre du parcours développeur iOS d'OpenClassRooms  
 https://openclassrooms.com/fr/paths/69-developpeur-dapplication-ios  
 Github : https://github.com/vincentBoulanger/RecipleaseV1  
