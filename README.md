@@ -1,15 +1,25 @@
 # Bienvenue sur Reciplease!
 
 Date : Avril 2019  
+
 Langage : Swift 5  
+
 IDE : Xcode 10.2  
+
 iOS : 12.2  
+
 Compatible : Iphone 5S et +  
+
 Version : 1.0    
+
 Modèle de données : MVC
+
 Technologies : CoreData, Alamofire, CoreML, Vision
+
 Orientation device : portrait
+
 Framework : Alamofire, CoreML, Vision, AVfoundation
+
 Contexte : Application réalisée dans le cadre du parcours développeur iOS d'OpenClassRooms  
 https://openclassrooms.com/fr/paths/69-developpeur-dapplication-ios
 Développeur : Vincent Boulanger  
